@@ -1,0 +1,26 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: dd
+      POSTGRES_PASSWORD: dd
+      POSTGRES_DB: dd
+    ports: ["5432:5432"]
+    volumes: [dbdata:/var/lib/postgresql/data]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U dd"]
+      interval: 5s
+      retries: 10
+
+  app:
+    build: .
+    ports: ["3000:3000"]
+    env_file: .env
+    environment:
+      DATABASE_URL: postgresql://dd:dd@db:5432/dd
+    depends_on:
+      db: { condition: service_healthy }
+    profiles: ["prod"]   # en dev : `pnpm dev` + `docker compose up db`
+
+volumes:
+  dbdata:

@@ -1,0 +1,1492 @@
+{
+  "sector": "Numérique",
+  "subtypes": {
+    "MNO": {
+      "notation_dd": {
+        "title": "Secteur du numérique - MNO",
+        "dimensions": [
+          {
+            "dimension": "BIODIVERSITE - Biodiversité et gestion des ressources naturelles",
+            "pillar": "Planète",
+            "objective": "",
+            "prerequisite": null,
+            "connector_note": "Si cette dimension de la notation DD est pertinente pour votre dossier (e.g. celui-ci serait éligible à un +1, +2 ou +3 ou -1), cliquez sur le bouton + afin de voir les critères détaillés ci-dessous",
+            "scale": [],
+            "criteria": []
+          },
+          {
+            "dimension": "CLIMAT - Atténuation",
+            "pillar": "Planète",
+            "objective": "Peu d'enjeux climat atténuation sur les projets MNO. Les impacts seront essentiellement portés sur une limitation des impacts négatifs du projet en termes d'émissions. Il est peu probable qu'un projet soit éligible à un +2 mais pourrait être éligible à un +1.",
+            "prerequisite": null,
+            "connector_note": "Si cette dimension de la notation DD est pertinente pour votre dossier (e.g. celui-ci serait éligible à un +1, +2 ou +3 ou -1), cliquez sur le bouton + afin de voir les critères détaillés ci-dessous",
+            "scale": [
+              "-1",
+              "0",
+              "+1",
+              "+2",
+              "+3"
+            ],
+            "criteria": [
+              {
+                "criterion": "Atténuation",
+                "summary": {
+                  "levels": {
+                    "-1": "Un projet MNO est automatiquement aligné Accord de Paris, un -1 est improbable",
+                    "0": "Aucun enjeu climat atténuation",
+                    "+1": "Le client a mis en place un plan de transition climatique certifié \nOU\nle projet débouche sur des co-bénéfices climat atténuation <30%",
+                    "+2": "Le projet débouche sur des co-bénéfices climat atténuation >30%",
+                    "+3": "Proparco soutient le client dans la mise en place d'un plan de transition climatique certifié (AT)"
+                  },
+                  "example": null
+                },
+                "detail": {
+                  "levels": {
+                    "+1": "Potentiels CAPEX éligibles finance climat pour un projet MNO: solaire/batteries (mais peu probables)",
+                    "+3": "Se rapprocher de IMP/ATM si le client montre un intérêt pour ce type d'AT"
+                  },
+                  "example": null
+                }
+              }
+            ]
+          },
+          {
+            "dimension": "CLIMAT - Adaptation",
+            "pillar": "Planète",
+            "objective": "Valoriser les activités, au sein du projet, visant à réduire la vulnérabilité climatique du projet (~ adaptation du projet, projet adapté) et/ou la vulnérabilité climatique du système (ex: population) dans lequel le projet opère (~adaptation 'par' le projet).",
+            "prerequisite": null,
+            "connector_note": "Si cette dimension de la notation DD est pertinente pour votre dossier (e.g. celui-ci serait éligible à un +1, +2 ou +3 ou -1), cliquez sur le bouton + afin de voir les critères détaillés ci-dessous",
+            "scale": [
+              "-1",
+              "0",
+              "+1",
+              "+2",
+              "+3"
+            ],
+            "criteria": [
+              {
+                "criterion": "Adaptation",
+                "summary": {
+                  "levels": {
+                    "-1": "Enjeux E&S majeurs identifiés en lien avec la dimension Adaptation et risque important qu’un ESAP satisfaisant pour ESG ne soit pas négocié/validé avec le client d’ici la signature.",
+                    "0": "Projet ayant fait l’objet d’une analyse du risque climatique et ne présentant pas d’enjeux particuliers.",
+                    "+1": "Le client a pris en compte dans la conception du projet les risques climatiques mais cela ne débouche pas sur des co-bénéfices climat adaptation, OU Les co-bénéfices climat adaptation sont <30%.",
+                    "+2": "Projet avec co-bénéfices adaptation ≥30 %.",
+                    "+3": "Projet avec co-bénéfices climat adaptation ≥30% ET Accompagnement du client dans sa stratégie climat adaptation ou Finance de Transition Adaptation."
+                  },
+                  "example": null
+                },
+                "detail": {
+                  "levels": {
+                    "-1": "Notes négatives Adaptation gérées par ESG",
+                    "0": "Analyse effectuée des risques climatiques actuels et futurs auxquels le projet est exposé (exemples de bases de données pour identifier les risques climatiques disponibles sur La Ruche), sans risque significatif identifié (ex : risque significatif si note >0,6 sur l’outil Climate screening pour un aléa donné).\n\nET \n\nAu sein du projet, pas d’activité contribuant à réduire les risques climatiques du système dans lequel l’activité se déroule (ex : territoire, entités ou groupes socio-économiques qui bénéficient du projet, environnement).",
+                    "+1": "Analyse effectuée des risques climatiques actuels et futurs auxquels le projet est exposé (exemples de bases de données pour identifier les risques climatiques disponible sur La Ruche), risques significatifs identifiés (ex : note >0,6 sur l’outil Climate screening pour un aléa donné) et pris en compte dans la conception du projet, les procédures et/ou les activités (ex : solutions techniques intégrées dans les spécifications du projet, mécanisme d’assurance, de partage/ transferts de risque, fonds de contingence, activités dédiées comme par ex. un plan de contingence, gestion des risques de catastrophes, ou solutions organisationnelles). Cependant, mesures mises en place par le projet non associées à des capex ou surcoûts, donc pas de co-bénéfices Adaptation associés. \nExemple : Dans un contexte de risque climatique significatif lié aux inondations/glissements de terrain et de risque climatique très faible lié aux cyclones, une installation aérienne de fibre (avec fondations adaptées) est privilégiée par rapport à une installation souterraine (car risque de remontée des câbles enfouis) ; pas de surcoût par rapport à l’installation souterraine prévue, donc pas de co-bénéfices Adaptation.\n\nOU \n\nAnalyse effectuée des risques climatiques actuels et futurs auxquels le projet est exposé (exemples de bases de données pour identifier les risques climatiques disponible sur La Ruche), risques significatifs identifiés (note >0,6 sur l’outil Climate screening pour un aléa donné). Activités (au sein du projet) permettant de réduire ces risques (ex : solutions techniques intégrées dans les spécifications du projet, mécanisme d’assurance, de partage/ transferts de risque, fonds de contingence, activités dédiées comme par ex. un plan de contingence, gestion des risques de catastrophes, ou solutions organisationnelles), générant des co-bénéfices Adaptation inférieurs à 30% (Règles de comptabilisation des co-bénéfices Adaptation disponibles sur La Ruche). \nExemples : Dans un contexte de risques significatifs liés aux cyclones, renforcement des réseaux fixes et mobiles grâce à l’enfouissement de la fibre sur les tronçons critiques, ou grâce des tours renforcées.\n\nOU\n\nAnalyse effectuée des risques climatiques actuels et futurs auxquels est exposé le système dans lequel le projet opère (ex : territoire, entités ou groupes socio-économiques qui bénéficient du projet, environnement) : évaluation des aléas climatiques, des enjeux, de la vulnérabilité. Risques climatiques significatifs identifiés. Activités (au sein du projet) permettant de les réduire, générant des co-bénéfices Adaptation inférieurs à 30%.  Exemples de bases de données pour identifier les risques climatiques et règles de comptabilisation des co-bénéfices Adaptation disponibles sur La Ruche.\nExemples : Dans un contexte de risques significatifs liés aux cyclones, renforcement des réseaux fixes et mobiles grâce à l’enfouissement de la fibre sur les tronçons critiques, ou grâce des tours renforcées. Post évènement climatique extrême, déploiement de solutions d’urgence pour rétablir les communications.",
+                    "+2": "(Faible potentiel pour les MNOs)\n\nAnalyse effectuée des risques climatiques actuels et futurs du projet et/ou du système dans lequel le projet opère (territoire, entités ou groupes socio-économiques qui bénéficient du projet, environnement). Risques climatiques significatifs identifiés. Activités (au sein du projet) permettant de les réduire, générant des co-bénéfices Adaptation d’au moins 30%. Bases de données pour identifier les risques climatiques et règles de comptabilisation des co-bénéfices disponibles dans La Ruche.",
+                    "+3": "(Faible potentiel pour les MNOs)\n\nProjet avec co-bénéfices climat Adaptation ≥30% (voir note +2) \n\nET \n\nAccompagnement technique (diagnostic adaptation, plan d’action adaptation, accompagnement sur la mise en œuvre du plan d’action), ou qualification du projet Finance de transition Adaptation : finance visant à accompagner la transition des acteurs en s’appuyant sur une forte intentionnalité de la part du client » avec : \n-  si financement non affecté : Pro climat Corporate\n- si financement affecté : appui à la transition de l’acteur/chaine de valeur/secteur/territoire pour des projets mettant en avant l’intentionnalité, la matérialité, la pérennité et la réplicabilité des éléments déployés, et s’insérant dans différentes phases de cette transition (innovation, unlocking, scale up, et/ou phase out)."
+                  },
+                  "example": null
+                }
+              }
+            ]
+          },
+          {
+            "dimension": "SOCIAL - Lien social",
+            "pillar": "Inclusion",
+            "objective": "Soutien aux services essentiels de part la réduction de la fracture numérique pour populations et territoires défavorisés, pouvant se manifester par: (voir ci-dessous)\na. Réduction des prix proposés aux utilisateurs finaux par le jeu de la concurrence et par la mutualisation des coûts de construction et d’exploitation (enjeu \"affordability\")\nb. Initatives permettant de rendre les terminaux numériques plus abordables pour les populations à faible revenus (enjeu \"affordability\")\nc. Extension de la couverture dans les zones blanches et grises mobiles (zones moins couvertes), notamment les territoires ruraux (enjeu \"accesibility\")\nd. Présence de programmes d'inclusion numérique des populations défavorisées (fourniture d’accès aux terminaux numériques, de formation aux métiers du numérique ou de lutte contre l’illectronisme)\ne. Présence de programme d'inclusion financière des populations défavorisées (offres \"mobile money\" spécifiques)  \nf. Réduction des coûts et amélioration de l’accessibilité de services essentiels (notamment en matière de santé, d’éducation, de services administratifs) grâce aux capacités accrues de télé-services\nf",
+            "prerequisite": "Prérequis pour une note +2 / +3 : Le projet ne vient ni aggraver les inégalités, ni favoriser l'exclusion et ne sert pas exclusivement des populations favorisées.",
+            "connector_note": "Si cette dimension de la notation DD est pertinente pour votre dossier (e.g. celui-ci serait éligible à un +1, +2 ou +3 ou -1), cliquez sur le bouton + afin de voir les critères détaillés ci-dessous",
+            "scale": [
+              "0",
+              "+1",
+              "+2",
+              "+3"
+            ],
+            "criteria": [
+              {
+                "criterion": "Accès",
+                "summary": {
+                  "levels": {
+                    "0": "Les informations fournies n'ont pas permis de comptabiliser des accès télécom / numérique fournis par le MNO directement à des particuliers.",
+                    "+1": "Des accès à un service de télécommunication / numérique fournis directement par le MNO à des particuliers sont comptabilisés sans information particulière sur les bénéficiaires ou les territoires desservis.",
+                    "+2": "Des accès à un service de télécommunication / numérique fournis directement par le MNO à des particuliers sont comptabilisés\nET\nIl a été démontré que ces accès bénéficient à des populations défavorisées.",
+                    "+3": "L'inclusion de populations et/ou de territoires défavorisés constitue un objectif explicite et documenté du projet et du client."
+                  },
+                  "example": "> 0 \n\n> +1\n   PSN1103 Sonatel\n\n> +2\n   PAM1019 Telecom Armenia\n   PJO1034 Orange Jordanie\n\n> +3  (Aurait pu être appliqué à Africa Mobile Networks - PZZ1566)"
+                },
+                "detail": {
+                  "levels": {
+                    "0": "Les informations fournies n'ont pas permis de comptabiliser des accès télécom / numérique fournis directement à des particuliers.\n\nUne note de 0 est peu probable. Un MNO est censé pouvoir fournir des données sur ses clients particuliers.",
+                    "+1": "Des accès à un service de télécommunication / numérique fournis directement par le MNO à des particuliers sont comptabilisés sans information particulière sur les bénéficiaires ou les territoires desservis.",
+                    "+2": "Des accès à un service de télécommunication / numérique fournis directement par le MNO à des particuliers sont comptabilisés\nET\nIl a été démontré que ces accès bénéficient à des populations défavorisées.\n\nLa justification peut s'appuyer sur les cas suivants : \n- Le client pratique une tarification abordable  pour les populations à bas revenus (faible cout représenté dans le panier moyen)\n- Le pays dispose de réglementations ou de politiques  créant les conditions pour un accès universel aux services telecoms et numériques",
+                    "+3": "La notation de +3 peut être attribuée si et seulement si l'objectif du client / projet est de contribuer à l'inclusion de populations défavorisées, et que cet objectif est explicite et a été documenté par le projet ou client.\n\nLe client doit pouvoir démontrer cet objectif via des éléments de stratégie d'intervention, de politique d'emploi, d'achat, etc. Une définition claire des populations défavorisées ciblées doit être fournie par le client / projet. \n\nDes discussions spécifiques sur le sujet sont à prévoir avec le client."
+                  },
+                  "example": "> 0 \n\n> +1\n   PSN1103 Sonatel\n\n> +2\n   PAM1019 Telecom Armenia\n   PJO1034 Orange Jordanie\n\n> +3  (Aurait pu être appliqué à Africa Mobile Networks - PZZ1566)"
+                }
+              },
+              {
+                "criterion": "Emplois",
+                "summary": {
+                  "levels": {
+                    "0": "Critère de notation non applicable à une note de +1.",
+                    "+2": "Le client a développé une politique d'emploi visant à inclure des populations défavorisées."
+                  },
+                  "example": "> +2 et +3\nPas d'exemples de projets"
+                },
+                "detail": {
+                  "levels": {
+                    "0": "Critère de notation non applicable à une note de +1.",
+                    "+2": "Le client a développé une politique d'emploi visant à inclure des populations défavorisées. Aucun seuil minimal n’est requis, mais une analyse démontre la capacité du client à soutenir l’emploi de ces populations, qui peut se traduire par :\n\n- Des actions de recrutement, de rétention et d’avancement professionnel ciblant ces groupes ;\n\n- Des mesures visant l'égalité salariale et proposant des conditions de travail adaptées à leurs besoins spécifiques."
+                  },
+                  "example": "> +2 et +3\nPas d'exemples de projets"
+                }
+              },
+              {
+                "criterion": "Territoires",
+                "summary": {
+                  "levels": {
+                    "+2": "Etant donné que les MNO fournissent des accès à un service essentiel, le critère Accès prévaut pour l'analyse."
+                  },
+                  "example": "Non concerné (cf Accès)"
+                },
+                "detail": {
+                  "levels": {
+                    "+2": "Etant donné que les MNO fournissent des accès à un service essentiel, le critère Accès prévaut pour l'analyse."
+                  },
+                  "example": "Non concerné (cf Accès)"
+                }
+              },
+              {
+                "criterion": "Chaînes de valeur",
+                "summary": {
+                  "levels": {
+                    "+2": "Le MNO intègre dans ses chaînes d'approvisionnement ou chaînes de valeur (amont et aval) au moins 50% d'entreprises :\n\n- employant des populations défavorisées ; ou\n\n- intervenant dans des territoires défavorisés.\n\nDIFFICILEMENT ACTIONNABLE pour le secteur du numérique"
+                  },
+                  "example": "> +2 et +3\nPas d'exemples de projets"
+                },
+                "detail": {
+                  "levels": {
+                    "+2": "Le MNO intègre dans ses chaînes d'approvisionnement ou chaînes de valeur (amont et aval) au moins 50% d'entreprises :\n\n- employant des populations défavorisées (se référer au détail du critères \"Emplois\"); ou\n\n- intervenant dans des territoires défavorisés (une entreprise est considérée comme intervenant dans un territoire défavorisé lorsqu’au moins 50 % de son chiffre d’affaires ou de son volume de ventes est réalisé dans ces territoires).\n\nDIFFICILEMENT ACTIONNABLE pour le secteur du numérique"
+                  },
+                  "example": "> +2 et +3\nPas d'exemples de projets"
+                }
+              }
+            ]
+          },
+          {
+            "dimension": "GENRE - Égalité femmes-hommes",
+            "pillar": "Genre",
+            "objective": "",
+            "prerequisite": null,
+            "connector_note": "Si cette dimension de la notation DD est pertinente pour votre dossier (e.g. celui-ci serait éligible à un +1, +2 ou +3 ou -1), cliquez sur le bouton + afin de voir les critères détaillés ci-dessous",
+            "scale": [
+              "0",
+              "+1",
+              "+2",
+              "+3"
+            ],
+            "criteria": [
+              {
+                "criterion": "2X Challenge",
+                "summary": {
+                  "levels": {
+                    "0": "Les risques ESG sont soit négligeables, soit traités selon les modalités habituelles (clauses types, ESAP validé avec le client, etc.)",
+                    "+1": "Conditions pour un projet aligné 2X Challenge : \n\n1) Remplir le critère \"gouvernance et responsabilité\" et ses 4 sous-critères.\n\nET  \n\n2) Remplir 2 des 5 critères directs (1 à 5)",
+                    "+2": "Conditions pour un projet éligible au 2X Challenge : \n\n1) Remplir le critère \"gouvernance et responsabilité\" (cf notation+1)\n\nET\n\n2) Remplir 2 deux des 5 critères directs (1 à 5) dont l'un d'eux peut être un engagement  \n\nET\n\n3) Obtenir l'accord de principe du client à rejoindre l'initiative 2X",
+                    "+3": "3 options au choix : \n\n1) Client candidat à la certification\n\nOU\n\n2)Le client s'engage à augmenter la proportion de femmes en position de leadership de 50% \n\nOU\n\n3) Le client dispose d'une approche hollistique en matière de genre"
+                  },
+                  "example": null
+                },
+                "detail": {
+                  "levels": {
+                    "0": "Les risques ESG sont soit négligeables, soit traités selon les modalités habituelles (clauses types, ESAP validé avec le client, etc.)",
+                    "+1": "Conditions pour un projet aligné 2X Challenge : \n\n1) Remplir le critère \"gouvernance et responsabilité\" qui comprend 4 sous-critères :\n- Engagement stratégique \n- Système de gestion\n- Données\n-  GBVH\nPour des exemples de mesures pour chacun des sous-critères voir les guidelines 2X page 40, 47 et suivantes.\n\nET  \n\n2) Remplir 2 critères directs (1 à 5) dont l'un d'eux peut être un engagement \n- critères 1 à 3 se référer aux seuils 2X à atteindre ici \n- critère 4 (supply chain) : l’entreprise doit formaliser un engagement stratégique explicite en faveur des femmes dans la supply chain (ex:Diversité des fournisseurs ou code de conduite en matière d'inclusion), et s’assurer qu’il est réellement mis en œuvre grâce à des processus, actions et mécanismes de suivi permettant d’en garantir l’efficacité.\n - Critère 5 (produits et services): le produit/service améliore directement le bien-être des femmes/filles ou l’égalité de genre, avec un impact mesurable en terme de revenu, accès, sécurité, santé...(voir exemple colone G)",
+                    "+2": "Conditions pour un projet éligible au 2X Challenge : \n\n1) Remplir le critère \"gouvernance et responsabilité\" (cf notation+1)\n\nET\n\n2) Remplir 2 critères directs (1 à 5) dont l'un d'eux peut être un engagement  \n\nET\n\n3) Obtenir l'accord de principe du client à rejoindre l'initiative 2X",
+                    "+3": "3 options au choix : \n\n1) Client candidat à la certification (preuve de la démarche engagée ex:mail de demande au 2X)\n\nOU\n\n2)Le client s'engage à augmenter la proportion de femmes en position de leadership de 50% (tableau de simulation ici)\n\nOU\n\n3) Le client dispose d'une approche hollistique en matière de genre (stratégie genre, études de faisabilité engagée en amont des projets, politiques RH genre, objectifs en matière d'égalité de genre en interne, engagement auprès des communautés locales, inclusion des femmes dans les projets...). Pour cette option, contacter IMP."
+                  },
+                  "example": "Critère 4 exemple : Une entreprise numérique met en place une supply chain responsable en cartographiant ses fournisseurs IT (cloud, SaaS, data, cybersécurité) et dispose d'un code de conduite mentionnant le genre.\n\nCritère 5 exemple :  \n - solutions d'intelligence artificielle conçues pour détecter et corriger les biais algorithmiques susceptibles de défavoriser les femmes ;\n- produits numériques améliorant la sécurité et la mobilité des femmes (applications de transport sécurisé, partage de localisation, alertes d'urgence, etc.) ; \n- Une entreprise de commerce électronique propose des \nproduits de santé destinés aux femmes ainsi que des informations essentielles en matière de santé à des clientes à faibles revenus, tant en milieu urbain que rural, en Afrique de l'Est. \nLa stigmatisation sociale liée à la santé sexuelle et reproductive\nest très répandue dans la région, ce qui empêche les femmes\nd’accéder aux informations pertinentes et aux produits sûrs \nnécessaires pour prendre des décisions éclairées concernant leur \nsanté. L’entreprise contribue à remédier à cette situation en offrant \nune expérience d’achat unique, discrète et conviviale \nà ses clientes. Elle est alignée sur les objectifs 2X"
+                }
+              },
+              {
+                "criterion": "Gender boost",
+                "summary": {
+                  "levels": {
+                    "0": "Les risques ESG sont soit négligeables, soit traités selon les modalités habituelles (clauses types, ESAP validé avec le client, etc.)",
+                    "+1": "Le client s'engage à mettre en place : \n\n1) Une mesure \"gouvernance et responsabilité\" \nPour des exemples de mesures voir les guidelines 2X page 47 et suivantes.\n\nET\n\n2) Une mesure de prévention des violences basées sur le genre\nPour des exemples de mesures voir les guidelines 2X page 40.",
+                    "+2": "Le client s'engage à :\n\n1) Remplir les conditions du +1 du track \"gender boost\"\n\nET \n\n2) Augmenter la proportion de femmes en position de leadership de +25%"
+                  },
+                  "example": null
+                },
+                "detail": {
+                  "levels": {
+                    "0": "Les risques ESG sont soit négligeables, soit traités selon les modalités habituelles (clauses types, ESAP validé avec le client, etc.)",
+                    "+1": "Le client s'engage à mettre en place : \n\n1) Une mesure \"gouvernance et responsabilité\" \nPour des exemples de mesures voir les guidelines 2X page 47 et suivantes.\n\nET\n\n2) Une mesure de prévention des violences basées sur le genre\nPour des exemples de mesures voir les guidelines 2X page 40.",
+                    "+2": "Le client s'engage à :\n\n1) Remplir les conditions du +1 du track \"gender boost\"\n\nET \n\n2) Augmenter la proportion de femmes en position de leadership de +25%"
+                  },
+                  "example": null
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "key_qs": {
+        "title": "Questionnaire de due diligence IMPACT: Secteur du numérique - MNO",
+        "questions": [
+          {
+            "section": "Planète",
+            "question": "L'entreprise dispose-t-elle d'un plan de transition climatique certifié ? Merci de partager les objectifs, le calendrier et toute autre information pertinente.",
+            "thematique": "Planète",
+            "dimension": "Atténuation",
+            "note_visee": "+1/+2/+3",
+            "commentaire": null,
+            "ressources": null
+          },
+          {
+            "section": "Planète",
+            "question": "Quelles mesures concrètes sont en place pour réduire l'empreinte carbone des opérations ?",
+            "thematique": "Planète",
+            "dimension": "Atténuation",
+            "note_visee": "+1/+2/+3",
+            "commentaire": null,
+            "ressources": null
+          },
+          {
+            "section": "Planète",
+            "question": "L'entreprise a-t-elle réalisé un bilan gaz à effets de serre/carbone ? Quel est le périmètre et la méthodologie de ce bilan carbone ? Quels sont les résultats ? Pouvez-vous partager des données chiffrées ?",
+            "thematique": "Planète",
+            "dimension": "Atténuation",
+            "note_visee": "+1/+2/+3",
+            "commentaire": "Si le client a déjà fait un bilan carbone, évaluer si utilisable tel quel ou si données utilisées peuvent être exploitées pour  bilan carbone interne",
+            "ressources": null
+          },
+          {
+            "section": "Planète",
+            "question": "Quel est le nombre d'utilisateurs additionnels concernés par le projet? Estimation du nombre total des infrastructure financées si les fonds sont fléchés, si pas de fléchage, comparaison t0 et t+5",
+            "thematique": "Planète",
+            "dimension": "Atténuation",
+            "note_visee": "+1/+2/+3",
+            "commentaire": "C'est la variable principale pour le calcul du bilan carbone",
+            "ressources": null
+          },
+          {
+            "section": "Planète",
+            "question": "Pour valoriser des mesures/activités liées à l'adaptation du projet (ou projet adapté) : \n1. Une analyse des risques climatiques physiques actuels et futurs auxquels le projet est exposé a-t-elle été réalisée (exemples de bases de données pour identifier les risques climatiques disponibles sur La Ruche) ? \n2. Si des risques climatiques significatifs ont été identifiés, quelles sont les activités mises en place par le projet pour répondre aux risques identifiés : solutions techniques (intégrées dans les spécifications du projet), outils dédiés (mécanisme d’assurance, de partage/ transferts de risque, fonds de contingence), activités dédiées (plan de contingence, gestion des risques de catastrophes, etc.) ou solutions organisationnelles ?\n3. Ces activités sont-elles associées à des CAPEX ou génèrent-elles des surcoûts ? Si elles génèrent des surcoûts, une estimation du montant des surcoûts est-elle disponible ?  \n4. Si ces activités sont associées à des CAPEX ou génèrent des surcoûts, un lien clair et direct entre les activités spécifiques du projet et l’objectif de réduction de la vulnérabilité au changement climatique est-il établi ? L’intention du projet de traiter les risques/ vulnérabilités sera-t-elle explicitée dans la documentation du projet ?",
+            "thematique": "Planète",
+            "dimension": "Adaptation",
+            "note_visee": "+1 ou +2",
+            "commentaire": "Si oui aux 4 questions, alors : \n- notation +1 si co-bénéfices < 30%\n- notation +2 si co-bénéfices  ≥ 30%",
+            "ressources": null
+          },
+          {
+            "section": "Planète",
+            "question": "Pour valoriser l'Adaptation par le projet : \n1. Une analyse des risques climatiques actuels et futurs auxquels est exposé le système dans lequel le projet opère (territoire, entités ou groupes socio-économiques qui bénéficient du projet, environnement) a-t-elle été réalisée : évaluation des aléas climatiques (exemples de bases de données pour identifier les risques climatiques disponibles sur La Ruche), des enjeux et de la vulnérabilité du système (analyse bibliographique dédiée) ?  \n2. Si des risques climatiques significatifs sont identifiés, certaines activités au sein du projet vont-elles contribuer à leur réduction ? Sont-elles associées à des CAPEX ? \n3. Un lien clair et direct entre les activités spécifiques du projet et l’objectif de réduction de la vulnérabilité au changement climatique est-il établi ? L’intention du projet de traiter les risques/ vulnérabilités sera-t-elle explicitée dans la documentation du projet ?",
+            "thematique": "Planète",
+            "dimension": "Adaptation",
+            "note_visee": "+1 ou +2",
+            "commentaire": "Si oui aux 4 questions, alors : \n- notation +1 si co-bénéfices < 30%\n- notation +2 si co-bénéfices  ≥ 30%",
+            "ressources": null
+          },
+          {
+            "section": "Planète",
+            "question": "En plus de co-bénéfices Adaptation d’au moins 30%, le projet est-il éligible à Finance de transition Adaptation (appui à la transition Adaptation de l’acteur/chaine de valeur/secteur/territoire pour des projets mettant en avant l’intentionnalité, la matérialité, la pérennité et la réplicabilité des éléments déployés) ou un Accompagnement technique (diagnostic adaptation, plan d’action adaptation, accompagnement sur la mise en œuvre du plan d’action) est-il envisagé par le client ?",
+            "thematique": "Planète",
+            "dimension": "Adaptation",
+            "note_visee": "+3",
+            "commentaire": null,
+            "ressources": null
+          },
+          {
+            "section": "Inclusion (Social)",
+            "question": "Le client fournit-il des accès télécom directement à des particuliers ? Dispose-t-il des données nécessaires au calcul des accès correspondants ? Ex : nombre d'abonnés (à T0 et T+5), proportion d'abonnés domestiques, nombre moyen d'abonnements par personne",
+            "thematique": "Social",
+            "dimension": "Général",
+            "note_visee": "+1",
+            "commentaire": "Les accès ne sont comptabilisés que lorsqu'ils sont fournis directement à des particuliers. Les accès indirects et les accès à des professionnels ne sont pas comptabilisés.",
+            "ressources": "• Données clients\n• Données statistiques nationales / régionales"
+          },
+          {
+            "section": "Inclusion (Social)",
+            "question": "Le projet sert-il exclusivement des populations favorisées au regard du service télécom proposé ?\n• Le client possède-t-il de l’information relative au profil socio-économique des clients cibles ? Ces populations sont-elles exclusivement des populations favorisées (au sein du pays) ?\n• Quelle est la politique tarifaire du client ? Est-elle alignée avec celle de ses concurrents ? Vient-elle cibler exclusivement des populations favorisées ?\n• Le service télécom proposé pèse-t-il lourdement dans les dépenses d'une population de classe moyenne au sein du pays ?",
+            "thematique": "Social",
+            "dimension": "Général",
+            "note_visee": "+2 ou +3",
+            "commentaire": "Pré-requis nécessaire pour toute notation de +2 ou +3 sur la dimension Social",
+            "ressources": "• Données sur la tarification des services télécoms et numériques pratiqués par le client et les opérateurs locaux\n• Données socio-économiques des dépenses des populations\n• Lettres d'engagement opérateurs mobiles\n• Obligations réglementaires régulant les prix\n• Programmes gouvernementaux/politiques de couverture universelle \n• Politiques du client en faveur d'une tarification accessible (micro-paiement, 1ers Go gratuits, etc.)"
+          },
+          {
+            "section": "Inclusion (Social)",
+            "question": "Quelles sont les populations défavorisées au sein du pays d'intervention ?\n• Des données permettant d’identifier et de mesurer les inégalités dans le pays d’intervention sont-elles disponibles ?\n• Parmi les inégalités identifiées, lesquelles sont pertinentes au regard du financement envisagé ? Ex : accès aux services télécoms / numériques, accès à l'emploi, etc.\n• Ces constats sont-ils étayés par des rapports publics ou politiques nationales de ciblage de groupes de population ?",
+            "thematique": "Social",
+            "dimension": "Général",
+            "note_visee": "+2 ou +3",
+            "commentaire": "Cette étude est nécessaire dès lors qu'une note de +2 ou +3 est envisagée sur un financement bénéficiant à des populations défavorisées. Dans le cas des MNO, les critères \"Accès\" et \"Emplois\" sont particulièrement concernés.",
+            "ressources": "• Instituts nationaux de statistiques\n• Agences / institutions internationales. Ex : UNU-WIDER: WIID Explorer, Data - WID - World Inequality Database, Carte interactive de la répartition de la pauvreté et des inégalités par pays (Poverty & Inequality Platform – WB) Interactive Maps\n• Données client\n• Fiches B40 Inégalités - LaRuche AFD\nAjouter les liens"
+          },
+          {
+            "section": "Inclusion (Social)",
+            "question": "Un accès direct à des services télécoms pour des populations caractérisées comme défavorisées à l'échelle nationale peut-il être démontré ?\n• Le projet améliore-t-il / contribue-t-il à l'accès à un service numérique / télécom pour ces populations défavorisées ? Peut-on estimer la proportion de bénéficiaires considérés comme défavorisés ?",
+            "thematique": "Social",
+            "dimension": "Accès",
+            "note_visee": "+2",
+            "commentaire": "Pas de seuil (populations défavorisées) requis",
+            "ressources": "Données sur le profil socio-économique de la clientèle\nDonnées sur le niveau d'accès à un service numérique de la clientèle ciblée par le projet (com SP: on avait introduit la notion de manque d'accès dans défavorisées, non ?)"
+          },
+          {
+            "section": "Inclusion (Social)",
+            "question": "En l'absence de données sur le profil socio-économique des clients, existe-t-il des garanties ou engagements permettant de s'assurer qu'un accès effectif au service télécom financé sera possible pour les populations défavorisées ?\n• Le client met-il en oeuvre une tarification adaptée et abordable pour des populations défavorisées ? Ex : faible coût du panier par rapport aux revenus pour les populations les plus pauvres, tarifs sociaux, prépayé micro-paiement, zero-rating éducation/santé, etc. \n• Le client est-il soumis à des obligations réglementaires afin que ses services bénéficient à des populations considérées comme défavorisées à l'échelle nationale ? Existe-t-il autrement des programmes gouvernementaux de couverture universelle, raccordements prioritaires écoles rurales/hôpitaux districts/préfecture permettant cette inclusivité des services numériques concernés ?",
+            "thematique": "Social",
+            "dimension": "Accès",
+            "note_visee": "+2",
+            "commentaire": "Permet de s'assurer que les accès télécoms / numériques financés permettront un accès à des populations défavorisées sans données directes sur les bénéficiaires finaux.",
+            "ressources": "• Données sur la tarification des services télécoms et numériques pratiquée par le client\n• Obligations réglementaires \n• Programmes gouvernementaux/politiques de couverture universelle"
+          },
+          {
+            "section": "Inclusion (Social)",
+            "question": "Le client présente-t-il des engagements visant à améliorer l'accès à l'emploi et les conditions d'emplois des populations défavorisées ?\n• Le client conduit-il des actions de recrutement adaptés ? Ex : campagnes de recrutement locales, critères de recrutement adaptés, etc.\n• Le client a-t-il des engagements en faveur de l’emploi de populations défavorisées ? Ex : charte, politique diversité & inclusion, communication RSE, etc.\n• Le client a t-il mis en place des dispositifs spécifiques pour favoriser la rétention des salariés issus de populations défavorisées ? Ex : politiques de formations, d'évolution interne, etc.\n• Le client peut-il montrer que des conditions de travail adaptées aux populations défavorisées sont mises en place ? Ex : aménagements de poste pour les personnes en situation de handicap, flexibilité horaire, etc.",
+            "thematique": "Social",
+            "dimension": "Emplois",
+            "note_visee": "+2",
+            "commentaire": "Le critère \"Emplois\" est une nouveauté 2026. Toute note envisagée sur ce critère nécessitera un appui renforcé de la division IMP.",
+            "ressources": "Documents internes du client : données sur la composition des effectifs, documents stratégiques, politiques RH, rapports annuels, rapport d’impact, etc."
+          },
+          {
+            "section": "Inclusion (Social)",
+            "question": "L'inclusion de populations défavorisées est-elle un objectif explicite et formalisé par le client ou le projet ?\n• Une définition claire des populations défavorisées ciblées par le client / projet est-elle être fournie ? Ex : les plus faibles revenus au sein du pays, handicap, zones rurales/périurbaines sous-connectées, etc.\n• Le ciblage de ces segments défavorisés de la population figure-t-il dans les documents stratégiques du client ?",
+            "thematique": "Social",
+            "dimension": "Général",
+            "note_visee": "+3",
+            "commentaire": null,
+            "ressources": "Documents stratégiques du client : plan d'expansion, politique interne, engagements contractuels avec autorités ou investisseurs, statuts, etc."
+          },
+          {
+            "section": "Genre",
+            "question": "Le client remplit-il le critère \"gouvernance et responsabilité\" et ses 4 sous-critères?",
+            "thematique": "Genre",
+            "dimension": "Général",
+            "note_visee": "+1/+2/+3",
+            "commentaire": "Pré-requis nécessaire pour toute notation de +1, +2 ou +3",
+            "ressources": null
+          },
+          {
+            "section": "Genre",
+            "question": "Le client a-t-il un engagement stratégique sur le genre ?\n Par exemple:\n• Un engagement public en faveur de l'égalité de genre sur le site du client (ex: Signature des Women's Empowerment Principles de l'ONU)\n• Des objectifs clairs, mesurables et assortis de délais en matière d'égalité de genre, allant au-delà des exigences minimales pour l'alignement 2X\n• Mesures ou plan d’action visant à promouvoir l’égalité de genre avec des rôles, des responsabilités et des échéances clairement définis\n• Ressources propres (budget, création d'un poste de responsable diversité, équité et inclusion pour lesquels l’égalité de genre constitue une priorité majeure et fait explicitement partie de la description de poste) spécifiquement allouées à l’égalité de genre  et/ou à la mise en œuvre de plans d’action\n• Stratégie autonome en matière d’égalité de genre et/ou intégration explicite de l’égalité de genre dans la stratégie d’entreprise ou le plan stratégique (ex: Intégration d'objectifs de diversité dans les plans de développement des compétences techniques, Inclusion de critères genre dans les politiques de sous-traitance et d'achats responsables,\nAnalyse des impacts différenciés des conditions de travail sur les femmes et les hommes)",
+            "thematique": "Genre",
+            "dimension": "Critère Gouvernance & responsabilité (Critère 0A)",
+            "note_visee": "+1/+2/+3",
+            "commentaire": "Correspond à un des sous critère pour le critère \"gouvernance et responsabilité\"",
+            "ressources": "Guide méthodologique 2X Challenge Page 47."
+          },
+          {
+            "section": "Genre",
+            "question": "Le client a-t-il ce qui pourrait être considéré comme un système de gestion genre ? \nPar exemple:\n• Trois politiques fondamentales en matière d'égalité des sexes (voir liste des mesures exhaustives qui entrent dans ce cadre sur le guide 2X P.50)\n• Un suivi régulier et/ou un plan de suivi des initiatives liées à l'égalité de genre et/ou des progrès accomplis par rapport aux objectifs fixés en la matière ex (intégration d'objectifs visant à réduire les inégalités de genre dans le taux de recrutement sur les chantiers et dans les fonctions techniques)\n• Mécanisme des plaintes des plaintes tenant compte de la dimension de genre (ex: Déploiement d’un canal de signalement sécurisé et anonyme contre le harcèlement en ligne, intégré à l’app mobile de l’opérateur)\n• Initiatives de gestion des risques intégrant explicitement la dimension de genre (ex: les risques de sécurité pour les techniciennes travaillant sur des sites isolés, adaptation des équipements de protection individuelle aux morphologies féminines, les risques de harcèlement sur les chantiers, les conditions d'hébergement lors des déplacements professionnels.)\n• Engagement des parties prenantes internes et/ou externes tenant compte de la dimension de genre (ex: partenariats avec écoles et universités pour encourager les jeunes filles vers les métiers techniques, campagnes de sensibilisation, bourses et campagne de communication dans les écoles et universités...)\n• Mesure et gestion de l'impact (IMM) en matière d'égalité de genre (ex: Objectifs d'impact intégrant explicitement une perspective de genre,  Stratégie d'impact intégrant explicitement une perspective de genre, Approche de mesure de l'impact permettant d'évaluer l'impact en matière de genre)",
+            "thematique": "Genre",
+            "dimension": "Critère Gouvernance & responsabilité (Critère 0B)",
+            "note_visee": "+1/+2/+3",
+            "commentaire": "Correspond à un des sous critère pour le critère \"gouvernance et responsabilité\"",
+            "ressources": "Guide méthodologique 2X Challenge Page 47 & 48."
+          },
+          {
+            "section": "Genre",
+            "question": "Le client a-t-il mis en place un sysème de collecte de données sur les questions de genre ?\nQuel niveau de données doivent être collectées ? Une collècte annuelle et sexogenrées de la place des femmes dans l'entreprise",
+            "thematique": "Genre",
+            "dimension": "Critère Gouvernance & responsabilité (Critère 0C)",
+            "note_visee": "+1/+2/+3",
+            "commentaire": "Correspond à un des sous critère pour le critère \"gouvernance et responsabilité\"",
+            "ressources": "Guide méthodologique 2X Challenge Page 47."
+          },
+          {
+            "section": "Genre",
+            "question": "Le client a-t-il mis en place une politique anti harcèlement ou un code de conduite qui  spécifie  expressément le genre ?\n\nVoici quelques exemples de mesures types à rechercher : \n• Politique de tolérance zéro (applicable en interne et en externe, par exemple aux fournisseurs et prestataires de services),\n• Mécanisme de remonté des plaintes adapté au genre pour les cas de violence sexiste,\n• Processus de réparation adapté au genre pour les problèmes de violence sexiste (par exemple, des procédures d’enquête claires et centrées sur les victimes),\n• Processus de gestion des risques considérant la violence sexiste au travail comme un risque majeur/significatif,\n• Code de conduite interdisant toutes les formes de violence sexiste au travail,\n• Formation obligatoire de l’ensemble du personnel sur la violence sexiste au travail et les politiques/procédures de l’entreprise,\n• Processus de suivi réguliers des VBGH,\n• Personnel dédié et formé pour identifier et gérer les problèmes de violence sexiste au travail, et\n• Environnement sûr pour toutes les activités liées au travail, y compris l’environnement de travail physique et les transports.",
+            "thematique": "Genre",
+            "dimension": "Critère Gouvernance & responsabilité (Critère 0D)",
+            "note_visee": null,
+            "commentaire": "Correspond à un des sous critère pour le critère \"gouvernance et responsabilité\". \n\nUne politique anti harcèlement ou un code de conduite qui ne spécifie pas expressément le genre est-elle suffisante pour remplir le critère \"violences basées sur le genre\" (Critère OD) ?  Non, la politique doit expressément mentionner le genre.",
+            "ressources": "Guide méthodologique 2X Challenge Page 40."
+          },
+          {
+            "section": "Genre",
+            "question": "Le client templit-il deux des 5 critères directs (1 à 5) du 2X (dont l'un d'eux peut être un engagement)? \n- critères 1 à 3 se référer aux seuils 2X à atteindre \n- critère 4 (supply chain) : l’entreprise doit formaliser un engagement stratégique explicite en faveur des femmes dans la supply chain (ex:Diversité des fournisseurs ou code de conduite en matière d'inclusion), et s’assurer qu’il est réellement mis en œuvre grâce à des processus, actions et mécanismes de suivi permettant d’en garantir l’efficacité.\n - Critère 5 (produits et services): le produit/service améliore directement le bien-être des femmes/filles ou l’égalité de genre, avec un impact mesurable en terme de revenu, accès, sécurité, santé...",
+            "thematique": "Genre",
+            "dimension": "Général",
+            "note_visee": "+1/+2/+3",
+            "commentaire": "Pré-requis nécessaire pour toute notation de +1, +2 ou +3",
+            "ressources": null
+          },
+          {
+            "section": "Genre",
+            "question": "Quels types de mesures pourrait permettre de remplir le critère 5: \nLe produit ou service créé doit prendre en compte les besoins spécifiques des femmes et des filles lors de la conception des produits numériques :\n• Programme d'expansion du réseau ciblant des zones rurales ou périurbaines où les femmes ont un accès plus faible à Internet mobile (Cartographie des écarts d'accès numérique entre femmes et hommes, construction prioritaire de tours dans ces zones, engagement contractuel avec les MNO pour améliorer la couverture)\n• Utilisation de l'énergie excédentaire des tours pour alimenter des centres communautaires, écoles de filles, centres de santé maternelle, espaces numériques destinés aux femmes.",
+            "thematique": "Genre",
+            "dimension": "Critère produit et service (5)",
+            "note_visee": "+1/+2/+3",
+            "commentaire": "Critère produits et service - l'un des 5 critères direct du 2X. \nExemples de produits et services",
+            "ressources": "Guide méthodologique 2X Challenge Pages 91 et suivantes"
+          },
+          {
+            "section": "Genre",
+            "question": "Si le client a mis en place des mesures/services locaux bénéficiant aux femmes en dehors du périmètre du financement de notre projet, cela peut-on considérer que le critère 5 (produit et services) est rempli ?\nNon, l'activité ou le service en question doit être spécifiquement rattaché au projet financé.",
+            "thematique": "Genre",
+            "dimension": "Critère produit et service (5)",
+            "note_visee": "+1/+2/+5",
+            "commentaire": "Critère produits et service - l'un des 5 critères direct du 2X. \nPrécision sur le critère 5 et son périmètre",
+            "ressources": "Guide méthodologique 2X Challenge Pages 91 et suivantes"
+          },
+          {
+            "section": "Genre",
+            "question": "Le client a-t-il donné son accord de principe pour rejoindre l'initiative 2X?",
+            "thematique": "Genre",
+            "dimension": "Général",
+            "note_visee": "+2/+3",
+            "commentaire": "Processus d'alignement 2X DD +2 \n\nAccord de principe",
+            "ressources": "Accord de principe à retrouver sur Laruche"
+          },
+          {
+            "section": "Genre",
+            "question": "Quand et comment obtenir l'accord de principe du client ? \n\nQuand : L'accord de principe doit être obtenu avant le COPRO afin de valider la notation +2 sur la dimension genre de la notation DD. \nComment procéder  : \n\nUne fois que vous avez vérifié l'éligibilité du projet avec le/la chargée IMP : \n\n1) Récupérer le template de l'accord de principe sur LaRuche ici\n2) Amender l'accord de principe avec les éléments inscrits dans le template impact\n3) Faire valider l'accord de principe par l'équipe IMP ou genre \n4) Envoyer l'accord de principe par mail au client avec l'équipe genre dans la boucle pour en assurer le suivi\n5) A réception de l'accord du client, l'équipe genre validera le Phare.",
+            "thematique": "Genre",
+            "dimension": "Général",
+            "note_visee": "+2/+3",
+            "commentaire": "Processus d'alignement 2X DD +2 \n\nAccord de principe",
+            "ressources": "Accord de principe à retrouver sur Laruche"
+          },
+          {
+            "section": "Genre",
+            "question": "Le client a-t-il entamé la démarche pour rejoindre l'initiative 2X?",
+            "thematique": "Genre",
+            "dimension": "Général",
+            "note_visee": "+3",
+            "commentaire": "Processus d'alignement 2X DD +3",
+            "ressources": null
+          },
+          {
+            "section": "Genre",
+            "question": "Quand et comment obtenir la qualification officielle du projet au 2X Challenge ?  \n\nLa qualification officielle au 2X Challenge requiert l'accord du client au partage de ses données genre avec le 2X Challenge. \n\nVous disposez de deux options : \n1) L'obtenir au stade du COPRO: en faisant signer le data sharing consent, lors de l'envoi de l'accord de principe au client. \nOU\n2) Lors de la signature : en intégrant les clauses 2X dans vos conventions de crédit/side letter. \n\nUne fois l'accord au partage des données obtenu, nous communiquerons au 2X Challenge les données de votre client afin d'officialiser sa qualification au 2X Challenge sur leur site internet.",
+            "thematique": "Genre",
+            "dimension": "Général",
+            "note_visee": "+3",
+            "commentaire": "Processus d'alignement 2X DD +3",
+            "ressources": "Data sharing consent à retrouver sur laruche\nClausier 2X à retrouver sur laruche"
+          },
+          {
+            "section": "Genre",
+            "question": "Quelle est la différence entre l'éligibilité, l'alignement 2X, la qualification et la certification 2X? \n\nUn client est éligible au 2X lorsqu'il rempli les conditions minimales 2X (critère gouvernance & reponsabilité et deux critères 2X)\nUn client est aligné 2X lorsqu'il rempli les conditions minimales 2X (critère gouvernance & reponsabilité et deux critères 2X) ET qu'il a donné son accord de principe à rejoindre l'initiative 2X.\nUn client est qualifié 2X lorsqu'il rempli les conditions minimales 2X (critère gouvernance & reponsabilité et deux critères 2X), qu'il a donné son accord de principe à rejoindre l'initiative 2X ET qu'il a donné son accord au partage des données.\nUn client est certifié 2X, lorsqu’il s’engage volontairement avec le 2X Challenge et qu’il obtient cette reconnaissance à l’issue d’un processus d’évaluation et d’audit interne conforme aux critères du 2X Challenge. Ce processus contrairement aux autres est externe, payant et à la charge du client.",
+            "thematique": "Genre",
+            "dimension": "Terminologie",
+            "note_visee": null,
+            "commentaire": "Précision sur les termes employés",
+            "ressources": null
+          },
+          {
+            "section": "Genre",
+            "question": "Un client peut-il s'engager à la fois sur un des critère \"gouvernance & responsabilité\" et sur un critère direct ? \nOui, le client peut s'engager sous un délai de 2 ans maximum à remplir un des critère gouvernance et respnsabilité qui ne serait pas rempli ET sur un critère direct.",
+            "thematique": "Genre",
+            "dimension": "Méthodologie d'alignement 2X",
+            "note_visee": null,
+            "commentaire": "Méthodologie 2X",
+            "ressources": "Guide méthodologique 2X Challenge Page 11."
+          },
+          {
+            "section": "Genre",
+            "question": "Si le seuil 2X à atteindre pour les critères 2 (leadership) et 3 (emploi) ne semblent pas pertinent compte tenu de la géographie du client et son secteur, peut on demander à le revoir ? \nOui, nous pouvons demander au comité d'exception du 2X de considérer comme rempli le critère bien que le seuil requis ne soit pas atteint. Voir avec l'équipe genre pour saisir le comité d'exception du 2X Challenge.",
+            "thematique": "Genre",
+            "dimension": "Méthodologie",
+            "note_visee": null,
+            "commentaire": "Contacter l'équipe genre pour solliciter le comité d'exception",
+            "ressources": "Contacter l'équipe genre pour solliciter le comité d'exception"
+          }
+        ]
+      }
+    },
+    "Towers": {
+      "notation_dd": {
+        "title": "Secteur du numérique - Towers & Co and Fixed Networks",
+        "dimensions": [
+          {
+            "dimension": "BIODIVERSITE - Biodiversité et gestion des ressources naturelles",
+            "pillar": "Planète",
+            "objective": "",
+            "prerequisite": null,
+            "connector_note": "Si cette dimension de la notation DD est pertinente pour votre dossier (e.g. celui-ci serait éligible à un +1, +2 ou +3 ou -1), cliquez sur le bouton + afin de voir les critères détaillés ci-dessous",
+            "scale": [],
+            "criteria": []
+          },
+          {
+            "dimension": "CLIMAT - Atténuation",
+            "pillar": "Planète",
+            "objective": "Pour les Towerco/ESCO, les enjeux principaux résident dans l'approvisionnement énergétique. Il s'agira de vérifier que le client a mis en place des mesures visant à minimiser l'utilisation de diesel pour l'approvisionnement électrique de ses tours (connexion réseau, utilisation de solaire + batteries)",
+            "prerequisite": null,
+            "connector_note": "Si cette dimension de la notation DD est pertinente pour votre dossier (e.g. celui-ci serait éligible à un +1, +2 ou +3 ou -1), cliquez sur le bouton + afin de voir les critères détaillés ci-dessous",
+            "scale": [
+              "-1",
+              "0",
+              "+1",
+              "+2",
+              "+3"
+            ],
+            "criteria": [
+              {
+                "criterion": "Atténuation",
+                "summary": {
+                  "levels": {
+                    "-1": "La part du diesel dans la consommation électrique du projet (l'ensemble des tours financées) représente plus de 2/3 de consommation électrique totale",
+                    "0": "Pas d'enjeux",
+                    "+1": "Le client a mis en place un plan de transition climatique certifié \nOU\nle projet débouche sur des co-bénéfices climat atténuation <30%",
+                    "+2": "Le CAPEX éligible comme finance climat atténuation est supérieur à 30%.",
+                    "+3": "Proparco soutient le client dans la mise en place d'un plan de transition climatique certifié (AT)"
+                  },
+                  "example": "+1: Eastcastle II (PCD1048)\n+2: Aktivco 6 (PZZ1831)"
+                },
+                "detail": {
+                  "levels": {
+                    "-1": "Afin de s'assurer que l'utilisation de diesel est minimisée dans l'approvisionnement électrique du client, il faudra vérifier que le diesel représente au maximum 2/3 de la consommation électrique totale. La consommation de diesel peut être réduite en connectant les tours au réseau national ou installant des systèmes solaires + batterie.\n\nNote: Pour vérifier la règle des 2/3, diviser la consommation électrique en kWh provenant de diesel par la consommation électrique totale sur les tours financées ou sur des tours existantes du client  (données à demander au client)",
+                    "+1": "Pour des tours greenfields, les CAPEX solaire et batteries sont 100% éligibles à la finance climat à condition que le diesel représente au maximum 2/3 de la consommation électrique (voir détails -1 pour le calcul)\n\nPour les projets de solarisation de tours existantes, les CAPEX solaire et batteries sont éligibles quel que soit le nouveau mix électrique, à condition de ne pas financer de nouvelles capacités diesels en parallèle.",
+                    "+3": "Se rapprocher de IMP/ATM si le client montre un intérêt pour ce type d'AT"
+                  },
+                  "example": null
+                }
+              }
+            ]
+          },
+          {
+            "dimension": "CLIMAT - Adaptation",
+            "pillar": "Planète",
+            "objective": "Valoriser les activités, au sein du projet, visant à réduire la vulnérabilité climatique du projet (~ adaptation du projet, projet adapté) et/ou la vulnérabilité climatique du système (ex: population) dans lequel le projet opère (~adaptation 'par' le projet).",
+            "prerequisite": null,
+            "connector_note": "Si cette dimension de la notation DD est pertinente pour votre dossier (e.g. celui-ci serait éligible à un +1, +2 ou +3 ou -1), cliquez sur le bouton + afin de voir les critères détaillés ci-dessous",
+            "scale": [
+              "-1",
+              "0",
+              "+1",
+              "+2",
+              "+3"
+            ],
+            "criteria": [
+              {
+                "criterion": "Adaptation",
+                "summary": {
+                  "levels": {
+                    "-1": "Enjeux E&S majeurs identifiés en lien avec la dimension Adaptation et risque important qu’un ESAP satisfaisant pour ESG ne soit pas négocié/validé avec le client d’ici la signature.",
+                    "0": "Projet ayant fait l’objet d’une analyse du risque climatique et ne présentant pas d’enjeux particuliers.",
+                    "+1": "Le client a pris en compte dans la conception du projet les risques climatiques mais cela ne débouche pas sur des co-bénéfices climat adaptation, OU Les co-bénéfices climat adaptation sont <30%.",
+                    "+2": "Projet avec co-bénéfices adaptation ≥30 %.",
+                    "+3": "Projet avec co-bénéfices climat adaptation ≥30% ET Accompagnement du client dans sa stratégie climat adaptation ou Finance de Transition Adaptation."
+                  },
+                  "example": null
+                },
+                "detail": {
+                  "levels": {
+                    "-1": "Notes négatives Adaptation gérées par ESG",
+                    "0": "Analyse effectuée des risques climatiques actuels et futurs auxquels le projet est exposé (exemples de bases de données pour identifier les risques climatiques disponibles sur La Ruche), sans risque significatif identifié (ex : risque significatif si note >0,6 sur l’outil Climate screening pour un aléa donné).\n\nET \n\nAu sein du projet, pas d’activité contribuant à réduire les risques climatiques du système dans lequel l’activité se déroule (ex : territoire, entités ou groupes socio-économiques qui bénéficient du projet, environnement).",
+                    "+1": "Analyse effectuée des risques climatiques actuels et futurs auxquels le projet est exposé (exemples de bases de données pour identifier les risques climatiques disponible sur La Ruche), risques significatifs identifiés (ex : note >0,6 sur l’outil Climate screening pour un aléa donné) et pris en compte dans la conception du projet, les procédures et/ou les activités (ex : solutions techniques intégrées dans les spécifications du projet, mécanisme d’assurance, de partage/ transferts de risque, fonds de contingence, activités dédiées comme par ex. un plan de contingence, gestion des risques de catastrophes, ou solutions organisationnelles). Cependant, mesures mises en place par le projet non associées à des capex ou surcoûts, donc pas de co-bénéfices Adaptation associés. \nExemple : Dans un contexte de risques significatifs liés aux inondations/glissements de terrain, prise en compte des risques climatiques dans le design de tours telecom à travers des fondations renforcées. \n\nOU \n\nAnalyse effectuée des risques climatiques actuels et futurs auxquels le projet est exposé (exemples de bases de données pour identifier les risques climatiques disponible sur La Ruche), risques significatifs identifiés (note >0,6 sur l’outil Climate screening pour un aléa donné). Activités (au sein du projet) permettant de réduire ces risques (ex : solutions techniques intégrées dans les spécifications du projet, mécanisme d’assurance, de partage/ transferts de risque, fonds de contingence, activités dédiées comme par ex. un plan de contingence, gestion des risques de catastrophes, ou solutions organisationnelles), générant des co-bénéfices Adaptation inférieurs à 30% (Règles de comptabilisation des co-bénéfices Adaptation disponibles sur La Ruche). \n\nOU\n\nAnalyse effectuée des risques climatiques actuels et futurs auxquels est exposé le système dans lequel le projet opère (ex : territoire, entités ou groupes socio-économiques qui bénéficient du projet, environnement) : évaluation des aléas climatiques, des enjeux, de la vulnérabilité. Risques climatiques significatifs identifiés. Activités (au sein du projet) permettant de les réduire, générant des co-bénéfices Adaptation inférieurs à 30%.  Exemples de bases de données pour identifier les risques climatiques et règles de comptabilisation des co-bénéfices Adaptation disponibles sur La Ruche.",
+                    "+2": "Analyse effectuée des risques climatiques actuels et futurs du projet et/ou du système dans lequel le projet opère (territoire, entités ou groupes socio-économiques qui bénéficient du projet, environnement). Risques climatiques significatifs identifiés. Activités (au sein du projet) permettant de les réduire, générant des co-bénéfices Adaptation d’au moins 30%. Bases de données pour identifier les risques climatiques et règles de comptabilisation des co-bénéfices disponibles dans La Ruche.",
+                    "+3": "Projet avec co-bénéfices climat Adaptation ≥30% (voir note +2) \n\nET \n\nAccompagnement technique (diagnostic adaptation, plan d’action adaptation, accompagnement sur la mise en œuvre du plan d’action), ou qualification du projet Finance de transition Adaptation : finance visant à accompagner la transition des acteurs en s’appuyant sur une forte intentionnalité de la part du client » avec : \n-  si financement non affecté : Pro climat Corporate\n- si financement affecté : appui à la transition de l’acteur/chaine de valeur/secteur/territoire pour des projets mettant en avant l’intentionnalité, la matérialité, la pérennité et la réplicabilité des éléments déployés, et s’insérant dans différentes phases de cette transition (innovation, unlocking, scale up, et/ou phase out)."
+                  },
+                  "example": null
+                }
+              }
+            ]
+          },
+          {
+            "dimension": "SOCIAL - Lien social",
+            "pillar": "Inclusion",
+            "objective": "Soutien aux services essentiels de part la réduction de la fracture numérique pour populations et territoires défavorisés, pouvant se manifester par: (voir ci-dessous)\na. Accès au haut débit et amélioration de la qualité de la connectivité\nb. Densification des réseaux en zone urbaine\nc. Extension de la couverture des infrastructures numériques  dans les territoires mal connectés (notamment les territoires ruraux)\nd. Réduction des prix et amélioration de l’accessibilité du numérique\ne. Présence de programmes d'inclusion numérique des populations défavorisées (fourniture d’accès aux terminaux numériques, de formation aux métiers du numérique ou de lutte contre l’illectronisme)",
+            "prerequisite": "Prérequis pour une note +2 / +3 : Le projet ne vient ni aggraver les inégalités, ni favoriser l'exclusion et ne sert pas exclusivement des populations favorisées.",
+            "connector_note": "Si cette dimension de la notation DD est pertinente pour votre dossier (e.g. celui-ci serait éligible à un +1, +2 ou +3 ou -1), cliquez sur le bouton + afin de voir les critères détaillés ci-dessous",
+            "scale": [
+              "0",
+              "+1",
+              "+2",
+              "+3"
+            ],
+            "criteria": [
+              {
+                "criterion": "Accès",
+                "summary": {
+                  "levels": {
+                    "0": "Les informations fournies n'ont pas permis de comptabiliser des accès télécom / numérique fournis par les TowerCo & Fixed Networks directement à des particuliers.",
+                    "+1": "Des accès à un service de télécommunication / numérique fournis directement par les TowerCo & Fixed Networks à des particuliers sont comptabilisés sans information particulière sur les bénéficiaires ou les territoires desservis.",
+                    "+2": "Des accès à un service de télécommunication / numérique fournis à des particuliers grace aux tours telecoms construites sont comptabilisés\nET\nIl a été démontré que ces accès bénéficient à des populations défavorisées.",
+                    "+3": "L'inclusion de populations et/ou de territoires défavorisés constitue un objectif explicite et documenté du projet / client."
+                  },
+                  "example": "> 0 \n\n> +1\n   PZZ1658 Netis\n   PZZ1772 Axian Telecom\n   PZZ1783 WIOCC3\n\n> +2 voir Territoires\n\n> +3\n   PMX1037 Netwey"
+                },
+                "detail": {
+                  "levels": {
+                    "0": "Les informations fournies n'ont pas permis de comptabiliser des accès télécom / numérique fournis par les TowerCo & Fixed Networks directement à des particuliers.",
+                    "+1": "Des accès à un service de télécommunication / numérique fournis directement par les TowerCo & Fixed Networks à des particuliers sont comptabilisés sans information particulière sur les bénéficiaires ou les territoires desservis.",
+                    "+2": "Des accès à un service de télécommunication / numérique fournis à des particuliers grace aux tours telecoms construitessont comptabilisés\nET\nIl a été démontré que ces accès bénéficient à des populations défavorisées.\n\nLa justification peut s'appuyer sur les cas suivants : \n- Les opérateurs locaux pratiquent des programmes ou tarifications spécifiques pour l'accès des populations défavorisées à leurs services.\n- Le pays dispose de réglementations ou de politiques  créant les conditions pour un accès universel aux services telecoms et numériques",
+                    "+3": "La notation de +3 peut être attribuée si et seulement si l'objectif du client / projet est de contribuer à l'inclusion de populations défavorisées, et que cet objectif est explicite et a été documenté par le projet ou client.\n\nLe client doit pouvoir démontrer cet objectif via des éléments de stratégie d'intervention, de politique d'emploi, d'achat, etc. Une définition claire des populations défavorisées ciblées doit être fournie par le client / projet. \n\nDes discussions spécifiques sur le sujet sont à prévoir avec le client."
+                  },
+                  "example": "> 0 \n\n> +1\n   PZZ1658 Netis\n   PZZ1772 Axian Telecom\n   PZZ1783 WIOCC3\n\n> +2 voir Territoires\n\n> +3\n   PMX1037 Netwey"
+                }
+              },
+              {
+                "criterion": "Emplois",
+                "summary": {
+                  "levels": {
+                    "0": "Critère de notation non applicable à une note de +1.",
+                    "+2": "Le client a développé une politique d'emploi visant à inclure des populations défavorisées."
+                  },
+                  "example": "> +2 et +3\nPas d'exemples de projets (nouveau critère 2026)"
+                },
+                "detail": {
+                  "levels": {
+                    "0": "Critère de notation non applicable à une note de +1.",
+                    "+2": "Le client a développé une politique d'emploi visant à inclure des populations défavorisées. Aucun seuil minimal n’est requis, mais une analyse démontre la capacité du client à soutenir l’emploi de ces populations, qui peut se traduire par :\n\n- Des actions de recrutement, de rétention et d’avancement professionnel ciblant ces groupes ;\n\n- Des mesures visant l'égalité salariale et proposant des conditions de travail adaptées à leurs besoins spécifiques."
+                  },
+                  "example": "> +2 et +3\nPas d'exemples de projets (nouveau critère 2026)"
+                }
+              },
+              {
+                "criterion": "Territoires",
+                "summary": {
+                  "levels": {
+                    "+2": "Au moins 50% des accès à un service télécom / numérique fournis par les TowerCo & Fixed Networks le sont dans des territoires défavorisés."
+                  },
+                  "example": "> 0\n   PZZ1748 Victoria\n   PMX1029 QMC\n \n> +1\n   PCD1047 Alpha Eco\n\n> +2\n   PPE1042 Win\n   PMX1035 C3ntro\n\n> +3  PMX1037 Netwey"
+                },
+                "detail": {
+                  "levels": {
+                    "+2": "Au moins 50% des accès à un service télécom / numérique fournis par les TowerCo & Fixed Networks le sont dans des territoires défavorisés, et des populations défavorisées peuvent y accéder.\n\nDans le cas de tour télécoms, la couverture géographique des infrastructures doit inclure 50% de territoires caractérisés comme défavorisés au niveau national. Il peut s'agir de territoires considérés commes défavorisés par rapport aux indicateurs socio-économiques locaux, aux indicateurs d'accès aux services télécom / numériques, etc.\n\nLe projet peut également apporter des garanties que les services télécoms / numériques seront accessibles à la population moyenne locale. Cela peut se traduire par des pratiques de tarifications, des modalités de paiement, des programmes politiques / gouvernementaux permettant un accès inclusif."
+                  },
+                  "example": "> 0\n   PZZ1748 Victoria\n   PMX1029 QMC\n \n> +1\n   PCD1047 Alpha Eco\n\n> +2\n   PPE1042 Win\n   PMX1035 C3ntro\n\n> +3  PMX1037 Netwey"
+                }
+              },
+              {
+                "criterion": "Chaînes de valeur",
+                "summary": {
+                  "levels": {
+                    "+2": "Les TowerCo & Fixed Networks intègrent dans leurs chaînes d'approvisionnement ou chaînes de valeur (amont et aval) au moins 50% d'entreprises :\n\n- employant des populations défavorisées ; ou\n\n- intervenant dans des territoires défavorisés.\n\nDIFFICILEMENT ACTIONNABLE pour le secteur du numérique"
+                  },
+                  "example": "> +2 et +3\nPas d'exemples de projets (critère élargi en 2026)"
+                },
+                "detail": {
+                  "levels": {
+                    "+2": "Les TowerCo & Fixed Networks intègrent dans leurs chaînes d'approvisionnement ou chaînes de valeur (amont et aval) au moins 50% d'entreprises :\n\n- employant des populations défavorisées (se référer au détail du critère \"Emplois\"); ou\n\n- intervenant dans des territoires défavorisés (se référer au détail du critère \"Territoires\").\n\nDIFFICILEMENT ACTIONNABLE pour le secteur du numérique"
+                  },
+                  "example": "> +2 et +3\nPas d'exemples de projets (critère élargi en 2026)"
+                }
+              }
+            ]
+          },
+          {
+            "dimension": "GENRE - Égalité femmes-hommes",
+            "pillar": "Genre",
+            "objective": "",
+            "prerequisite": null,
+            "connector_note": "Si cette dimension de la notation DD est pertinente pour votre dossier (e.g. celui-ci serait éligible à un +1, +2 ou +3 ou -1), cliquez sur le bouton + afin de voir les critères détaillés ci-dessous",
+            "scale": [
+              "0",
+              "+1",
+              "+2",
+              "+3"
+            ],
+            "criteria": [
+              {
+                "criterion": "2X Challenge",
+                "summary": {
+                  "levels": {
+                    "0": "Les risques ESG sont soit négligeables, soit traités selon les modalités habituelles (clauses types, ESAP validé avec le client, etc.)",
+                    "+1": "Conditions pour un projet aligné 2X Challenge : \n\n1) Remplir le critère \"gouvernance et responsabilité\" et ses 4 sous-critères.\n\nET  \n\n2) Remplir 2 des 5 critères directs (1 à 5)",
+                    "+2": "Conditions pour un projet éligible au 2X Challenge : \n\n1) Remplir le critère \"gouvernance et responsabilité\" (cf notation+1)\n\nET\n\n2) Remplir 2 deux des 5 critères directs (1 à 5) dont l'un d'eux peut être un engagement  \n\nET\n\n3) Obtenir l'accord de principe du client à rejoindre l'initiative 2X",
+                    "+3": "3 options au choix : \n\n1) Client candidat à la certification\n\nOU\n\n2)Le client s'engage à augmenter la proportion de femmes en position de leadership de 50% \n\nOU\n\n3) Le client dispose d'une approche hollistique en matière de genre"
+                  },
+                  "example": null
+                },
+                "detail": {
+                  "levels": {
+                    "0": "Les risques ESG sont soit négligeables, soit traités selon les modalités habituelles (clauses types, ESAP validé avec le client, etc.)",
+                    "+1": "Conditions pour un projet aligné 2X Challenge : \n\n1) Remplir le critère \"gouvernance et responsabilité\" qui comprend 4 sous-critères :\n- Engagement stratégique \n- Système de gestion\n- Données\n-  GBVH\nPour des exemples de mesures pour chacun des sous-critères voir les Key Qs et les guidelines  2X page 40, 47 et suivantes.\n\nET  \n\n2) Remplir 2 critères directs (1 à 5) dont l'un d'eux peut être un engagement \n- critères 1 à 3 se référer aux seuils 2X à atteindre ici \n- critère 4 (supply chain) : l’entreprise doit formaliser un engagement stratégique explicite en faveur des femmes dans la supply chain (ex:Diversité des fournisseurs ou code de conduite en matière d'inclusion), et s’assurer qu’il est réellement mis en œuvre grâce à des processus, actions et mécanismes de suivi permettant d’en garantir l’efficacité.\n - Critère 5 (produits et services): le produit/service améliore directement le bien-être des femmes/filles ou l’égalité de genre, avec un impact mesurable en terme de revenu, accès, sécurité, santé...",
+                    "+2": "Conditions pour un projet éligible au 2X Challenge : \n\n1) Remplir le critère \"gouvernance et responsabilité\" (cf notation+1)\n\nET\n\n2) Remplir 2 critères directs (1 à 5) dont l'un d'eux peut être un engagement  \n\nET\n\n3) Obtenir l'accord de principe du client à rejoindre l'initiative 2X",
+                    "+3": "3 options au choix : \n\n1) Client candidat à la certification (preuve de la démarche engagée ex:mail de demande au 2X)\n\nOU\n\n2)Le client s'engage à augmenter la proportion de femmes en position de leadership de 50% (tableau de simulation ici)\n\nOU\n\n3) Le client dispose d'une approche hollistique en matière de genre (stratégie genre, études de faisabilité engagée en amont des projets, politiques RH genre, objectifs en matière d'égalité de genre en interne, engagement auprès des communautés locales, inclusion des femmes dans les projets...). Pour cette option, contacter IMP."
+                  },
+                  "example": "Critère 4 exemple : Une entreprise numérique met en place une supply chain responsable en cartographiant ses fournisseurs IT (cloud, SaaS, data, cybersécurité) et dispose d'un code de conduite mentionnant le genre."
+                }
+              },
+              {
+                "criterion": "Gender boost",
+                "summary": {
+                  "levels": {
+                    "0": "Les risques ESG sont soit négligeables, soit traités selon les modalités habituelles (clauses types, ESAP validé avec le client, etc.)",
+                    "+1": "Le client s'engage à mettre en place : \n\n1) Une mesure \"gouvernance et responsabilité\" \nPour des exemples de mesures voir les guidelines 2X page 47 et suivantes.\n\nET\n\n2) Une mesure de prévention des violences basées sur le genre\nPour des exemples de mesures voir les guidelines 2X page 40.",
+                    "+2": "Le client s'engage à :\n\n1) Remplir les conditions du +1 du track \"gender boost\"\n\nET \n\n2) Augmenter la proportion de femmes en position de leadership de +25%"
+                  },
+                  "example": null
+                },
+                "detail": {
+                  "levels": {
+                    "0": "Les risques ESG sont soit négligeables, soit traités selon les modalités habituelles (clauses types, ESAP validé avec le client, etc.)",
+                    "+1": "Le client s'engage à mettre en place : \n\n1) Une mesure \"gouvernance et responsabilité\" \nPour des exemples de mesures voir les guidelines 2X page 47 et suivantes.\n\nET\n\n2) Une mesure de prévention des violences basées sur le genre\nPour des exemples de mesures voir les guidelines 2X page 40.",
+                    "+2": "Le client s'engage à :\n\n1) Remplir les conditions du +1 du track \"gender boost\"\n\nET \n\n2) Augmenter la proportion de femmes en position de leadership de +25%"
+                  },
+                  "example": null
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "key_qs": {
+        "title": "Questionnaire de due diligence IMPACT: Secteur du numérique - TowerCo and Fixed Networks",
+        "questions": [
+          {
+            "section": "Planète",
+            "question": "L'entreprise dispose-t-elle d'un plan de transition climatique ? Les informations utiles incluent entre autres les objectifs et le calendrier",
+            "thematique": "Planète",
+            "dimension": "Atténuation",
+            "note_visee": "+1/+2/+3",
+            "commentaire": "Ces éléments peuvent également être inclus dans le narratif alignement Accord de Paris",
+            "ressources": "Sustainability report du client"
+          },
+          {
+            "section": "Planète",
+            "question": "Quelles mesures concrètes sont en place pour réduire l'empreinte carbone des opérations ? E.g., pour réduire de diesel pour la consommation énergétique, dans le design, dans la sourcing des matériaux de construction, etc.",
+            "thematique": "Planète",
+            "dimension": "Atténuation",
+            "note_visee": "+1/+2/+3",
+            "commentaire": "Ces éléments peuvent également être inclus dans le narratif alignement Accord de Paris",
+            "ressources": "Sustainability report du client"
+          },
+          {
+            "section": "Planète",
+            "question": "L'entreprise a-t-elle réalisé un bilan Gaz à effets de serre/carbone ? Quel est le périmètre et la méthodologie de ce bilan carbone ? Quels sont les résultats ? Pouvez-vous partager des données chiffrées ?",
+            "thematique": "Planète",
+            "dimension": "Atténuation",
+            "note_visee": "+1/+2/+3",
+            "commentaire": "Si le client a déjà fait un bilan carbone, évaluer si utilisable tel quel ou si données utilisées peuvent être exploitées pour  bilan carbone interne",
+            "ressources": "Sustainability report du client"
+          },
+          {
+            "section": "Planète",
+            "question": "Quel est le mix électrique des tours financées? Merci de préciser les modalités contractuelles (PPA, autoconsommation, etc.) ainsi que toute donnée quantitative sur la consommation et/ou la production d'électricité (consommation annuelle en MWh ; part solaire, diesel, réseau électrique – capacité installée et production ; intensité carbone de la production électrique en gCO2e/kWh).",
+            "thematique": "Planète",
+            "dimension": "Atténuation",
+            "note_visee": "+1/+2/+3",
+            "commentaire": "Permet d'évaluer le niveau d'émissivité de l'électricité; utile pour le bilan carbone, la Finance climat (part des CAPEX solaire + batterie), et alignement Accord de Paris\n\nContacter IMP si le mix électrique des tours n'inclut pas du tout de capacités renouvelables (risques de désalignement Accord de Paris).",
+            "ressources": "Données historiques du client sur les tours existantes ou projections sur les tours financées"
+          },
+          {
+            "section": "Planète",
+            "question": "Pour valoriser des mesures/activités liées à l'adaptation du projet (ou projet adapté) : \n1. Une analyse des risques climatiques physiques actuels et futurs auxquels le projet est exposé a-t-elle été réalisée (exemples de bases de données pour identifier les risques climatiques disponibles sur La Ruche) ? \n2. Si des risques climatiques significatifs ont été identifiés, quelles sont les activités mises en place par le projet pour répondre aux risques identifiés : solutions techniques (intégrées dans les spécifications du projet), outils dédiés (mécanisme d’assurance, de partage/ transferts de risque, fonds de contingence), activités dédiées (plan de contingence, gestion des risques de catastrophes, etc.) ou solutions organisationnelles ?\n3. Ces activités sont-elles associées à des CAPEX ou génèrent-elles des surcoûts ? Si elles génèrent des surcoûts, une estimation du montant des surcoûts est-elle disponible ?  \n4. Si ces activités sont associées à des CAPEX ou génèrent des surcoûts, un lien clair et direct entre les activités spécifiques du projet et l’objectif de réduction de la vulnérabilité au changement climatique est-il établi ? L’intention du projet de traiter les risques/ vulnérabilités sera-t-elle explicitée dans la documentation du projet ?",
+            "thematique": "Planète",
+            "dimension": "Adaptation",
+            "note_visee": "+1 ou +2",
+            "commentaire": "Si oui aux 4 questions, alors : \n- notation +1 si co-bénéfices < 30%\n- notation +2 si co-bénéfices  ≥ 30%",
+            "ressources": null
+          },
+          {
+            "section": "Planète",
+            "question": "Pour valoriser l'Adaptation par le projet : \n1. Une analyse des risques climatiques actuels et futurs auxquels est exposé le système dans lequel le projet opère (territoire, entités ou groupes socio-économiques qui bénéficient du projet, environnement) a-t-elle été réalisée : évaluation des aléas climatiques (exemples de bases de données pour identifier les risques climatiques disponibles sur La Ruche), des enjeux et de la vulnérabilité du système (analyse bibliographique dédiée) ?  \n2. Si des risques climatiques significatifs sont identifiés, certaines activités au sein du projet vont-elles contribuer à leur réduction ? Sont-elles associées à des CAPEX ? \n3. Un lien clair et direct entre les activités spécifiques du projet et l’objectif de réduction de la vulnérabilité au changement climatique est-il établi ? L’intention du projet de traiter les risques/ vulnérabilités sera-t-elle explicitée dans la documentation du projet ?",
+            "thematique": "Planète",
+            "dimension": "Adaptation",
+            "note_visee": "+1 ou +2",
+            "commentaire": "Si oui aux 4 questions, alors :\n- notation +1 si co-bénéfices < 30%\n- notation +2 si co-bénéfices  ≥ 30%",
+            "ressources": null
+          },
+          {
+            "section": "Planète",
+            "question": "En plus de co-bénéfices Adaptation d’au moins 30%, le projet est-il éligible à Finance de transition Adaptation (appui à la transition Adaptation de l’acteur/chaine de valeur/secteur/territoire pour des projets mettant en avant l’intentionnalité, la matérialité, la pérennité et la réplicabilité des éléments déployés) ou un Accompagnement technique (diagnostic adaptation, plan d’action adaptation, accompagnement sur la mise en œuvre du plan d’action) est-il envisagé par le client ?",
+            "thematique": "Planète",
+            "dimension": "Adaptation",
+            "note_visee": "+3",
+            "commentaire": null,
+            "ressources": null
+          },
+          {
+            "section": "Inclusion (Social)",
+            "question": "Le client / projet fournit-il des accès télécoms / numériques directement à des particuliers ? Disposons-nous des données nécessaires au calcul des accès correspondants ?",
+            "thematique": "Social",
+            "dimension": "Général",
+            "note_visee": "+1",
+            "commentaire": "Les accès ne sont comptabilisés que lorsqu'ils sont fournis directement à des particuliers. Les accès indirects et les accès à des professionnels ne sont pas comptabilisés.",
+            "ressources": "• Données clients\n• Données statistiques nationales / régionales"
+          },
+          {
+            "section": "Inclusion (Social)",
+            "question": "Le projet sert-il exclusivement des populations favorisées au regard du service télécom proposé ?\n• Le client possède-t-il de l’information relative au profil socio-économique des clients cibles ? Ces populations sont-elles exclusivement des populations favorisées (au sein du pays) ?\n• Quelle est la politique tarifaire du client ? Est-elle alignée avec celle de ses concurrents ? Vient-elle cibler exclusivement des populations favorisées ?\n• Le service télécom proposé pèse-t-il lourdement dans les dépenses de la population locale ?\n• Le projet vient-il aggraver les inégalités existantes par une couverture renforcée dans des régions déjà favorisées au regard de l'accès aux télécoms / numérique ?",
+            "thematique": "Social",
+            "dimension": "Général",
+            "note_visee": "+2 ou +3",
+            "commentaire": "Pré-requis nécessaire pour toute notation de +2 ou +3",
+            "ressources": "• Données sur la tarification des services télécoms et numériques pratiqués par le client et les opérateurs locaux\n• Données socio-économiques des dépenses des populations\n• Lettres d'engagement opérateurs mobiles\n• Obligations réglementaires régulant les prix\n• Programmes gouvernementaux/politiques de couverture universelle \n• Politiques du client en faveur d'une tarification accessible (micro-paiement, 1ers Go gratuits, zero-rating éducation / santé, etc.) ou d'un accès élargi (raccordement prioritaire aux écoles publiques, hôpitaux locaux, etc.)"
+          },
+          {
+            "section": "Inclusion (Social)",
+            "question": "Quelles sont les populations défavorisées au sein du pays d'intervention ?\n• Des données permettant d’identifier et de mesurer les inégalités dans le pays d’intervention sont-elles disponibles ?\n• Parmi les inégalités identifiées, lesquelles sont pertinentes au regard du financement envisagé ? Ex : accès aux services télécoms / numériques, accès à l'emploi, etc.\n• Ces constats sont-ils étayés par des rapports publics ou politiques nationales de ciblage de groupes de population ?",
+            "thematique": "Social",
+            "dimension": "Général",
+            "note_visee": "+2 ou +3",
+            "commentaire": "Cette étude est nécessaire dès lors qu'une note de +2 ou +3 est envisagée sur un financement :\n\n• intervenant dans des territoires défavorisés. Dans le cas des TowerCo & Fixed Networks, le critère \"Territoires\" est particulièrement concerné.\n\n• bénéficiant à des populations défavorisées. Dans le cas des TowerCo & Fixed Networks, le critère \"Emplois\" est particulièrement concerné.",
+            "ressources": "• Instituts nationaux de statistiques\n• Agences / institutions internationales. Ex : UNU-WIDER: WIID Explorer, Data - WID - World Inequality Database, Carte interactive de la répartition de la pauvreté et des inégalités par pays (Poverty & Inequality Platform – WB) Interactive Maps\n• Données client\n• Fiches B40 Inégalités - LaRuche AFD\nAjouter les liens"
+          },
+          {
+            "section": "Inclusion (Social)",
+            "question": "Un accès direct à des services télécoms pour des populations caractérisées comme défavorisées à l'échelle nationale peut-il être démontré ?\n• Le projet améliore-t-il / contribue-t-il à l'accès à un service numérique / télécom pour ces populations défavorisées ? Peut-on estimer la proportion de bénéficiaires considérés comme défavorisés ?",
+            "thematique": "Social",
+            "dimension": "Accès",
+            "note_visee": "+2",
+            "commentaire": "Pas de seuil (populations défavorisées) requis",
+            "ressources": "Données sur le profil socio-économique de la clientèle\nDonnées sur le niveau d'accès à un service numérique de la clientèle ciblée par le projet"
+          },
+          {
+            "section": "Inclusion (Social)",
+            "question": "En l'absence de données sur le profil socio-économique des clients, existe-t-il des garanties ou engagements permettant de s'assurer qu'un accès effectif au service télécom financé sera possible pour les populations défavorisées ?\n• Le client met-il en oeuvre une tarification adaptée et abordable pour des populations défavorisées ? Ex : faible coût du panier par rapport aux revenus pour les populations les plus pauvres, tarifs sociaux, prépayé micro-paiement, zero-rating éducation/santé, etc. \n• Le client est-il soumis à des obligations réglementaires afin que ses services bénéficient à des populations considérées comme défavorisées à l'échelle nationale ? Existe-t-il autrement des programmes gouvernementaux de couverture universelle, raccordements prioritaires écoles rurales/hôpitaux districts/préfecture permettant cette inclusivité des services numériques concernés ?",
+            "thematique": "Social",
+            "dimension": "Accès",
+            "note_visee": "+2",
+            "commentaire": "Permet de s'assurer que les accès télécoms / numériques financés permettront un accès à des populations défavorisées sans données directes sur les bénéficiaires finaux.",
+            "ressources": "• Données sur la tarification des services télécoms et numériques pratiquée par le client\n• Obligations réglementaires \n• Programmes gouvernementaux/politiques de couverture universelle"
+          },
+          {
+            "section": "Inclusion (Social)",
+            "question": "Quels sont les territoires défavorisés au sein du pays d'intervention ?\n• Des territoires (régions, communes, quartiers, etc.) dans le pays d'intervention peuvent-il être considérés comme défavorisés ? Ex : indicateurs socio-économiques inférieurs à la moyenne nationale (taux de pauvreté, IDH), territoires officiellement reconnus comme prioritaires par des programmes nationaux de développement, etc.\n• Ces constats sont-ils étayés par des rapports publics ou politiques nationales de cohésion territoriale ?",
+            "thematique": "Social",
+            "dimension": "Territoires",
+            "note_visee": "+2 ou +3",
+            "commentaire": "Cette étude est nécessaire dès lors qu'une note de +2 ou +3 est envisagée sur le critère Territoires :",
+            "ressources": "• Instituts nationaux de statistiques\n• Agences / institutions internationales. Ex : UNU-WIDER: WIID Explorer, Data - WID - World Inequality Database, Carte interactive de la répartition de la pauvreté et des inégalités par pays (Poverty & Inequality Platform – WB) Interactive Maps\n• Données client\n• Fiches B40 Inégalités - LaRuche AFD\nAjouter les liens"
+          },
+          {
+            "section": "Inclusion (Social)",
+            "question": "Le projet / financement bénéficie-t-il majoritairement à des territoires défavorisés ?\n• Quel est le tracé du réseau financé ?\n• Est- ce qu'au moins 50% des infrastructures (par ex, en nombre de sites / points de raccordement) dessert des territoires défavorisés ? Est-ce qu'au moins 50% de la population desservie, des abonnés ou de la couverture géographique se situe dans des territoires défavorisés ?\n• Les infrastructures implantées en territoires défavorisés se traduisent-elles par un accès effectif pour les populations locales ?",
+            "thematique": "Social",
+            "dimension": "Territoires",
+            "note_visee": "+2",
+            "commentaire": "Cette étude devra être obligatoirement complétée par le pré-requis, qui est de ne pas servir exclusivement des populations favorisées (cf. ci-dessus).",
+            "ressources": "Données de ciblage géographique (tracé, plan d’expansion, etc.), y compris données sur nouvelles connections permises dans les territoires cibles."
+          },
+          {
+            "section": "Inclusion (Social)",
+            "question": "Le client présente-t-il des engagements visant à améliorer l'accès à l'emploi et les conditions d'emplois des populations défavorisées ?\n• Le client conduit-il des actions de recrutement adaptés ? Ex : campagnes de recrutement locales, critères de recrutement adaptés, etc.\n• Le client a-t-il des engagements en faveur de l’emploi de populations défavorisées ? Ex : charte, politique diversité & inclusion, communication RSE, etc.\n• Le client a t-il mis en place des dispositifs spécifiques pour favoriser la rétention des salariés issus de populations défavorisées ? Ex : politiques de formations, d'évolution interne, etc.\n• Le client peut-il montrer que des conditions de travail adaptées aux populations défavorisées sont mises en place ? Ex : aménagements de poste pour les personnes en situation de handicap, flexibilité horaire, etc.",
+            "thematique": "Social",
+            "dimension": "Emplois",
+            "note_visee": "+2",
+            "commentaire": "Le critère \"Emplois\" est une nouveauté 2026. Toute note envisagée sur ce critère nécessitera un appui renforcé de la division IMP.",
+            "ressources": "Documents internes du client : données sur la composition des effectifs, documents stratégiques, politiques RH, rapports annuels, rapport d’impact, etc."
+          },
+          {
+            "section": "Inclusion (Social)",
+            "question": "L'inclusion de populations défavorisées est-elle un objectif explicite et formalisé par le client ou le projet ?\n• Une définition claire des populations défavorisées ciblées par le client / projet est-elle être fournie ? Ex : les plus faibles revenus au sein du pays, handicap, zones rurales/périurbaines sous-connectées, etc. Cf. ci-dessus\n• Le ciblage de ces segments défavorisés de la population figure-t-il dans les documents stratégiques du client ?",
+            "thematique": "Social",
+            "dimension": "Général",
+            "note_visee": "+3",
+            "commentaire": null,
+            "ressources": "Documents stratégiques du client : plan d'expansion, politique interne, engagements contractuels avec autorités ou investisseurs, statuts, etc."
+          },
+          {
+            "section": "Genre",
+            "question": "Le client remplit-il le critère \"gouvernance et responsabilité\" et ses 4 sous-critères?",
+            "thematique": "Genre",
+            "dimension": "Général",
+            "note_visee": "+1/+2/+3",
+            "commentaire": "Pré-requis nécessaire pour toute notation de +1, +2 ou +3",
+            "ressources": null
+          },
+          {
+            "section": "Genre",
+            "question": "Le client a-t-il un engagement stratégique sur le genre ?\n Par exemple:\n• Un engagement public en faveur de l'égalité de genre sur le site du client (ex: Signature des Women's Empowerment Principles de l'ONU)\n• Des objectifs clairs, mesurables et assortis de délais en matière d'égalité de genre, allant au-delà des exigences minimales pour l'alignement 2X\n• Mesures ou plan d’action visant à promouvoir l’égalité de genre avec des rôles, des responsabilités et des échéances clairement définis\n• Ressources propres (budget, création d'un poste de responsable diversité, équité et inclusion pour lesquels l’égalité de genre constitue une priorité majeure et fait explicitement partie de la description de poste) spécifiquement allouées à l’égalité de genre  et/ou à la mise en œuvre de plans d’action\n• Stratégie autonome en matière d’égalité de genre et/ou intégration explicite de l’égalité de genre dans la stratégie d’entreprise ou le plan stratégique (ex: Intégration d'objectifs de diversité dans les plans de développement des compétences techniques, Inclusion de critères genre dans les politiques de sous-traitance et d'achats responsables,\nAnalyse des impacts différenciés des conditions de travail sur les femmes et les hommes)",
+            "thematique": "Genre",
+            "dimension": "Critère Gouvernance & responsabilité (Critère 0A)",
+            "note_visee": "+1/+2/+3",
+            "commentaire": "Correspond à un des sous critère pour le critère \"gouvernance et responsabilité\"",
+            "ressources": "Guide méthodologique 2X Challenge Page 47."
+          },
+          {
+            "section": "Genre",
+            "question": "Le client a-t-il ce qui pourrait être considéré comme un système de gestion genre ? \nPar exemple:\n• Trois politiques fondamentales en matière d'égalité des sexes (voir liste des mesures exhaustives qui entrent dans ce cadre sur le guide 2X P.50)\n• Un suivi régulier et/ou un plan de suivi des initiatives liées à l'égalité de genre et/ou des progrès accomplis par rapport aux objectifs fixés en la matière ex (intégration d'objectifs visant à réduire les inégalités de genre dans le taux de recrutement sur les chantiers et dans les fonctions techniques)\n• Mécanisme des plaintes des plaintes tenant compte de la dimension de genre (ex: Déploiement d’un canal de signalement sécurisé et anonyme contre le harcèlement en ligne, intégré à l’app mobile de l’opérateur)\n• Initiatives de gestion des risques intégrant explicitement la dimension de genre (ex: les risques de sécurité pour les techniciennes travaillant sur des sites isolés, adaptation des équipements de protection individuelle aux morphologies féminines, les risques de harcèlement sur les chantiers, les conditions d'hébergement lors des déplacements professionnels.)\n• Engagement des parties prenantes internes et/ou externes tenant compte de la dimension de genre (ex: partenariats avec écoles et universités pour encourager les jeunes filles vers les métiers techniques, campagnes de sensibilisation, bourses et campagne de communication dans les écoles et universités...)\n• Mesure et gestion de l'impact (IMM) en matière d'égalité de genre (ex: Objectifs d'impact intégrant explicitement une perspective de genre,  Stratégie d'impact intégrant explicitement une perspective de genre, Approche de mesure de l'impact permettant d'évaluer l'impact en matière de genre)",
+            "thematique": "Genre",
+            "dimension": "Critère Gouvernance & responsabilité (Critère 0B)",
+            "note_visee": "+1/+2/+3",
+            "commentaire": "Correspond à un des sous critère pour le critère \"gouvernance et responsabilité\"",
+            "ressources": "Guide méthodologique 2X Challenge Page 47 & 48."
+          },
+          {
+            "section": "Genre",
+            "question": "Le client a-t-il mis en place un sysème de collecte de données sur les questions de genre ?\nQuel niveau de données doivent être collectées ? Une collècte annuelle et sexogenrées de la place des femmes dans l'entreprise",
+            "thematique": "Genre",
+            "dimension": "Critère Gouvernance & responsabilité (Critère 0C)",
+            "note_visee": "+1/+2/+3",
+            "commentaire": "Correspond à un des sous critère pour le critère \"gouvernance et responsabilité\"",
+            "ressources": "Guide méthodologique 2X Challenge Page 47."
+          },
+          {
+            "section": "Genre",
+            "question": "Le client a-t-il mis en place une politique anti harcèlement ou un code de conduite qui  spécifie  expressément le genre ?\n\nVoici quelques exemples de mesures types à rechercher : \n• Politique de tolérance zéro (applicable en interne et en externe, par exemple aux fournisseurs et prestataires de services),\n• Mécanisme de remonté des plaintes adapté au genre pour les cas de violence sexiste,\n• Processus de réparation adapté au genre pour les problèmes de violence sexiste (par exemple, des procédures d’enquête claires et centrées sur les victimes),\n• Processus de gestion des risques considérant la violence sexiste au travail comme un risque majeur/significatif,\n• Code de conduite interdisant toutes les formes de violence sexiste au travail,\n• Formation obligatoire de l’ensemble du personnel sur la violence sexiste au travail et les politiques/procédures de l’entreprise,\n• Processus de suivi réguliers des VBGH,\n• Personnel dédié et formé pour identifier et gérer les problèmes de violence sexiste au travail, et\n• Environnement sûr pour toutes les activités liées au travail, y compris l’environnement de travail physique et les transports.",
+            "thematique": "Genre",
+            "dimension": "Critère Gouvernance & responsabilité (Critère 0D)",
+            "note_visee": null,
+            "commentaire": "Correspond à un des sous critère pour le critère \"gouvernance et responsabilité\". \n\nUne politique anti harcèlement ou un code de conduite qui ne spécifie pas expressément le genre est-elle suffisante pour remplir le critère \"violences basées sur le genre\" (Critère OD) ?  Non, la politique doit expressément mentionner le genre.",
+            "ressources": "Guide méthodologique 2X Challenge Page 40."
+          },
+          {
+            "section": "Genre",
+            "question": "Le client templit-il deux des 5 critères directs (1 à 5) du 2X (dont l'un d'eux peut être un engagement)? \n- critères 1 à 3 se référer aux seuils 2X à atteindre \n- critère 4 (supply chain) : l’entreprise doit formaliser un engagement stratégique explicite en faveur des femmes dans la supply chain (ex:Diversité des fournisseurs ou code de conduite en matière d'inclusion), et s’assurer qu’il est réellement mis en œuvre grâce à des processus, actions et mécanismes de suivi permettant d’en garantir l’efficacité.\n - Critère 5 (produits et services): le produit/service améliore directement le bien-être des femmes/filles ou l’égalité de genre, avec un impact mesurable en terme de revenu, accès, sécurité, santé...",
+            "thematique": "Genre",
+            "dimension": "Général",
+            "note_visee": "+1/+2/+3",
+            "commentaire": "Pré-requis nécessaire pour toute notation de +1, +2 ou +3",
+            "ressources": null
+          },
+          {
+            "section": "Genre",
+            "question": "Quels types de mesures pourrait permettre de remplir le critère 5: \nLe produit ou service créé doit prendre en compte les besoins spécifiques des femmes et des filles lors de la conception des produits numériques :\n• Programme d'expansion du réseau ciblant des zones rurales ou périurbaines où les femmes ont un accès plus faible à Internet mobile (Cartographie des écarts d'accès numérique entre femmes et hommes, construction prioritaire de tours dans ces zones, engagement contractuel avec les MNO pour améliorer la couverture)\n• Utilisation de l'énergie excédentaire des tours pour alimenter des centres communautaires, écoles de filles, centres de santé maternelle, espaces numériques destinés aux femmes.",
+            "thematique": "Genre",
+            "dimension": "Critère produit et service (5)",
+            "note_visee": "+1/+2/+3",
+            "commentaire": "Critère produits et service - l'un des 5 critères direct du 2X. \nExemples de produits et services",
+            "ressources": "Guide méthodologique 2X Challenge Pages 91 et suivantes"
+          },
+          {
+            "section": "Genre",
+            "question": "Si le client a mis en place des mesures/services locaux bénéficiant aux femmes en dehors du périmètre du financement de notre projet, cela peut-on considérer que le critère 5 (produit et services) est rempli ?\nNon, l'activité ou le service en question doit être spécifiquement rattaché au projet financé.",
+            "thematique": "Genre",
+            "dimension": "Critère produit et service (5)",
+            "note_visee": "+1/+2/+5",
+            "commentaire": "Critère produits et service - l'un des 5 critères direct du 2X. \nPrécision sur le critère 5 et son périmètre",
+            "ressources": "Guide méthodologique 2X Challenge Pages 91 et suivantes"
+          },
+          {
+            "section": "Genre",
+            "question": "Le client a-t-il donné son accord de principe pour rejoindre l'initiative 2X?",
+            "thematique": "Genre",
+            "dimension": "Général",
+            "note_visee": "+2/+3",
+            "commentaire": "Processus d'alignement 2X DD +2 \n\nAccord de principe",
+            "ressources": "Accord de principe à retrouver sur Laruche"
+          },
+          {
+            "section": "Genre",
+            "question": "Quand et comment obtenir l'accord de principe du client ? \n\nQuand : L'accord de principe doit être obtenu avant le COPRO afin de valider la notation +2 sur la dimension genre de la notation DD. \nComment procéder  : \n\nUne fois que vous avez vérifié l'éligibilité du projet avec le/la chargée IMP : \n\n1) Récupérer le template de l'accord de principe sur LaRuche ici\n2) Amender l'accord de principe avec les éléments inscrits dans le template impact\n3) Faire valider l'accord de principe par l'équipe IMP ou genre \n4) Envoyer l'accord de principe par mail au client avec l'équipe genre dans la boucle pour en assurer le suivi\n5) A réception de l'accord du client, l'équipe genre validera le Phare.",
+            "thematique": "Genre",
+            "dimension": "Général",
+            "note_visee": "+2/+3",
+            "commentaire": "Processus d'alignement 2X DD +2 \n\nAccord de principe",
+            "ressources": "Accord de principe à retrouver sur Laruche"
+          },
+          {
+            "section": "Genre",
+            "question": "Le client a-t-il entamé la démarche pour rejoindre l'initiative 2X?",
+            "thematique": "Genre",
+            "dimension": "Général",
+            "note_visee": "+3",
+            "commentaire": "Processus d'alignement 2X DD +3",
+            "ressources": null
+          },
+          {
+            "section": "Genre",
+            "question": "Quand et comment obtenir la qualification officielle du projet au 2X Challenge ?  \n\nLa qualification officielle au 2X Challenge requiert l'accord du client au partage de ses données genre avec le 2X Challenge. \n\nVous disposez de deux options : \n1) L'obtenir au stade du COPRO: en faisant signer le data sharing consent, lors de l'envoi de l'accord de principe au client. \nOU\n2) Lors de la signature : en intégrant les clauses 2X dans vos conventions de crédit/side letter. \n\nUne fois l'accord au partage des données obtenu, nous communiquerons au 2X Challenge les données de votre client afin d'officialiser sa qualification au 2X Challenge sur leur site internet.",
+            "thematique": "Genre",
+            "dimension": "Général",
+            "note_visee": "+3",
+            "commentaire": "Processus d'alignement 2X DD +3",
+            "ressources": "Data sharing consent à retrouver sur laruche\nClausier 2X à retrouver sur laruche"
+          },
+          {
+            "section": "Genre",
+            "question": "Quelle est la différence entre l'éligibilité, l'alignement 2X, la qualification et la certification 2X? \n\nUn client est éligible au 2X lorsqu'il rempli les conditions minimales 2X (critère gouvernance & reponsabilité et deux critères 2X)\nUn client est aligné 2X lorsqu'il rempli les conditions minimales 2X (critère gouvernance & reponsabilité et deux critères 2X) ET qu'il a donné son accord de principe à rejoindre l'initiative 2X.\nUn client est qualifié 2X lorsqu'il rempli les conditions minimales 2X (critère gouvernance & reponsabilité et deux critères 2X), qu'il a donné son accord de principe à rejoindre l'initiative 2X ET qu'il a donné son accord au partage des données.\nUn client est certifié 2X, lorsqu’il s’engage volontairement avec le 2X Challenge et qu’il obtient cette reconnaissance à l’issue d’un processus d’évaluation et d’audit interne conforme aux critères du 2X Challenge. Ce processus contrairement aux autres est externe, payant et à la charge du client.",
+            "thematique": "Genre",
+            "dimension": "Terminologie",
+            "note_visee": null,
+            "commentaire": "Précision sur les termes employés",
+            "ressources": null
+          },
+          {
+            "section": "Genre",
+            "question": "Un client peut-il s'engager à la fois sur un des critère \"gouvernance & responsabilité\" et sur un critère direct ? \nOui, le client peut s'engager sous un délai de 2 ans maximum à remplir un des critère gouvernance et respnsabilité qui ne serait pas rempli ET sur un critère direct.",
+            "thematique": "Genre",
+            "dimension": "Méthodologie d'alignement 2X",
+            "note_visee": null,
+            "commentaire": "Méthodologie 2X",
+            "ressources": "Guide méthodologique 2X Challenge Page 11."
+          },
+          {
+            "section": "Genre",
+            "question": "Si le seuil 2X à atteindre pour les critères 2 (leadership) et 3 (emploi) ne semblent pas pertinent compte tenu de la géographie du client et son secteur, peut on demander à le revoir ? \nOui, nous pouvons demander au comité d'exception du 2X de considérer comme rempli le critère bien que le seuil requis ne soit pas atteint. Voir avec l'équipe genre pour saisir le comité d'exception du 2X Challenge.",
+            "thematique": "Genre",
+            "dimension": "Méthodologie",
+            "note_visee": null,
+            "commentaire": "Contacter l'équipe genre pour solliciter le comité d'exception",
+            "ressources": "Contacter l'équipe genre pour solliciter le comité d'exception"
+          }
+        ]
+      }
+    },
+    "Data Centre": {
+      "notation_dd": {
+        "title": "Secteur du numérique - Data centres",
+        "dimensions": [
+          {
+            "dimension": "BIODIVERSITE - Biodiversité et gestion des ressources naturelles",
+            "pillar": "Planète",
+            "objective": "",
+            "prerequisite": null,
+            "connector_note": "Si cette dimension de la notation DD est pertinente pour votre dossier (e.g. celui-ci serait éligible à un +1, +2 ou +3 ou -1), cliquez sur le bouton + afin de voir les critères détaillés ci-dessous",
+            "scale": [],
+            "criteria": []
+          },
+          {
+            "dimension": "CLIMAT - Atténuation",
+            "pillar": "Planète",
+            "objective": "Les data centres sont très énergivores. L'enjeu principal pour le climat atténuation est de vérifier que l'efficacité énergétique du data centre est suffisante. Les certifications sont fortement recommandées car elles simplifieront grandement les due diligence.",
+            "prerequisite": null,
+            "connector_note": "Si cette dimension de la notation DD est pertinente pour votre dossier (e.g. celui-ci serait éligible à un +1, +2 ou +3 ou -1), cliquez sur le bouton + afin de voir les critères détaillés ci-dessous",
+            "scale": [
+              "-1",
+              "0",
+              "+1",
+              "+2",
+              "+3"
+            ],
+            "criteria": [
+              {
+                "criterion": "Atténuation",
+                "summary": {
+                  "levels": {
+                    "-1": "Le projet n'atteint pas les meilleurs standards en termes d'efficacité énergétique (PUE>1,56 en climat humide et >1,45 dans les autres climats).\nOU\nLe projet requiert directement ou indirectement des capacités fossiles additionnelles pour sa consommation électrique\nOU\nLe projet n'est pas aligné avec les objectifs climatiques du pays (NDC, LTS)",
+                    "0": "Pas d'enjeux (n'arrivera pas car le projet est ou désaligné, ou éligible à un certain montant de finance climat)",
+                    "+1": "Le client a mis en place un plan de transition climatique certifié \nOU\nle projet débouche sur des co-bénéfices climat atténuation <30%",
+                    "+2": "Le CAPEX éligible comme finance climat atténuation est supérieur à 30%.",
+                    "+3": "Proparco soutient le client dans la mise en place d'un plan de transition climatique certifié (AT)"
+                  },
+                  "example": "+2: Datavolt (PUZ1022)"
+                },
+                "detail": {
+                  "levels": {
+                    "-1": "Afin de s'assurer que Proparco ne finance pas de projets présentant des risques de vérrouillage d'émissions de CO2, Proparco ne financera pas de data centres: \n- excessivement gourmands en électricité (faible efficacité énergétique) ou \n-nécessitant des capacités additionnelles fossiles captives ou connectées au réseau, ou\n-qui ne seraient pas alignés avec les objectifs climatiques du pays (peu probable, à faire par IMP)",
+                    "+1": "Si le PUE est <1,56 en climat humide et <1,45 dans les autres climats: les coûts liés à la construction du bâtiment du data centres (hors terrain) sont éligibles à 40% de co-bénéfice climat + 10% si le projet obtient une certification internationalement reconnue (EDGE, LEED, etc.)\n\nSi le PUE est <1,17 en climat humide et <1,09 dans les autres climats: les coûts liés à la construction du bâtiment du data centres (hors terrain) sont éligibles à 70% de co-bénéfice climat + 10% si le projet obtient une certification internationalement reconnue (EDGE, LEED, etc.)\n\nLes CAPEX solaires sont éligibles à 100%.\n\nSe rapprocher de IMP pour le calcul final des co-bénéfices sur le projet. Le PUE et un plan de CAPEX détaillé seront nécessaires pour le calcul.",
+                    "+3": "Se rapprocher de IMP/ATM si le client montre un intérêt pour ce type d'AT"
+                  },
+                  "example": null
+                }
+              }
+            ]
+          },
+          {
+            "dimension": "CLIMAT - Adaptation",
+            "pillar": "Planète",
+            "objective": "Valoriser les activités, au sein du projet, visant à réduire la vulnérabilité climatique du projet (~ adaptation du projet, projet adapté) et/ou la vulnérabilité climatique du système (ex: population) dans lequel le projet opère (~ adaptation 'par' le projet).",
+            "prerequisite": null,
+            "connector_note": "Si cette dimension de la notation DD est pertinente pour votre dossier (e.g. celui-ci serait éligible à un +1, +2 ou +3 ou -1), cliquez sur le bouton + afin de voir les critères détaillés ci-dessous",
+            "scale": [
+              "-1",
+              "0",
+              "+1",
+              "+2",
+              "+3"
+            ],
+            "criteria": [
+              {
+                "criterion": "Adaptation",
+                "summary": {
+                  "levels": {
+                    "-1": "Enjeux E&S majeurs identifiés en lien avec la dimension Adaptation et risque important qu’un ESAP satisfaisant pour ESG ne soit pas négocié/validé avec le client d’ici la signature.",
+                    "0": "Projet ayant fait l’objet d’une analyse du risque climatique et ne présentant pas d’enjeux particuliers.",
+                    "+1": "Le client a pris en compte dans la conception du projet les risques climatiques mais cela ne débouche pas sur des co-bénéfices climat adaptation, OU Les co-bénéfices climat adaptation sont <30%.",
+                    "+2": "Projet avec co-bénéfices adaptation ≥30 %.",
+                    "+3": "Projet avec co-bénéfices climat adaptation ≥30% ET Accompagnement du client dans sa stratégie climat adaptation ou Finance de Transition Adaptation."
+                  },
+                  "example": "WIOCC 2 (West Indian Ocean Cable Company, PZZ1676) : Prêt de 20 MUSD pour financer la ligne d'activité de datacenters, y compris la construction d’infrastructures supplémentaires dans plusieurs pays (y compris RDC et Afrique du Sud) et l'extension datacenters existants. Financement autorisé en 2023, et signé en 2024.\n19% adaptation : Prise en compte des risques climatiques dans le design du datacenter de Lekki au Nigéria (surélévation du datacenter de 2 mètres pour faire face au risque élevé d’inondations en lien avec le changement climatique) et pour 8 datacenters, dans un contexte de stress hydrique au moins 20% d’économie d’eau par rapport au scénario de référence (certification EDGE)."
+                },
+                "detail": {
+                  "levels": {
+                    "-1": "Notes négatives Adaptation gérées par ESG",
+                    "0": "Analyse effectuée des risques climatiques actuels et futurs auxquels le projet est exposé (exemples de bases de données pour identifier les risques climatiques disponibles sur La Ruche), sans risque significatif identifié (ex : risque significatif si note >0,6 sur l’outil Climate screening pour un aléa donné).\n\nET \n\nAu sein du projet, pas d’activité contribuant à réduire les risques climatiques du système dans lequel l’activité se déroule (ex : territoire, entités ou groupes socio-économiques qui bénéficient du projet, environnement).",
+                    "+1": "Analyse effectuée des risques climatiques actuels et futurs auxquels le projet est exposé (exemples de bases de données pour identifier les risques climatiques disponible sur La Ruche), risques significatifs identifiés (ex : note >0,6 sur l’outil Climate screening pour un aléa donné) et pris en compte dans la conception du projet, les procédures et/ou les activités (ex : solutions techniques intégrées dans les spécifications du projet, mécanisme d’assurance, de partage/ transferts de risque, fonds de contingence, activités dédiées comme par ex. un plan de contingence, gestion des risques de catastrophes, ou solutions organisationnelles). Cependant, mesures mises en place par le projet non associées à des capex ou surcoûts, donc pas de co-bénéfices Adaptation associés. \n\nOU \n\nAnalyse effectuée des risques climatiques actuels et futurs auxquels le projet est exposé (exemples de bases de données pour identifier les risques climatiques disponible sur La Ruche), risques significatifs identifiés (note >0,6 sur l’outil Climate screening pour un aléa donné). Activités (au sein du projet) permettant de réduire ces risques (ex : solutions techniques intégrées dans les spécifications du projet, mécanisme d’assurance, de partage/ transferts de risque, fonds de contingence, activités dédiées comme par ex. un plan de contingence, gestion des risques de catastrophes, ou solutions organisationnelles), générant des co-bénéfices Adaptation inférieurs à 30% (Règles de comptabilisation des co-bénéfices Adaptation disponibles sur La Ruche). \nExemples :  Dans une zone soumise au stress hydrique, réutilisation des eaux grises industrielles en boucle fermée (réduction de la consommation absolue d’eau). Dans une zone soumise à un risque élevé lié aux inondations, prise en compte des risques climatiques dans le design d’un datacenter à travers une surélévation de 2 mètres. Dans une zone soumise à un risque élevé lié aux inondations, financement de systèmes d’alerte précoce pour les data centers.\n\nL’approche AFD pour la comptabilisation de la finance climat des projets d’efficacité énergétique dans les bâtiments peut être appliquée pour les projets de data centers, il s’agit d’une approche forfaitaire par risque climatique pertinent traité : 15% des capex éligibles par risque pris en compte (augmentation des températures ou des vagues de chaleur si amélioration minimum de 20% du confort thermique par rapport au scénario de référence, stress hydrique si minimum 20% d’économie d’eau par rapport au scénario de référence). \nExemple : dans un contexte de stress hydrique, au moins 20% d’économie d’eau pour un datacenter par rapport au scénario de référence (certification EDGE).\n\nOU\n\nAnalyse effectuée des risques climatiques actuels et futurs auxquels est exposé le système dans lequel le projet opère (ex : territoire, entités ou groupes socio-économiques qui bénéficient du projet, environnement) : évaluation des aléas climatiques, des enjeux, de la vulnérabilité. Risques climatiques significatifs identifiés. Activités (au sein du projet) permettant de les réduire, générant des co-bénéfices Adaptation inférieurs à 30%.  Exemples de bases de données pour identifier les risques climatiques et règles de comptabilisation des co-bénéfices Adaptation disponibles sur La Ruche.",
+                    "+2": "Analyse effectuée des risques climatiques actuels et futurs du projet et/ou du système dans lequel le projet opère (territoire, entités ou groupes socio-économiques qui bénéficient du projet, environnement). Risques climatiques significatifs identifiés. Activités (au sein du projet) permettant de les réduire, générant des co-bénéfices Adaptation d’au moins 30%. Bases de données pour identifier les risques climatiques et règles de comptabilisation des co-bénéfices disponibles dans La Ruche.\nExemple : Installation de data centers dédiés au calcul scientifique et à la modélisation des impacts du changement climatique (ex. géosciences)\n\nL’approche AFD pour la comptabilisation de la finance climat des projets d’efficacité énergétique dans les bâtiments peut être appliquée pour les projets de data centers, il s’agit d’une approche forfaitaire par risque climatique pertinent traité : 15% des capex éligibles par risque pris en compte (augmentation des températures ou des vagues de chaleur si amélioration minimum de 20% du confort thermique par rapport au scénario de référence, stress hydrique si minimum 20% d’économie d’eau par rapport au scénario de référence). \nExemple : dans un contexte de stress hydrique et d’augmentation des températures moyennes, concernant un datacenter, au moins 20% d’économie d’eau et amélioration minimum de 20% du confort thermique par rapport au scénario de référence (certification EDGE).",
+                    "+3": "Projet avec co-bénéfices climat Adaptation ≥30% (voir note +2) \n\nET \n\nAccompagnement technique (diagnostic adaptation, plan d’action adaptation, accompagnement sur la mise en œuvre du plan d’action), ou qualification du projet Finance de transition Adaptation : finance visant à accompagner la transition des acteurs en s’appuyant sur une forte intentionnalité de la part du client » avec : \n-  si financement non affecté : Pro climat Corporate\n- si financement affecté : appui à la transition de l’acteur/chaine de valeur/secteur/territoire pour des projets mettant en avant l’intentionnalité, la matérialité, la pérennité et la réplicabilité des éléments déployés, et s’insérant dans différentes phases de cette transition (innovation, unlocking, scale up, et/ou phase out)."
+                  },
+                  "example": null
+                }
+              }
+            ]
+          },
+          {
+            "dimension": "SOCIAL - Lien social",
+            "pillar": "Inclusion",
+            "objective": "Soutien aux services essentiels de part la réduction de la fracture numérique pour populations et territoires défavorisés, pouvant se manifester par: (voir ci-dessous)\na. Déploiement d’infrastructures fixes et de l’offre de Fournisseur d'Accès à Internt (FAI) et de MNO\nb. Présence de programmes d'inclusion numérique des populations désavatagées ou défavorisées (fourniture d’accès aux terminaux numériques, de formation aux métiers du numérique ou de lutte contre l’illectronisme)\nc. Extension de la couverture numérique pour des des infrastructures (publiques) essentielles (santé, éducation, etc)",
+            "prerequisite": "Prérequis pour une note +2 / +3 : Le projet ne vient ni aggraver les inégalités, ni favoriser l'exclusion et ne sert pas exclusivement des populations favorisées.",
+            "connector_note": "Si cette dimension de la notation DD est pertinente pour votre dossier (e.g. celui-ci serait éligible à un +1, +2 ou +3 ou -1), cliquez sur le bouton + afin de voir les critères détaillés ci-dessous",
+            "scale": [
+              "0",
+              "+1",
+              "+2",
+              "+3"
+            ],
+            "criteria": [
+              {
+                "criterion": "Accès",
+                "summary": {
+                  "levels": {
+                    "0": "Les informations fournies n'ont pas permis de comptabiliser des accès télécom / numérique fournis par le data center directement à des particuliers.",
+                    "+1": "Non applicable",
+                    "+2": "Non applicable - Se reporter aux critères \"Emplois\" et \"Chaines de Valeur\".",
+                    "+3": "L'inclusion de populations et/ou de territoires défavorisés constitue un objectif explicite et documenté du projet / client. Il est très peu probable que cette note soit pertinente pour un data center."
+                  },
+                  "example": "> +2 et +3\nPas d'exemples de projets"
+                },
+                "detail": {
+                  "levels": {
+                    "0": "Les informations fournies n'ont pas permis de comptabiliser des accès télécom / numérique fournis par le data center directement à des particuliers.\n\nUne note de 0 est probable étant donné qu'il est complexe de comptabiliser des accès directement à des particuliers à travers des data centers (pas de base d'abonnés).",
+                    "+1": "Au regard de la fourniture d'accès de manière indirecte, les data centers ne sont pas éligibles au critère \"Accès\" et ne sont donc pas éligible pour un + 1 Social",
+                    "+2": "Au regard de la fourniture d'accès de manière indirecte, la note de +2 sur des data centers sera plutôt établie sur la base du critère \"Emplois\", ou du critère \"Chaine de valeurs\".",
+                    "+3": "La notation de +3 peut être attribuée si et seulement si l'objectif du client / projet est de contribuer à l'inclusion de populations défavorisées, et que cet objectif est explicite et a été documenté par le projet ou client.\n\nLe client doit pouvoir démontrer cet objectif via des éléments de stratégie d'intervention, de politique d'emploi, d'achat, etc. Une définition claire des populations défavorisées ciblées doit être fournie par le client / projet. \n\nDes discussions spécifiques sur le sujet sont à prévoir avec le client.\n\nIl est très peu probable que cette note soit pertinente pour un data center."
+                  },
+                  "example": "> +2 et +3\nPas d'exemples de projets"
+                }
+              },
+              {
+                "criterion": "Emplois",
+                "summary": {
+                  "levels": {
+                    "0": "Critère de notation non applicable à une note de +1.",
+                    "+2": "Le client a développé une politique d'emploi visant à inclure des populations défavorisées."
+                  },
+                  "example": "> +2 et +3\nPas d'exemples de projets"
+                },
+                "detail": {
+                  "levels": {
+                    "0": "Critère de notation non applicable à une note de +1.",
+                    "+2": "Le client a développé une politique d'emploi visant à inclure des populations défavorisées. Aucun seuil minimal n’est requis, mais une analyse démontre la capacité du client à soutenir l’emploi de ces populations, qui peut se traduire par :\n\n- Des actions de recrutement, de rétention et d’avancement professionnel ciblant ces groupes ;\n\n- Des mesures visant l'égalité salariale et proposant des conditions de travail adaptées à leurs besoins spécifiques."
+                  },
+                  "example": "> +2 et +3\nPas d'exemples de projets"
+                }
+              },
+              {
+                "criterion": "Territoires",
+                "summary": {
+                  "levels": {
+                    "+2": "Non applicable - Se reporter aux critères \"Emplois\" et \"Chaines de Valeur\"."
+                  },
+                  "example": "> +2 et +3\nPas d'exemples de projets"
+                },
+                "detail": {
+                  "levels": {
+                    "+2": "Au regard de la fourniture d'accès de manière indirecte et de la nature décentralisée d'un  data center, la note de +2 sur des data centers sera plutôt établie sur la base du critère \"Emplois\" , ou du critère \"Chaine de valeurs\"."
+                  },
+                  "example": "> +2 et +3\nPas d'exemples de projets"
+                }
+              },
+              {
+                "criterion": "Chaînes de valeur",
+                "summary": {
+                  "levels": {
+                    "+2": "Le data center intègre dans ses chaînes d'approvisionnement ou chaînes de valeur (amont et aval) au moins 50% d'entreprises :\n\n- employant des populations défavorisées ; ou\n\n- intervenant dans des territoires défavorisés.\n\nDIFFICILEMENT ACTIONNABLE pour le secteur du numérique"
+                  },
+                  "example": "> +2 et +3\nPas d'exemples de projets"
+                },
+                "detail": {
+                  "levels": {
+                    "+2": "Le data center intègre dans ses chaînes d'approvisionnement ou chaînes de valeur (amont et aval) au moins 50% d'entreprises :\n\n- employant des populations défavorisées (se référer au détail du critère \"Emplois\"); ou\n\n- intervenant dans des territoires défavorisés (se référer au détail du critère \"Territoires\").\n\nDIFFICILEMENT ACTIONNABLE pour le secteur du numérique"
+                  },
+                  "example": "> +2 et +3\nPas d'exemples de projets"
+                }
+              }
+            ]
+          },
+          {
+            "dimension": "GENRE - Égalité femmes-hommes",
+            "pillar": "Genre",
+            "objective": "",
+            "prerequisite": null,
+            "connector_note": "Si cette dimension de la notation DD est pertinente pour votre dossier (e.g. celui-ci serait éligible à un +1, +2 ou +3 ou -1), cliquez sur le bouton + afin de voir les critères détaillés ci-dessous",
+            "scale": [
+              "0",
+              "+1",
+              "+2",
+              "+3"
+            ],
+            "criteria": [
+              {
+                "criterion": "2X Challenge",
+                "summary": {
+                  "levels": {
+                    "0": "Les risques ESG sont soit négligeables, soit traités selon les modalités habituelles (clauses types, ESAP validé avec le client, etc.)",
+                    "+1": "Conditions pour un projet aligné 2X Challenge : \n\n1) Remplir le critère \"gouvernance et responsabilité\" et ses 4 sous-critères.\n\nET  \n\n2) Remplir 2 des 5 critères directs (1 à 5)",
+                    "+2": "Conditions pour un projet éligible au 2X Challenge : \n\n1) Remplir le critère \"gouvernance et responsabilité\" (cf notation+1)\n\nET\n\n2) Remplir 2 deux des 5 critères directs (1 à 5) dont l'un d'eux peut être un engagement  \n\nET\n\n3) Obtenir l'accord de principe du client à rejoindre l'initiative 2X",
+                    "+3": "3 options au choix : \n\n1) Client candidat à la certification\n\nOU\n\n2)Le client s'engage à augmenter la proportion de femmes en position de leadership de 50% \n\nOU\n\n3) Le client dispose d'une approche hollistique en matière de genre"
+                  },
+                  "example": null
+                },
+                "detail": {
+                  "levels": {
+                    "0": "Les risques ESG sont soit négligeables, soit traités selon les modalités habituelles (clauses types, ESAP validé avec le client, etc.)",
+                    "+1": "Conditions pour un projet aligné 2X Challenge : \n\n1) Remplir le critère \"gouvernance et responsabilité\" qui comprend 4 sous-critères :\n- Engagement stratégique \n- Système de gestion\n- Données\n-  GBVH\nPour des exemples de mesures pour chacun des sous-critères voir les Key Qs et les guidelines  2X page 40, 47 et suivantes.\n\nET  \n\n2) Remplir 2 critères directs (1 à 5) dont l'un d'eux peut être un engagement \n- critères 1 à 3 se référer aux seuils 2X à atteindre ici \n- critère 4 (supply chain) : l’entreprise doit formaliser un engagement stratégique explicite en faveur des femmes dans la supply chain (ex:Diversité des fournisseurs ou code de conduite en matière d'inclusion), et s’assurer qu’il est réellement mis en œuvre grâce à des processus, actions et mécanismes de suivi permettant d’en garantir l’efficacité.\n - Critère 5 (produits et services): le produit/service améliore directement le bien-être des femmes/filles ou l’égalité de genre, avec un impact mesurable en terme de revenu, accès, sécurité, santé...",
+                    "+2": "Conditions pour un projet éligible au 2X Challenge : \n\n1) Remplir le critère \"gouvernance et responsabilité\" (cf notation+1)\n\nET\n\n2) Remplir 2 critères directs (1 à 5) dont l'un d'eux peut être un engagement  \n\nET\n\n3) Obtenir l'accord de principe du client à rejoindre l'initiative 2X (template ici)",
+                    "+3": "3 options au choix : \n\n1) Client candidat à la certification (preuve de la démarche engagée ex:mail de demande au 2X)\n\nOU\n\n2)Le client s'engage à augmenter la proportion de femmes en position de leadership de 50% (tableau de simulation ici)\n\nOU\n\n3) Le client dispose d'une approche hollistique en matière de genre (stratégie genre, études de faisabilité engagée en amont des projets, politiques RH genre, objectifs en matière d'égalité de genre en interne, engagement auprès des communautés locales, inclusion des femmes dans les projets...). Pour cette option, contacter IMP."
+                  },
+                  "example": "Critère 4 exemple : Une entreprise numérique met en place une supply chain responsable en cartographiant ses fournisseurs IT (cloud, SaaS, data, cybersécurité) et dispose d'un code de conduite mentionnant le genre."
+                }
+              },
+              {
+                "criterion": "Gender boost",
+                "summary": {
+                  "levels": {
+                    "0": "Les risques ESG sont soit négligeables, soit traités selon les modalités habituelles (clauses types, ESAP validé avec le client, etc.)",
+                    "+1": "Le client s'engage à mettre en place : \n\n1) Une mesure \"gouvernance et responsabilité\" \nPour des exemples de mesures voir les guidelines 2X page 47 et suivantes.\n\nET\n\n2) Une mesure de prévention des violences basées sur le genre\nPour des exemples de mesures voir les guidelines 2X page 40.",
+                    "+2": "Le client s'engage à :\n\n1) Remplir les conditions du +1 du track \"gender boost\"\n\nET \n\n2) Augmenter la proportion de femmes en position de leadership de +25%"
+                  },
+                  "example": null
+                },
+                "detail": {
+                  "levels": {
+                    "0": "Les risques ESG sont soit négligeables, soit traités selon les modalités habituelles (clauses types, ESAP validé avec le client, etc.)",
+                    "+1": "Le client s'engage à mettre en place : \n\n1) Une mesure \"gouvernance et responsabilité\" \nPour des exemples de mesures voir les guidelines 2X page 47 et suivantes.\n\nET\n\n2) Une mesure de prévention des violences basées sur le genre\nPour des exemples de mesures voir les guidelines 2X page 40.",
+                    "+2": "Le client s'engage à :\n\n1) Remplir les conditions du +1 du track \"gender boost\"\n\nET \n\n2) Augmenter la proportion de femmes en position de leadership de +25%"
+                  },
+                  "example": null
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "key_qs": {
+        "title": "Questionnaire de due diligence IMPACT: Secteur du numérique - Data Centres",
+        "questions": [
+          {
+            "section": "Planète",
+            "question": "L'entreprise dispose-t-elle d'un plan de transition climatique ? Les informations utiles incluent entre autres les objectifs et le calendrier",
+            "thematique": "Planète",
+            "dimension": "Atténuation",
+            "note_visee": "+1",
+            "commentaire": "Ces éléments peuvent également être inclus dans le narratif alignement Accord de Paris",
+            "ressources": "Sustainability report du client"
+          },
+          {
+            "section": "Planète",
+            "question": "Quelles mesures concrètes sont en place pour réduire l'empreinte carbone et la consommation d'eau du data centre ? E.g., recyclage de la chaleur fatale, installation de panneaux solaires, augmentation du numbre de cycles de refroidissement de l'eau avant rejet, etc.",
+            "thematique": "Planète",
+            "dimension": "Atténuation",
+            "note_visee": "+1",
+            "commentaire": "Ces éléments peuvent également être inclus dans le narratif alignement Accord de Paris",
+            "ressources": "Sustainability report du client"
+          },
+          {
+            "section": "Planète",
+            "question": "Le data centre sera-t-il certifié avec une certification reconnue internationalement? Viser les certifications reconnues internationalement (EDGE et LEED).",
+            "thematique": "Planète",
+            "dimension": "Atténuation",
+            "note_visee": "+2",
+            "commentaire": null,
+            "ressources": null
+          },
+          {
+            "section": "Planète",
+            "question": "Quel est le PUE du projet? Ce PUE est-il vraisemblable en pratique? (Vérification par le LTA)",
+            "thematique": "Planète",
+            "dimension": "Atténuation",
+            "note_visee": "+2",
+            "commentaire": null,
+            "ressources": "Client ou LTA"
+          },
+          {
+            "section": "Planète",
+            "question": "L'entreprise a-t-elle réalisé un bilan gaz à effets de serre/carbone ? Quel est le périmètre et la méthodologie de ce bilan carbone ? Quels sont les résultats ? Pouvez-vous partager des données chiffrées ?",
+            "thematique": "Planète",
+            "dimension": "Atténuation",
+            "note_visee": null,
+            "commentaire": "Si le client a déjà fait un bilan carbone, évaluer si utilisable tel quel ou si données utilisées peuvent être exploitées pour  bilan carbone interne",
+            "ressources": "Sustainability report du client"
+          },
+          {
+            "section": "Planète",
+            "question": "Pour valoriser des mesures/activités liées à l''adaptation du projet' (ou 'projet adapté') : \n1. Une analyse des risques climatiques physiques actuels et futurs auxquels le projet est exposé a-t-elle été réalisée (exemples de bases de données pour identifier les risques climatiques disponibles sur La Ruche) ? \n2. Si des risques climatiques significatifs ont été identifiés, quelles sont les activités mises en place par le projet pour répondre aux risques identifiés : solutions techniques (intégrées dans les spécifications du projet), outils dédiés (mécanisme d’assurance, de partage/ transferts de risque, fonds de contingence), activités dédiées (plan de contingence, gestion des risques de catastrophes, etc.) ou solutions organisationnelles ?\n3. Ces activités sont-elles associées à des CAPEX ou génèrent-elles des surcoûts ? Si elles génèrent des surcoûts, une estimation du montant des surcoûts est-elle disponible ?  \n4. Si ces activités sont associées à des CAPEX ou génèrent des surcoûts, un lien clair et direct entre les activités spécifiques du projet et l’objectif de réduction de la vulnérabilité au changement climatique est-il établi ? L’intention du projet de traiter les risques/ vulnérabilités sera-t-elle explicitée dans la documentation du projet ?",
+            "thematique": "Planète",
+            "dimension": "Adaptation",
+            "note_visee": "+1 ou +2",
+            "commentaire": "Si oui aux 4 questions, alors : \n- notation +1 si co-bénéfices < 30%\n- notation +2 si co-bénéfices  ≥ 30%",
+            "ressources": null
+          },
+          {
+            "section": "Planète",
+            "question": "Cas particulier : Pour les constructions de data centers (ou rénovation), un objectif (d’amélioration) de  performance énergétique et environnementale est-il affiché par rapport à la situation de référence ? Exemple : certification EDGE visée.",
+            "thematique": "Planète",
+            "dimension": "Adaptation",
+            "note_visee": "+1 ou +2",
+            "commentaire": "L’approche AFD pour la comptabilisation de la finance climat des projets d’efficacité énergétique dans les bâtiments peut être appliquée pour les projets de data centers, il s’agit d’une approche forfaitaire par risque climatique pertinent traité : 15% des capex éligibles par risque pris en compte (augmentation des températures ou des vagues de chaleur si amélioration minimum de 20% du confort thermique par rapport au scénario de référence, stress hydrique si minimum 20% d’économie d’eau par rapport au scénario de référence).",
+            "ressources": null
+          },
+          {
+            "section": "Planète",
+            "question": "Pour valoriser l'Adaptation 'par' le projet : \n1. Une analyse des risques climatiques actuels et futurs auxquels est exposé le système dans lequel le projet opère (territoire, entités ou groupes socio-économiques qui bénéficient du projet, environnement) a-t-elle été réalisée : évaluation des aléas climatiques (exemples de bases de données pour identifier les risques climatiques disponibles sur La Ruche), des enjeux et de la vulnérabilité du système (analyse bibliographique dédiée) ?  \n2. Si des risques climatiques significatifs sont identifiés, certaines activités au sein du projet vont-elles contribuer à leur réduction ? Sont-elles associées à des CAPEX ? \n3. Un lien clair et direct entre les activités spécifiques du projet et l’objectif de réduction de la vulnérabilité au changement climatique est-il établi ? L’intention du projet de traiter les risques/ vulnérabilités sera-t-elle explicitée dans la documentation du projet ?",
+            "thematique": "Planète",
+            "dimension": "Adaptation",
+            "note_visee": "+1 ou +2",
+            "commentaire": "Si oui aux 4 questions, alors : \n- notation +1 si co-bénéfices < 30%\n- notation +2 si co-bénéfices  ≥ 30%",
+            "ressources": null
+          },
+          {
+            "section": "Planète",
+            "question": "En plus de co-bénéfices Adaptation d’au moins 30%, le projet est-il éligible à Finance de transition Adaptation (appui à la transition Adaptation de l’acteur/chaine de valeur/secteur/territoire pour des projets mettant en avant l’intentionnalité, la matérialité, la pérennité et la réplicabilité des éléments déployés) ou un Accompagnement technique (diagnostic adaptation, plan d’action adaptation, accompagnement sur la mise en œuvre du plan d’action) est-il envisagé par le client ?",
+            "thematique": "Planète",
+            "dimension": "Adaptation",
+            "note_visee": "+3",
+            "commentaire": null,
+            "ressources": null
+          },
+          {
+            "section": "Inclusion (Social)",
+            "question": "Le projet sert-il exclusivement des populations favorisées au regard du service télécom proposé ?\n• Le client possède-t-il de l’information relative au profil socio-économique des clients cibles ? Ces populations sont-elles exclusivement des populations favorisées (au sein du pays) ?\n• Quelle est la politique tarifaire du client ? Est-elle alignée avec celle de ses concurrents ? Vient-elle cibler exclusivement des populations favorisées ?\n• Le service télécom proposé pèse-t-il lourdement dans les dépenses de la population locale ?\n• Le projet vient-il aggraver les inégalités existantes par une couverture renforcée dans des régions déjà favorisées au regard de l'accès aux télécoms / numérique ?",
+            "thematique": "Social",
+            "dimension": "Général",
+            "note_visee": "+2 ou +3",
+            "commentaire": "Pré-requis nécessaire pour toute notation de +2 ou +3",
+            "ressources": "• Données sur la tarification des services télécoms et numériques pratiqués par le client et les concurrents locaux\n• Données socio-économiques des dépenses des populations\n• Obligations réglementaires régulant les prix\n• Programmes gouvernementaux/politiques de couverture universelle\n• Politiques du client en faveur d'une tarification accessible ou d'un accès élargi"
+          },
+          {
+            "section": "Inclusion (Social)",
+            "question": "Le client présente-t-il des engagements visant à améliorer l'accès à l'emploi et les conditions d'emplois des populations défavorisées ?\n• Le client conduit-il des actions de recrutement adaptés ? Ex : campagnes de recrutement locales, critères de recrutement adaptés, etc.\n• Le client a-t-il des engagements en faveur de l’emploi de populations défavorisées ? Ex : charte, politique diversité & inclusion, communication RSE, etc.\n• Le client a t-il mis en place des dispositifs spécifiques pour favoriser la rétention des salariés issus de populations défavorisées ? Ex : politiques de formations, d'évolution interne, etc.\n• Le client peut-il montrer que des conditions de travail adaptées aux populations défavorisées sont mises en place ? Ex : aménagements de poste pour les personnes en situation de handicap, flexibilité horaire, etc.",
+            "thematique": "Social",
+            "dimension": "Emplois",
+            "note_visee": "+2 ou +3",
+            "commentaire": "Le critère \"Emplois\" est une nouveauté 2026. Toute note envisagée sur ce critère nécessitera un appui renforcé de la division IMP.",
+            "ressources": "Documents internes du client : données sur la composition des effectifs, documents stratégiques, politiques RH, rapports annuels, rapport d’impact, etc."
+          },
+          {
+            "section": "Inclusion (Social)",
+            "question": "L'inclusion de populations défavorisées est-elle un objectif explicite et formalisé par le client ou le projet ?\n• Une définition claire des populations défavorisées ciblées par le client / projet est-elle être fournie ? Ex : les plus faibles revenus au sein du pays, handicap, zones rurales/périurbaines sous-connectées, etc. Cf. ci-dessus\n• Le ciblage de ces segments défavorisés de la population figure-t-il dans les documents stratégiques du client ?",
+            "thematique": "Social",
+            "dimension": "Général",
+            "note_visee": "+3",
+            "commentaire": null,
+            "ressources": "Documents stratégiques du client : plan d'expansion, politique interne, engagements contractuels avec autorités ou investisseurs, statuts, etc."
+          },
+          {
+            "section": "Genre",
+            "question": "Le client remplit-il le critère \"gouvernance et responsabilité\" et ses 4 sous-critères?",
+            "thematique": "Genre",
+            "dimension": "Général",
+            "note_visee": "+1/+2/+3",
+            "commentaire": "Pré-requis nécessaire pour toute notation de +1, +2 ou +3",
+            "ressources": null
+          },
+          {
+            "section": "Genre",
+            "question": "Le client a-t-il un engagement stratégique sur le genre ?\n Par exemple:\n• Un engagement public en faveur de l'égalité de genre sur le site du client (ex: Signature des Women's Empowerment Principles de l'ONU)\n• Des objectifs clairs, mesurables et assortis de délais en matière d'égalité de genre, allant au-delà des exigences minimales pour l'alignement 2X\n• Mesures ou plan d’action visant à promouvoir l’égalité de genre avec des rôles, des responsabilités et des échéances clairement définis\n• Ressources propres (budget, création d'un poste de responsable diversité, équité et inclusion pour lesquels l’égalité de genre constitue une priorité majeure et fait explicitement partie de la description de poste) spécifiquement allouées à l’égalité de genre  et/ou à la mise en œuvre de plans d’action\n• Stratégie autonome en matière d’égalité de genre et/ou intégration explicite de l’égalité de genre dans la stratégie d’entreprise ou le plan stratégique (ex: Intégration d'objectifs de diversité dans les plans de développement des compétences techniques, Inclusion de critères genre dans les politiques de sous-traitance et d'achats responsables,\nAnalyse des impacts différenciés des conditions de travail sur les femmes et les hommes)",
+            "thematique": "Genre",
+            "dimension": "Critère Gouvernance & responsabilité (Critère 0A)",
+            "note_visee": "+1/+2/+3",
+            "commentaire": "Correspond à un des sous critère pour le critère \"gouvernance et responsabilité\"",
+            "ressources": "Guide méthodologique 2X Challenge Page 47."
+          },
+          {
+            "section": "Genre",
+            "question": "Le client a-t-il ce qui pourrait être considéré comme un système de gestion genre ? \nPar exemple:\n• Trois politiques fondamentales en matière d'égalité des sexes (voir liste des mesures exhaustives qui entrent dans ce cadre sur le guide 2X P.50)\n• Un suivi régulier et/ou un plan de suivi des initiatives liées à l'égalité de genre et/ou des progrès accomplis par rapport aux objectifs fixés en la matière ex (intégration d'objectifs visant à réduire les inégalités de genre dans le taux de recrutement sur les chantiers et dans les fonctions techniques)\n• Mécanisme des plaintes des plaintes tenant compte de la dimension de genre (ex: Déploiement d’un canal de signalement sécurisé et anonyme contre le harcèlement en ligne, intégré à l’app mobile de l’opérateur)\n• Initiatives de gestion des risques intégrant explicitement la dimension de genre (ex: les risques de sécurité pour les techniciennes travaillant sur des sites isolés, adaptation des équipements de protection individuelle aux morphologies féminines, les risques de harcèlement sur les chantiers, les conditions d'hébergement lors des déplacements professionnels.)\n• Engagement des parties prenantes internes et/ou externes tenant compte de la dimension de genre (ex: partenariats avec écoles et universités pour encourager les jeunes filles vers les métiers techniques, campagnes de sensibilisation, bourses et campagne de communication dans les écoles et universités...)\n• Mesure et gestion de l'impact (IMM) en matière d'égalité de genre (ex: Objectifs d'impact intégrant explicitement une perspective de genre,  Stratégie d'impact intégrant explicitement une perspective de genre, Approche de mesure de l'impact permettant d'évaluer l'impact en matière de genre)",
+            "thematique": "Genre",
+            "dimension": "Critère Gouvernance & responsabilité (Critère 0B)",
+            "note_visee": "+1/+2/+3",
+            "commentaire": "Correspond à un des sous critère pour le critère \"gouvernance et responsabilité\"",
+            "ressources": "Guide méthodologique 2X Challenge Page 47 & 48."
+          },
+          {
+            "section": "Genre",
+            "question": "Le client a-t-il mis en place un sysème de collecte de données sur les questions de genre ?\nQuel niveau de données doivent être collectées ? Une collècte annuelle et sexogenrées de la place des femmes dans l'entreprise",
+            "thematique": "Genre",
+            "dimension": "Critère Gouvernance & responsabilité (Critère 0C)",
+            "note_visee": "+1/+2/+3",
+            "commentaire": "Correspond à un des sous critère pour le critère \"gouvernance et responsabilité\"",
+            "ressources": "Guide méthodologique 2X Challenge Page 47."
+          },
+          {
+            "section": "Genre",
+            "question": "Le client a-t-il mis en place une politique anti harcèlement ou un code de conduite qui  spécifie  expressément le genre ?\n\nVoici quelques exemples de mesures types à rechercher : \n• Politique de tolérance zéro (applicable en interne et en externe, par exemple aux fournisseurs et prestataires de services),\n• Mécanisme de remonté des plaintes adapté au genre pour les cas de violence sexiste,\n• Processus de réparation adapté au genre pour les problèmes de violence sexiste (par exemple, des procédures d’enquête claires et centrées sur les victimes),\n• Processus de gestion des risques considérant la violence sexiste au travail comme un risque majeur/significatif,\n• Code de conduite interdisant toutes les formes de violence sexiste au travail,\n• Formation obligatoire de l’ensemble du personnel sur la violence sexiste au travail et les politiques/procédures de l’entreprise,\n• Processus de suivi réguliers des VBGH,\n• Personnel dédié et formé pour identifier et gérer les problèmes de violence sexiste au travail, et\n• Environnement sûr pour toutes les activités liées au travail, y compris l’environnement de travail physique et les transports.",
+            "thematique": "Genre",
+            "dimension": "Critère Gouvernance & responsabilité (Critère 0D)",
+            "note_visee": "+1/+2/+3",
+            "commentaire": "Correspond à un des sous critère pour le critère \"gouvernance et responsabilité\". \n\nUne politique anti harcèlement ou un code de conduite qui ne spécifie pas expressément le genre est-elle suffisante pour remplir le critère \"violences basées sur le genre\" (Critère OD) ?  Non, la politique doit expressément mentionner le genre.",
+            "ressources": "Guide méthodologique 2X Challenge Page 40."
+          },
+          {
+            "section": "Genre",
+            "question": "Le client templit-il deux des 5 critères directs (1 à 5) du 2X (dont l'un d'eux peut être un engagement)? \n- critères 1 à 3 se référer aux seuils 2X à atteindre \n- critère 4 (supply chain) : l’entreprise doit formaliser un engagement stratégique explicite en faveur des femmes dans la supply chain (ex:Diversité des fournisseurs ou code de conduite en matière d'inclusion), et s’assurer qu’il est réellement mis en œuvre grâce à des processus, actions et mécanismes de suivi permettant d’en garantir l’efficacité.\n - Critère 5 (produits et services): le produit/service améliore directement le bien-être des femmes/filles ou l’égalité de genre, avec un impact mesurable en terme de revenu, accès, sécurité, santé...",
+            "thematique": "Genre",
+            "dimension": "Général",
+            "note_visee": "+1/+2/+3",
+            "commentaire": "Pré-requis nécessaire pour toute notation de +1, +2 ou +3",
+            "ressources": null
+          },
+          {
+            "section": "Genre",
+            "question": "Quels types de mesures pourrait permettre de remplir le critère 5: \nLe produit ou service créé doit prendre en compte les besoins spécifiques des femmes et des filles lors de la conception des produits numériques :\n• Programme d'expansion du réseau ciblant des zones rurales ou périurbaines où les femmes ont un accès plus faible à Internet mobile (Cartographie des écarts d'accès numérique entre femmes et hommes, construction prioritaire de tours dans ces zones, engagement contractuel avec les MNO pour améliorer la couverture)\n• Utilisation de l'énergie excédentaire des tours pour alimenter des centres communautaires, écoles de filles, centres de santé maternelle, espaces numériques destinés aux femmes.",
+            "thematique": "Genre",
+            "dimension": "Critère produit et service (5)",
+            "note_visee": "+1/+2/+3",
+            "commentaire": "Critère produits et service - l'un des 5 critères direct du 2X. \nExemples de produits et services",
+            "ressources": "Guide méthodologique 2X Challenge Pages 91 et suivantes"
+          },
+          {
+            "section": "Genre",
+            "question": "Si le client a mis en place des mesures/services locaux bénéficiant aux femmes en dehors du périmètre du financement de notre projet, cela peut-on considérer que le critère 5 (produit et services) est rempli ?\nNon, l'activité ou le service en question doit être spécifiquement rattaché au projet financé.",
+            "thematique": "Genre",
+            "dimension": "Critère produit et service (5)",
+            "note_visee": "+1/+2/+3",
+            "commentaire": "Critère produits et service - l'un des 5 critères direct du 2X. \nPrécision sur le critère 5 et son périmètre",
+            "ressources": "Guide méthodologique 2X Challenge Pages 91 et suivantes"
+          },
+          {
+            "section": "Genre",
+            "question": "Le client a-t-il donné son accord de principe pour rejoindre l'initiative 2X?",
+            "thematique": "Genre",
+            "dimension": "Général",
+            "note_visee": "+2/+3",
+            "commentaire": "Processus d'alignement 2X DD +2 \n\nAccord de principe",
+            "ressources": "Accord de principe à retrouver sur Laruche"
+          },
+          {
+            "section": "Genre",
+            "question": "Quand et comment obtenir l'accord de principe du client ? \n\nQuand : L'accord de principe doit être obtenu avant le COPRO afin de valider la notation +2 sur la dimension genre de la notation DD. \nComment procéder  : \n\nUne fois que vous avez vérifié l'éligibilité du projet avec le/la chargée IMP : \n\n1) Récupérer le template de l'accord de principe sur LaRuche ici\n2) Amender l'accord de principe avec les éléments inscrits dans le template impact\n3) Faire valider l'accord de principe par l'équipe IMP ou genre \n4) Envoyer l'accord de principe par mail au client avec l'équipe genre dans la boucle pour en assurer le suivi\n5) A réception de l'accord du client, l'équipe genre validera le Phare.",
+            "thematique": "Genre",
+            "dimension": "Général",
+            "note_visee": "+2/+3",
+            "commentaire": "Processus d'alignement 2X DD +2 \n\nAccord de principe",
+            "ressources": "Accord de principe à retrouver sur Laruche"
+          },
+          {
+            "section": "Genre",
+            "question": "Le client a-t-il entamé la démarche pour rejoindre l'initiative 2X?",
+            "thematique": "Genre",
+            "dimension": "Général",
+            "note_visee": "+3",
+            "commentaire": "Processus d'alignement 2X DD +3",
+            "ressources": null
+          },
+          {
+            "section": "Genre",
+            "question": "Quand et comment obtenir la qualification officielle du projet au 2X Challenge ?  \n\nLa qualification officielle au 2X Challenge requiert l'accord du client au partage de ses données genre avec le 2X Challenge. \n\nVous disposez de deux options : \n1) L'obtenir au stade du COPRO: en faisant signer le data sharing consent, lors de l'envoi de l'accord de principe au client. \nOU\n2) Lors de la signature : en intégrant les clauses 2X dans vos conventions de crédit/side letter. \n\nUne fois l'accord au partage des données obtenu, nous communiquerons au 2X Challenge les données de votre client afin d'officialiser sa qualification au 2X Challenge sur leur site internet.",
+            "thematique": "Genre",
+            "dimension": "Général",
+            "note_visee": "+3",
+            "commentaire": "Processus d'alignement 2X DD +3",
+            "ressources": "Data sharing consent à retrouver sur laruche\nClausier 2X à retrouver sur laruche"
+          },
+          {
+            "section": "Genre",
+            "question": "Quelle est la différence entre l'éligibilité, l'alignement 2X, la qualification et la certification 2X? \n\nUn client est éligible au 2X lorsqu'il rempli les conditions minimales 2X (critère gouvernance & reponsabilité et deux critères 2X)\nUn client est aligné 2X lorsqu'il rempli les conditions minimales 2X (critère gouvernance & reponsabilité et deux critères 2X) ET qu'il a donné son accord de principe à rejoindre l'initiative 2X.\nUn client est qualifié 2X lorsqu'il rempli les conditions minimales 2X (critère gouvernance & reponsabilité et deux critères 2X), qu'il a donné son accord de principe à rejoindre l'initiative 2X ET qu'il a donné son accord au partage des données.\nUn client est certifié 2X, lorsqu’il s’engage volontairement avec le 2X Challenge et qu’il obtient cette reconnaissance à l’issue d’un processus d’évaluation et d’audit interne conforme aux critères du 2X Challenge. Ce processus contrairement aux autres est externe, payant et à la charge du client.",
+            "thematique": "Genre",
+            "dimension": "Terminologie",
+            "note_visee": null,
+            "commentaire": "Précision sur les termes employés",
+            "ressources": null
+          },
+          {
+            "section": "Genre",
+            "question": "Un client peut-il s'engager à la fois sur un des critère \"gouvernance & responsabilité\" et sur un critère direct ? \nOui, le client peut s'engager sous un délai de 2 ans maximum à remplir un des critère gouvernance et respnsabilité qui ne serait pas rempli ET sur un critère direct.",
+            "thematique": "Genre",
+            "dimension": "Méthodologie d'alignement 2X",
+            "note_visee": null,
+            "commentaire": "Méthodologie 2X",
+            "ressources": "Guide méthodologique 2X Challenge Page 11."
+          },
+          {
+            "section": "Genre",
+            "question": "Si le seuil 2X à atteindre pour les critères 2 (leadership) et 3 (emploi) ne semblent pas pertinent compte tenu de la géographie du client et son secteur, peut on demander à le revoir ? \nOui, nous pouvons demander au comité d'exception du 2X de considérer comme rempli le critère bien que le seuil requis ne soit pas atteint. Voir avec l'équipe genre pour saisir le comité d'exception du 2X Challenge.",
+            "thematique": "Genre",
+            "dimension": "Méthodologie",
+            "note_visee": null,
+            "commentaire": "Contacter l'équipe genre pour solliciter le comité d'exception",
+            "ressources": "Contacter l'équipe genre pour solliciter le comité d'exception"
+          }
+        ]
+      }
+    }
+  }
+}
