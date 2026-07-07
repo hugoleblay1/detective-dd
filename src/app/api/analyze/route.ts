@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
-import { loadGrids } from "@/lib/grid";
+import { loadGrids } from "@/lib/grid.loader";
 import { analyze } from "@/lib/gap/engine";
 
 const Body = z.object({

@@ -6,10 +6,10 @@
  *  - Au sein d'un critère, seuls les niveaux réellement mobilisables sont exposés.
  *  - Logique OR : une note se valide sur UN critère (+ prérequis de la dimension).
  *  - Les questions sont filtrées par dimension, critère visé et note visée.
+ *
+ * Module PUR (aucune IO) → importable côté client. Le chargement des grilles
+ * vit dans `grid.loader.ts` (fs, serveur uniquement).
  */
-import fs from "node:fs";
-import path from "node:path";
-
 export type Note = "-2" | "-1" | "0" | "+1" | "+2" | "+3";
 export type DimKey = "Atténuation" | "Adaptation" | "Social" | "Genre" | "Biodiversité";
 
@@ -30,19 +30,6 @@ export interface SectorGrid {
   subtypes: Record<string, { notation_dd: { title: string; dimensions: Dimension[] }; key_qs: { title: string; questions: KeyQuestion[] } }>;
 }
 
-const CONTENT_DIR = process.env.CONTENT_DIR ?? path.join(process.cwd(), "content", "proparco");
-
-let cache: Record<string, SectorGrid> | null = null;
-export function loadGrids(): Record<string, SectorGrid> {
-  if (cache) return cache;
-  cache = {};
-  for (const f of fs.readdirSync(CONTENT_DIR).filter((f) => f.endsWith(".json"))) {
-    const g = JSON.parse(fs.readFileSync(path.join(CONTENT_DIR, f), "utf-8")) as SectorGrid;
-    cache[g.sector] = g;
-  }
-  return cache;
-}
-
 /* ---------- non-applicabilité ---------- */
 const NA_RX = [
   /^\s*non applicable/i,
@@ -60,6 +47,19 @@ export function critNAExpl(cr: Criterion): string {
   for (const t of Object.values(cr.summary.levels)) if (lvlNA(t))
     return t.replace(/^\s*non applicable\s*[-–:]*\s*/i, "").trim() || t;
   return "non mobilisable pour ce type d'investissement";
+}
+/** Critères entièrement non mobilisables pour ce sous-type, avec l'explication à afficher. */
+export function naList(grid: SectorGrid, subtype: string, dk: DimKey): { crit: string; expl: string }[] {
+  const d = dimObj(grid, subtype, dk); if (!d) return [];
+  return d.criteria.filter(critExcluded).map((c) => ({ crit: c.criterion, expl: critNAExpl(c) }));
+}
+/** Critères mobilisables sur une seule note (hors 0) → périmètre restreint à signaler. */
+export function singleNoteCrits(grid: SectorGrid, subtype: string, dk: DimKey): { crit: string; note: string }[] {
+  const d = dimObj(grid, subtype, dk); if (!d) return [];
+  return d.criteria.filter((c) => !critExcluded(c)).map((c) => {
+    const u = Object.keys(usableLevels(c.summary.levels)).filter((k) => k !== "0");
+    return u.length === 1 ? { crit: c.criterion, note: u[0] } : null;
+  }).filter((x): x is { crit: string; note: string } => x !== null);
 }
 
 /* ---------- accès dimensions/critères ---------- */
