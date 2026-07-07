@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { loadGrids } from "@/lib/grid.loader";
 import { analyze } from "@/lib/gap/engine";
+import { DIMS_EXCLUDED_FROM_ANALYSIS } from "@/lib/gap/types";
 
 const Body = z.object({
   sector: z.string().default("Numérique"),
@@ -23,6 +24,14 @@ export async function POST(req: NextRequest) {
   if (!grid) return NextResponse.json({ error: `Secteur inconnu: ${parsed.data.sector}` }, { status: 404 });
   if (!grid.subtypes[parsed.data.subtype])
     return NextResponse.json({ error: `Sous-type inconnu: ${parsed.data.subtype}` }, { status: 404 });
+  // Rejet explicite (pas de filtrage silencieux) : le Genre est évalué via son
+  // propre questionnaire et outil, hors de cette analyse pour le moment.
+  const excluded = DIMS_EXCLUDED_FROM_ANALYSIS.filter((dk) => dk in parsed.data.targets);
+  if (excluded.length)
+    return NextResponse.json(
+      { error: `Dimension(s) hors analyse du dossier : ${excluded.join(", ")} (questionnaire et outil dédiés).` },
+      { status: 400 },
+    );
   const result = await analyze(grid, parsed.data);
   return NextResponse.json({ analyses: result });
 }

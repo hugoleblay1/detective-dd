@@ -18,6 +18,8 @@ Règle de file : **parité avec le prototype validé d'abord** (P0), nouveautés
 - [ ] **RAG banque interne** : pgvector, découpage/indexation des documents qualifiés, injection des passages pertinents dans l'analyse avec citation.
 - [ ] **Routage de modèles** : configuration par tâche (léger pour extraction/indexation, supérieur pour analyse) dans la couche `llm/`.
 
+- [ ] **Réintégrer le Genre dans l'analyse du dossier** : exclu pour le moment (`DIMS_EXCLUDED_FROM_ANALYSIS`) — la dimension est très verbeuse (sortie JSON tronquée) et une partie de ses questions relève du questionnaire et de l'outil Genre dédiés (2X). À revoir : découpage de l'appel, sous-ensemble de questions propre à l'analyse du dossier, ou pont vers l'outil dédié.
+
 ## P2 — Ancrage local et connecteurs
 
 - [ ] **Localisation du projet** (pays → région → point GPS optionnel) pour Adaptation, Biodiversité, Social/Territoires ; sources spatiales correspondantes (bassin versant, aléas par zone, aires protégées à proximité, indicateurs territoriaux).

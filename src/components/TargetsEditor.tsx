@@ -1,4 +1,5 @@
 import { critsForNote, type DimKey, type Note, type SectorGrid } from "@/lib/grid";
+import { DIMS_EXCLUDED_FROM_ANALYSIS } from "@/lib/gap/types";
 
 export type NoteT = "+1" | "+2" | "+3";
 export type Targets = Partial<Record<DimKey, { note: NoteT; crit: string | null }>>;
@@ -17,6 +18,14 @@ export function TargetsEditor({ grid, sub, targets, onSetNote, onSetCrit }: {
   return (
     <div style={{ marginTop: 12 }}>
       {ALL_DIMS.map((dk) => {
+        if (DIMS_EXCLUDED_FROM_ANALYSIS.includes(dk)) {
+          return (
+            <div key={dk} className="target-row">
+              <span className="dn" style={{ color: "var(--muted)" }}>{dk}</span>
+              <span className="hint">évalué via le questionnaire et l&apos;outil Genre dédiés — hors de cette analyse pour le moment</span>
+            </div>
+          );
+        }
         const t = targets[dk];
         const pool = t ? critsForNote(grid, sub, dk, t.note as Note) : [];
         return (

@@ -44,6 +44,11 @@ export const DimSynthesis = z.object({
 });
 export type TDimSynthesis = z.infer<typeof DimSynthesis>;
 
+// Dimensions exclues de l'analyse du dossier — le Genre est évalué via son propre
+// questionnaire et outil (2X) : une partie de ses questions n'est pas réponse ici,
+// et sa verbosité fait déborder la sortie JSON. À réintégrer plus tard (cf. BACKLOG).
+export const DIMS_EXCLUDED_FROM_ANALYSIS: readonly DimKey[] = ["Genre"];
+
 export interface ClientDoc { name: string; text: string }
 export interface AnalyzeTarget { note: Note; crit?: string | null }
 export interface AnalyzeRequest {
