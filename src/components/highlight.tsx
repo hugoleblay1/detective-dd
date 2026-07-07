@@ -25,6 +25,25 @@ const HL_PATTERNS: RegExp[] = [
   /efficacité\s+énergétique/gi, /énergies?\s+renouvelables?/gi,
   /stress\s+hydrique/gi, /prérequis/gi, /couverture\s+(?:numérique|mobile)/gi,
   /non\s+applicable/gi,
+  // élargissement — vocabulaire de la méthodologie de notation
+  /att[ée]nuation/gi, /adaptation/gi,
+  /vuln[ée]rabilit[ée](?:\s+climatique)?/gi, /r[ée]silience/gi,
+  /(?:gaz\s+à\s+effets?\s+de\s+serre|\bGES\b)/g,
+  /[ée]missions?(?:\s+(?:de\s+)?(?:GES|CO2|carbone))?/gi,
+  /trajectoire(?:\s+(?:bas\s+carbone|1[.,]5\s*°?\s*C?|2\s*°?\s*C?))?/gi,
+  /\bISO\s?\d{4,5}\b/g, /\bPPA\b/g, /\bWUE\b/g,
+  /refroidissement(?:\s+adiabatique)?/gi,
+  /[ée]conomie\s+circulaire/gi, /déchets?/gi,
+  /biodiversit[ée]/gi, /aires?\s+prot[ée]g[ée]es?/gi, /ressources?\s+naturelles?/gi,
+  /al[ée]as?(?:\s+(?:climatiques?|naturels?))?/gi,
+  /inclusi(?:on|f|ve|ves|fs)/gi, /exclusion/gi,
+  /emplois?(?:\s+(?:décents?|inclusifs?))?/gi,
+  /cha[îi]nes?\s+(?:de\s+valeur|d['’]approvisionnement)/gi,
+  /formation(?:\s+professionnelle)?/gi,
+  /\b2X(?:\s+Challenge)?\b/g, /parit[ée]/gi,
+  /gouvernance/gi, /harc[èe]lement/gi,
+  /objectifs?\s+(?:strat[ée]giques?|explicites?|d['’]impact)/gi,
+  /additionnalit[ée]/gi,
 ];
 
 export function highlight(input: string | null | undefined): React.ReactNode {

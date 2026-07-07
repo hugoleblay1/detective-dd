@@ -53,12 +53,17 @@ export function naList(grid: SectorGrid, subtype: string, dk: DimKey): { crit: s
   const d = dimObj(grid, subtype, dk); if (!d) return [];
   return d.criteria.filter(critExcluded).map((c) => ({ crit: c.criterion, expl: critNAExpl(c) }));
 }
-/** Critères mobilisables sur une seule note (hors 0) → périmètre restreint à signaler. */
+/**
+ * Critères à périmètre restreint : mobilisables sur une seule note.
+ * Un critère compte comme tel s'il n'a qu'UN niveau réellement mobilisable et que
+ * ce niveau n'est pas la simple ligne de base « 0 ». Un critère qui garde un niveau 0
+ * signifiant ET un autre niveau (ex. Accès : 0 et +3) n'est PAS restreint.
+ */
 export function singleNoteCrits(grid: SectorGrid, subtype: string, dk: DimKey): { crit: string; note: string }[] {
   const d = dimObj(grid, subtype, dk); if (!d) return [];
   return d.criteria.filter((c) => !critExcluded(c)).map((c) => {
-    const u = Object.keys(usableLevels(c.summary.levels)).filter((k) => k !== "0");
-    return u.length === 1 ? { crit: c.criterion, note: u[0] } : null;
+    const u = Object.keys(usableLevels(c.summary.levels));
+    return u.length === 1 && u[0] !== "0" ? { crit: c.criterion, note: u[0] } : null;
   }).filter((x): x is { crit: string; note: string } => x !== null);
 }
 

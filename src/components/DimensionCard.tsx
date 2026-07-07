@@ -3,6 +3,7 @@ import { critExcluded, dimKeyOf, naList, singleNoteCrits, type Dimension, type S
 import { ScoreTag } from "./ScoreTag";
 import { CriterionRow } from "./CriterionRow";
 import { ContextLinks } from "./ContextLinks";
+import { highlight } from "./highlight";
 
 function pillClass(p: string) {
   const s = (p || "").toLowerCase();
@@ -20,6 +21,8 @@ export function DimensionCard({ grid, subtype, geo, dim, defaultOpen }: {
   const naL = dk ? naList(grid, subtype, dk) : [];
   const snc = dk ? singleNoteCrits(grid, subtype, dk) : [];
   const visibleCrits = dim.criteria.filter((c) => !critExcluded(c));
+  const sncByNote = new Map<string, string[]>();
+  for (const x of snc) sncByNote.set(x.note, [...(sncByNote.get(x.note) ?? []), x.crit]);
   return (
     <div className={`card dim${open ? " open" : ""}`}>
       <div className="dim-head" onClick={() => setOpen((o) => !o)}>
@@ -32,7 +35,7 @@ export function DimensionCard({ grid, subtype, geo, dim, defaultOpen }: {
           {dim.prerequisite && (
             <div className="prereq">
               <span className="ptag">PRÉREQUIS +2/+3</span>
-              <span className="ptxt">{dim.prerequisite}</span>
+              <span className="ptxt">{highlight(dim.prerequisite)}</span>
             </div>
           )}
           {(naL.length > 0 || snc.length > 0) && (
@@ -40,20 +43,24 @@ export function DimensionCard({ grid, subtype, geo, dim, defaultOpen }: {
               {naL.length > 0 && (
                 <>
                   <span className="t">Critères non mobilisables — {subtype}</span>
-                  {naL.map((x) => <span key={x.crit} className="item"><b>{x.crit}</b> — {x.expl}</span>)}
+                  {naL.map((x) => <span key={x.crit} className="item"><b>{x.crit}</b> — {highlight(x.expl)}</span>)}
                 </>
               )}
               {snc.length > 0 && (
-                <span className="item" style={{ marginTop: naL.length ? 6 : 0 }}>
+                <>
                   {naL.length === 0 && <span className="t">Périmètre des critères — {subtype}</span>}
-                  Mobilisables uniquement en <b>{snc[0].note}</b> : {snc.map((x, i) => (
-                    <React.Fragment key={x.crit}>{i > 0 ? ", " : ""}<b>{x.crit}</b></React.Fragment>
-                  ))}.
-                </span>
+                  {[...sncByNote.entries()].map(([note, crits], gi) => (
+                    <span key={note} className="item" style={{ marginTop: naL.length || gi > 0 ? 6 : 0 }}>
+                      Mobilisables uniquement en <b>{note}</b> : {crits.map((cr, i) => (
+                        <React.Fragment key={cr}>{i > 0 ? ", " : ""}<b>{cr}</b></React.Fragment>
+                      ))}.
+                    </span>
+                  ))}
+                </>
               )}
             </div>
           )}
-          {dim.objective && <div className="obj">{dim.objective}</div>}
+          {dim.objective && <div className="obj">{highlight(dim.objective)}</div>}
           {dim.criteria.length > 0 && (
             <div className="scale">
               {dim.scale.map((s) => (

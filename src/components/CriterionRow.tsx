@@ -33,7 +33,7 @@ export function CriterionRow({ cr }: { cr: Criterion }) {
       {open && (
         <div className="crit-body">
           <LevelRows levels={uls} />
-          {cr.summary.example && <div className="ex"><b>Exemple de projet :</b> {cr.summary.example}</div>}
+          {cr.summary.example && <div className="ex"><b>Exemple de projet :</b> {highlight(cr.summary.example)}</div>}
           {hasDetail && (
             <>
               <div className="dtoggle" onClick={() => setDetailOpen((d) => !d)}>
@@ -42,7 +42,7 @@ export function CriterionRow({ cr }: { cr: Criterion }) {
               {detailOpen && (
                 <div className="crit-detail">
                   <LevelRows levels={detailLevels} />
-                  {cr.detail?.example && <div className="ex"><b>Exemple de projet :</b> {cr.detail.example}</div>}
+                  {cr.detail?.example && <div className="ex"><b>Exemple de projet :</b> {highlight(cr.detail.example)}</div>}
                 </div>
               )}
             </>
