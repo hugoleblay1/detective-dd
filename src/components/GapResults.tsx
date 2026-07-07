@@ -1,5 +1,5 @@
 import { dimObj, type SectorGrid } from "@/lib/grid";
-import type { DimAnalysis } from "@/lib/gap/types";
+import type { DimAnalysis, TDimSynthesis } from "@/lib/gap/types";
 import { scoreStyle } from "./ScoreTag";
 import { highlight } from "./highlight";
 
@@ -8,6 +8,54 @@ const STATUT = {
   partiel: { row: "r-mid", badge: "v-mid", label: "Partiel" },
   manquant: { row: "r-ko", badge: "v-ko", label: "Manquant" },
 } as const;
+
+// Complétude DOCUMENTAIRE du dossier au regard de la note visée — jamais une note (règle 1).
+const MATURITE = {
+  complet: { cls: "m-ok", label: "Dossier complet au regard de la note visée" },
+  partiel: { cls: "m-mid", label: "Dossier partiel au regard de la note visée" },
+  insuffisant: { cls: "m-ko", label: "Dossier insuffisant au regard de la note visée" },
+} as const;
+
+function Cite({ txt }: { txt?: string }) {
+  if (!txt) return null;
+  return <div className="src synth-cite">{txt}</div>;
+}
+
+function SynthBlock({ s }: { s: TDimSynthesis }) {
+  const m = MATURITE[s.maturite.niveau];
+  return (
+    <div className="gap-synth">
+      <div className={`synth-head ${m.cls}`}>
+        <span className="dot" /><b>{m.label}</b>
+      </div>
+      {s.maturite.justification && <div className="synth-just">{s.maturite.justification}</div>}
+      {(s.forces.length > 0 || s.faiblesses.length > 0) && (
+        <div className="synth-cols">
+          <div className="synth-col">
+            <div className="h">Forces du dossier</div>
+            {s.forces.length ? s.forces.map((f, i) => (
+              <div key={i} className="synth-it ok"><span className="mk">✓</span><span>{f.point}<Cite txt={f.citation} /></span></div>
+            )) : <div className="src">—</div>}
+          </div>
+          <div className="synth-col">
+            <div className="h">Faiblesses</div>
+            {s.faiblesses.length ? s.faiblesses.map((f, i) => (
+              <div key={i} className="synth-it ko"><span className="mk">⚠</span><span>{f.point}<Cite txt={f.citation} /></span></div>
+            )) : <div className="src">—</div>}
+          </div>
+        </div>
+      )}
+      {s.a_obtenir.length > 0 && (
+        <div className="synth-obtenir">
+          <div className="h">À obtenir du client</div>
+          {s.a_obtenir.map((x, i) => (
+            <div key={i} className="it"><span className="b">›</span><span>{x}</span></div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
 
 function Cell({ items }: { items: string[] }) {
   if (!items.length) return <span className="src">—</span>;
@@ -40,6 +88,10 @@ export function GapResults({ grid, sub, geo, analyses }: { grid: SectorGrid; sub
               </span>
               <span className="lvltag" style={{ ...scoreStyle(a.note), fontSize: 12, padding: "3px 9px" }}>note visée {a.note}</span>
             </div>
+            {a.synthesis && <SynthBlock s={a.synthesis} />}
+            {!a.synthesis && a.synthesisError && a.engine !== "erreur" && (
+              <div className="synth-err">Avis qualitatif indisponible — {a.synthesisError}</div>
+            )}
             {a.exigence && (
               <div className="gap-exig"><b>Exigence :</b>{"\n"}{highlight(a.exigence.slice(0, 800))}{a.exigence.length > 800 ? "…" : ""}</div>
             )}
