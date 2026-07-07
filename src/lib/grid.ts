@@ -117,6 +117,12 @@ export function questionsFor(grid: SectorGrid, subtype: string, dk: DimKey, crit
 }
 
 /* ---------- exigence ---------- */
+/**
+ * Divergence VOLONTAIRE avec le prototype (validée en audit de parité, 2026-07-08) :
+ * on exclut les critères entièrement non mobilisables et les niveaux « Non applicable »
+ * (le prototype les affichait). Exigence plus épurée ; contrepartie assumée : l'exigence
+ * peut être vide et les renvois « se reporter aux critères… » ne sont pas repris.
+ */
 export function exigence(grid: SectorGrid, subtype: string, dk: DimKey, note: Note, crit: string | null): string {
   const d = dimObj(grid, subtype, dk); if (!d) return "";
   const pool = crit ? d.criteria.filter((c) => c.criterion === crit) : d.criteria.filter((c) => !critExcluded(c));

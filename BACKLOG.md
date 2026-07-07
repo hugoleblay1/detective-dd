@@ -4,15 +4,17 @@ Règle de file : **parité avec le prototype validé d'abord** (P0), nouveautés
 
 ## P0 — Parité prototype (la spec : `docs/prototype-spec.html`)
 
-- [ ] **UI « Parcourir les critères »** en React sur `src/lib/grid.ts` : dimensions, prérequis en bandeau, critères non mobilisables exclus avec explication, niveaux NA masqués, mise en gras des éléments signifiants, questions filtrables (Planète avec sous-filtre Atténuation/Adaptation/Biodiversité).
-- [ ] **UI « Décrire mon dossier »** : notes visées + critère visé (logique OR, options filtrées par note), documents collés/joints, appel `/api/analyze`, tableau de couverture à code couleur, liste « à redemander au client », moteur affiché (IA / erreur) par dimension.
+> Audit de parité (2026-07-08, `scripts/parity-audit.ts`) : logique métier 100 % conforme (critExcluded, naList, critsForNote, questionsFor). Seules divergences volontaires — `singleNoteCrits` (correction du bug « Accès » du prototype) et `exigence` (filtre les niveaux « Non applicable », documenté dans `grid.ts`). Hors périmètre convenu : mode IMP / onglet Bibliothèque, docs internes de contexte.
+
+- [x] **UI « Parcourir les critères »** en React sur `src/lib/grid.ts` : dimensions, prérequis en bandeau, critères non mobilisables exclus avec explication, niveaux NA masqués, mise en gras des éléments signifiants, questions filtrables (Planète avec sous-filtre Atténuation/Adaptation/Biodiversité).
+- [x] **UI « Décrire mon dossier »** : notes visées + critère visé (logique OR, options filtrées par note), documents collés/joints, appel `/api/analyze`, tableau de couverture à code couleur, liste « à redemander au client », moteur affiché (IA / erreur) par dimension.
 - [ ] **Bibliothèque + file de qualification** : indexeur (`scripts/indexer`) branché sur un dossier local de dev, écran de qualification (métadonnées : titre, géographie à 3 niveaux, dimensions, tags), persistance Postgres (schéma à créer), affichage des ressources internes dans le contexte de chaque dimension.
-- [ ] **Ingestion PDF** des documents du dossier (extraction texte serveur) — le prototype ne lisait que du texte brut.
+- [x] **Ingestion PDF** des documents du dossier (extraction texte serveur) — le prototype ne lisait que du texte brut.
 
 ## P1 — Le cran au-dessus du prototype
 
 - [ ] **Avis qualitatif consolidé** par dimension (forces / faiblesses / à obtenir / maturité vs note visée) au-dessus du tableau — contrat zod dédié, toujours sans note.
-- [ ] **Résumé contextuel à l'écran** par dimension × pays : pré-extraction serveur des indicateurs de base (aires protégées, stress hydrique, indicateurs d'inclusion…) avec source + date, stockés en base — remplace les simples liens.
+- [~] **Résumé contextuel à l'écran** par dimension × pays : pré-extraction serveur des indicateurs de base (aires protégées, stress hydrique, indicateurs d'inclusion…) avec source + date, stockés en base — remplace les simples liens. *Amorcé* : connecteur Banque mondiale (`src/lib/context/`, 4 dimensions), affiché dans l'analyse et injecté au prompt. Reste : Adaptation (Aqueduct/ThinkHazard) + autres sources (Ember, Protected Planet…), persistance base, exploitation plus fine.
 - [ ] **RAG banque interne** : pgvector, découpage/indexation des documents qualifiés, injection des passages pertinents dans l'analyse avec citation.
 - [ ] **Routage de modèles** : configuration par tâche (léger pour extraction/indexation, supérieur pour analyse) dans la couche `llm/`.
 

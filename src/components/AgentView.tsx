@@ -18,7 +18,7 @@ export function AgentView({ grid, sub, geo }: { grid: SectorGrid; sub: string; g
       const next = { ...prev };
       if (!note) { delete next[dk]; return next; }
       const pool = critsForNote(grid, sub, dk, note as Note);
-      next[dk] = { note, crit: pool.length > 1 ? pool[0] : null };
+      next[dk] = { note, crit: pool.length >= 1 ? pool[0] : null };
       return next;
     });
   }

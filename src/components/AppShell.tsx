@@ -33,6 +33,10 @@ export function AppShell({ grid }: { grid: SectorGrid }) {
         {tab === "browse"
           ? <BrowseView grid={grid} sub={sub} geo={geo} />
           : <AgentView grid={grid} sub={sub} geo={geo} />}
+        <div className="foot">
+          Grille = Excel maître (source de vérité), republié vers l&apos;appli.<br />
+          L&apos;agent évalue la couverture et cite ses sources ; la note reste une décision humaine.
+        </div>
       </div>
     </>
   );

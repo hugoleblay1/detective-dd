@@ -1,6 +1,6 @@
 import { dimObj, type SectorGrid } from "@/lib/grid";
 import type { DimAnalysis } from "@/lib/gap/types";
-import { ScoreTag } from "./ScoreTag";
+import { scoreStyle } from "./ScoreTag";
 import { highlight } from "./highlight";
 
 const STATUT = {
@@ -38,7 +38,7 @@ export function GapResults({ grid, sub, geo, analyses }: { grid: SectorGrid; sub
               <span className="src-flag" style={a.engine === "erreur" ? { color: "var(--ko)" } : undefined}>
                 {a.engine === "ia" ? "IA" : "erreur"}
               </span>
-              <ScoreTag note={a.note} className="lvltag" style={{ fontSize: 12, padding: "3px 9px" }} />
+              <span className="lvltag" style={{ ...scoreStyle(a.note), fontSize: 12, padding: "3px 9px" }}>note visée {a.note}</span>
             </div>
             {a.exigence && (
               <div className="gap-exig"><b>Exigence :</b>{"\n"}{highlight(a.exigence.slice(0, 800))}{a.exigence.length > 800 ? "…" : ""}</div>

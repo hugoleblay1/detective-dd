@@ -31,7 +31,7 @@ export function TargetsEditor({ grid, sub, targets, onSetNote, onSetCrit }: {
               </div>
               <span className="hint">note visée</span>
             </div>
-            {t && pool.length > 1 && (
+            {t && pool.length >= 1 && (
               <div className="crit-pick">
                 <span className="lbl">Critère visé</span>
                 {pool.map((cn) => (
