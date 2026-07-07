@@ -5,6 +5,7 @@
  */
 import { getProvider } from "../llm";
 import { SectorGrid, DimKey, critsForNote, questionsFor, exigence } from "../grid";
+import { getDimContext } from "../context";
 import { BlockResult, type AnalyzeRequest, type AnalyzeTarget, type DimAnalysis } from "./types";
 
 export * from "./types";
@@ -18,6 +19,8 @@ ${docs || "(aucun document fourni)"}
 Dimension analysée: ${b.dim} — note visée ${b.note}${b.crit ? ` — critère visé : ${b.crit}` : ""}
 Exigence de la grille:
 ${b.exigence.slice(0, 1500)}
+Données de contexte officielles (${req.geo}) — chiffres réels ; si tu t'en sers, cite la valeur, l'année et la source :
+${b.context.length ? b.context.map((c) => `- ${c.label} : ${c.value}${c.unit} (${c.year}, ${c.source})`).join("\n") : "(aucune donnée de contexte disponible)"}
 Questions:
 ${b.questions.map((x) => `- [${x.id}] ${x.q.split("\n").join(" ")}${x.ress ? ` (docs attendus: ${x.ress})` : ""}`).join("\n")}
 
@@ -44,11 +47,12 @@ export async function analyze(grid: SectorGrid, req: AnalyzeRequest): Promise<Di
     return {
       dim: dk, note: t.note, crit,
       exigence: exigence(grid, req.subtype, dk, t.note, crit),
-      questions, result: { verdicts: [], a_redemander: [] }, engine: "ia",
+      questions, context: [], result: { verdicts: [], a_redemander: [] }, engine: "ia",
     };
   });
 
   await Promise.all(blocks.map(async (b) => {
+    b.context = await getDimContext(b.dim, req.geo);
     try {
       const raw = await provider.complete(blockPrompt(b, req, docs), { maxTokens: 2000 });
       b.result = BlockResult.parse(parseLLMJson(raw));

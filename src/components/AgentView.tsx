@@ -68,7 +68,7 @@ export function AgentView({ grid, sub, geo }: { grid: SectorGrid; sub: string; g
           {error && <div className="gap-error" style={{ margin: "12px 0 0" }}><b>Erreur :</b> {error}</div>}
           {busy && <div className="placeholder">Analyse de la couverture, dimension par dimension…</div>}
           {!busy && !error && !analyses && <div className="placeholder">Sélectionnez au moins une note visée, ajoutez vos éléments, puis lancez l&apos;analyse.</div>}
-          {!busy && analyses && (analyses.length ? <GapResults grid={grid} sub={sub} analyses={analyses} /> : <div className="placeholder">Aucune dimension analysée.</div>)}
+          {!busy && analyses && (analyses.length ? <GapResults grid={grid} sub={sub} geo={geo} analyses={analyses} /> : <div className="placeholder">Aucune dimension analysée.</div>)}
         </div>
       </div>
     </div>

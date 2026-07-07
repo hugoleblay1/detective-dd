@@ -4,6 +4,7 @@
  */
 import { z } from "zod";
 import type { DimKey, Note } from "../grid";
+import type { ContextIndicator } from "../context/types";
 
 export const Verdict = z.object({
   id: z.string(),
@@ -28,6 +29,7 @@ export interface AnalyzeRequest {
 export interface DimAnalysis {
   dim: DimKey; note: Note; crit: string | null; exigence: string;
   questions: { id: string; q: string; ress: string }[];
+  context: ContextIndicator[];
   result: TBlockResult; engine: "ia" | "erreur";
   error?: string;
 }

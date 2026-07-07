@@ -14,7 +14,7 @@ function Cell({ items }: { items: string[] }) {
   return <ul>{items.map((x, i) => <li key={i}>{x}</li>)}</ul>;
 }
 
-export function GapResults({ grid, sub, analyses }: { grid: SectorGrid; sub: string; analyses: DimAnalysis[] }) {
+export function GapResults({ grid, sub, geo, analyses }: { grid: SectorGrid; sub: string; geo: string; analyses: DimAnalysis[] }) {
   const allIA = analyses.every((a) => a.engine === "ia");
   const noneIA = analyses.every((a) => a.engine === "erreur");
   const flag = allIA ? "Agent IA — lecture contextuelle"
@@ -42,6 +42,19 @@ export function GapResults({ grid, sub, analyses }: { grid: SectorGrid; sub: str
             </div>
             {a.exigence && (
               <div className="gap-exig"><b>Exigence :</b>{"\n"}{highlight(a.exigence.slice(0, 800))}{a.exigence.length > 800 ? "…" : ""}</div>
+            )}
+            {a.context.length > 0 && (
+              <div className="ctx-summary">
+                <div className="h">Résumé contextuel{geo.trim() ? ` — ${geo.trim()}` : ""} · source {a.context[0].source}</div>
+                <div className="ctx-grid">
+                  {a.context.map((c) => (
+                    <a key={c.label} className="ctx-src" href={c.sourceUrl} target="_blank" rel="noopener noreferrer">
+                      <div className="nm">{c.value}{c.unit}</div>
+                      <div className="ds">{c.label} · {c.year} ↗</div>
+                    </a>
+                  ))}
+                </div>
+              </div>
             )}
             {a.engine === "erreur" ? (
               <div className="gap-error">
