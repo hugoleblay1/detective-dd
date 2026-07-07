@@ -1,4 +1,5 @@
 import type { SectorGrid } from "@/lib/grid";
+import type { LibraryDoc } from "@/lib/library";
 import { DimensionCard } from "./DimensionCard";
 import { KeyQuestions } from "./KeyQuestions";
 import { ScoreTag } from "./ScoreTag";
@@ -8,7 +9,7 @@ const LEGEND: Array<[string, string]> = [
   ["+2", "Qualifie obj. strat."], ["+3", "Excellence"],
 ];
 
-export function BrowseView({ grid, sub, geo }: { grid: SectorGrid; sub: string; geo: string }) {
+export function BrowseView({ grid, sub, geo, libDocs }: { grid: SectorGrid; sub: string; geo: string; libDocs: LibraryDoc[] }) {
   const dims = grid.subtypes[sub].notation_dd.dimensions;
   return (
     <div className="content">
@@ -22,7 +23,7 @@ export function BrowseView({ grid, sub, geo }: { grid: SectorGrid; sub: string; 
         ))}
       </div>
       {dims.map((d, i) => (
-        <DimensionCard key={`${sub}:${d.dimension}`} grid={grid} subtype={sub} geo={geo} dim={d} defaultOpen={i === 3} />
+        <DimensionCard key={`${sub}:${d.dimension}`} grid={grid} subtype={sub} geo={geo} dim={d} defaultOpen={i === 3} libDocs={libDocs} />
       ))}
       <KeyQuestions grid={grid} subtype={sub} />
     </div>

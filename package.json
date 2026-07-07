@@ -7,11 +7,13 @@
     "build": "next build",
     "start": "next start",
     "typecheck": "tsc --noEmit",
-    "indexer": "tsx scripts/indexer/index-share.ts",
-    "parity": "tsx scripts/parity-audit.ts"
+    "indexer": "tsx --env-file=.env scripts/indexer/index-share.ts",
+    "parity": "tsx scripts/parity-audit.ts",
+    "db:seed": "tsx --env-file=.env scripts/db/seed.ts"
   },
   "dependencies": {
     "next": "^15.3.0",
+    "pg": "^8.22.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "unpdf": "^1.6.2",
@@ -19,6 +21,7 @@
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
+    "@types/pg": "^8.20.0",
     "@types/react": "^19.1.0",
     "tsx": "^4.19.0",
     "typescript": "^5.7.0"

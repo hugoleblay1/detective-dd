@@ -6,11 +6,13 @@
 import { getProvider } from "../llm";
 import { SectorGrid, DimKey, critsForNote, questionsFor, exigence } from "../grid";
 import { getDimContext } from "../context";
+import { listQualified } from "../library.server";
+import { libForDim, type LibraryDoc } from "../library";
 import { BlockResult, type AnalyzeRequest, type AnalyzeTarget, type DimAnalysis } from "./types";
 
 export * from "./types";
 
-function blockPrompt(b: DimAnalysis, req: AnalyzeRequest, docs: string): string {
+function blockPrompt(b: DimAnalysis, req: AnalyzeRequest, docs: string, internalSources: string[]): string {
   return `Tu es un analyste de l'équipe Impact d'une institution de financement du développement. Tu lis et COMPRENDS les documents fournis (contexte, chiffres, engagements — pas une recherche de mots-clés). Tu ne proposes JAMAIS de note.
 Dossier: ${req.subtype}, ${req.geo}. Description: """${req.dealText.slice(0, 2500)}"""
 Documents du client:
@@ -21,6 +23,8 @@ Exigence de la grille:
 ${b.exigence.slice(0, 1500)}
 Données de contexte officielles (${req.geo}) — chiffres réels ; si tu t'en sers, cite la valeur, l'année et la source :
 ${b.context.length ? b.context.map((c) => `- ${c.label} : ${c.value}${c.unit} (${c.year}, ${c.source})`).join("\n") : "(aucune donnée de contexte disponible)"}
+Ressources internes disponibles (renvoie le chargé d'affaires vers elles si pertinent ; n'invente PAS leur contenu) :
+${internalSources.length ? internalSources.map((s) => `- ${s}`).join("\n") : "(aucune)"}
 Questions:
 ${b.questions.map((x) => `- [${x.id}] ${x.q.split("\n").join(" ")}${x.ress ? ` (docs attendus: ${x.ress})` : ""}`).join("\n")}
 
@@ -38,6 +42,7 @@ function parseLLMJson(txt: string): unknown {
 export async function analyze(grid: SectorGrid, req: AnalyzeRequest): Promise<DimAnalysis[]> {
   const provider = getProvider();
   const docs = req.docs.map((d) => `### ${d.name}\n${d.text.slice(0, 12000)}`).join("\n\n");
+  const qualified: LibraryDoc[] = await listQualified().catch(() => []);
 
   const blocks: DimAnalysis[] = (Object.entries(req.targets) as [DimKey, AnalyzeTarget][]).map(([dk, t]) => {
     const pool = critsForNote(grid, req.subtype, dk, t.note);
@@ -53,8 +58,9 @@ export async function analyze(grid: SectorGrid, req: AnalyzeRequest): Promise<Di
 
   await Promise.all(blocks.map(async (b) => {
     b.context = await getDimContext(b.dim, req.geo);
+    const internalSources = libForDim(qualified, b.dim, req.geo).map((d) => `${d.title} (${d.geoName})`);
     try {
-      const raw = await provider.complete(blockPrompt(b, req, docs), { maxTokens: 2000 });
+      const raw = await provider.complete(blockPrompt(b, req, docs, internalSources), { maxTokens: 2000 });
       b.result = BlockResult.parse(parseLLMJson(raw));
       b.engine = "ia";
     } catch (e) {

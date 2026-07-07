@@ -8,7 +8,7 @@ Règle de file : **parité avec le prototype validé d'abord** (P0), nouveautés
 
 - [x] **UI « Parcourir les critères »** en React sur `src/lib/grid.ts` : dimensions, prérequis en bandeau, critères non mobilisables exclus avec explication, niveaux NA masqués, mise en gras des éléments signifiants, questions filtrables (Planète avec sous-filtre Atténuation/Adaptation/Biodiversité).
 - [x] **UI « Décrire mon dossier »** : notes visées + critère visé (logique OR, options filtrées par note), documents collés/joints, appel `/api/analyze`, tableau de couverture à code couleur, liste « à redemander au client », moteur affiché (IA / erreur) par dimension.
-- [ ] **Bibliothèque + file de qualification** : indexeur (`scripts/indexer`) branché sur un dossier local de dev, écran de qualification (métadonnées : titre, géographie à 3 niveaux, dimensions, tags), persistance Postgres (schéma à créer), affichage des ressources internes dans le contexte de chaque dimension.
+- [x] **Bibliothèque + file de qualification** : indexeur (`scripts/indexer`) → upsert Postgres (`library_document`), mode IMP (porte démo) + écran de qualification (titre, géographie à 3 niveaux, dimensions, tags), ressources internes qualifiées affichées dans le contexte des dimensions + pointeurs passés à l'analyse. *Reste :* purge des fichiers disparus (upsert seulement) ; auth réelle = P2.
 - [x] **Ingestion PDF** des documents du dossier (extraction texte serveur) — le prototype ne lisait que du texte brut.
 
 ## P1 — Le cran au-dessus du prototype

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { critExcluded, dimKeyOf, naList, singleNoteCrits, type Dimension, type SectorGrid } from "@/lib/grid";
+import type { LibraryDoc } from "@/lib/library";
 import { ScoreTag } from "./ScoreTag";
 import { CriterionRow } from "./CriterionRow";
 import { ContextLinks } from "./ContextLinks";
@@ -13,8 +14,8 @@ function pillClass(p: string) {
   return "pill-planete";
 }
 
-export function DimensionCard({ grid, subtype, geo, dim, defaultOpen }: {
-  grid: SectorGrid; subtype: string; geo: string; dim: Dimension; defaultOpen: boolean;
+export function DimensionCard({ grid, subtype, geo, dim, defaultOpen, libDocs }: {
+  grid: SectorGrid; subtype: string; geo: string; dim: Dimension; defaultOpen: boolean; libDocs: LibraryDoc[];
 }) {
   const [open, setOpen] = useState(defaultOpen);
   const dk = dimKeyOf(dim.dimension);
@@ -70,7 +71,7 @@ export function DimensionCard({ grid, subtype, geo, dim, defaultOpen }: {
           )}
           {visibleCrits.map((cr) => <CriterionRow key={cr.criterion} cr={cr} />)}
           {dim.criteria.length === 0 && <div className="esg-note">Dimension renvoyée à l&apos;analyse ESG pour ce secteur.</div>}
-          <ContextLinks dk={dk} geo={geo} />
+          <ContextLinks dk={dk} geo={geo} libDocs={libDocs} />
         </div>
       )}
     </div>
