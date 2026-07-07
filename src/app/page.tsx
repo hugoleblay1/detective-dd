@@ -1,8 +1,8 @@
 import { loadGrids } from "@/lib/grid.loader";
-import { BrowseView } from "@/components/BrowseView";
+import { AppShell } from "@/components/AppShell";
 
 /**
- * Onglet « Parcourir les critères » (portage du prototype validé, docs/prototype-spec.html).
+ * Application Détective DD (portage du prototype validé, docs/prototype-spec.html).
  * Composant serveur : charge la grille du secteur ; toute la logique métier vient de `grid.ts`.
  */
 export default function Home() {
@@ -16,10 +16,5 @@ export default function Home() {
       </div>
     );
   }
-  return (
-    <>
-      <div className="brandline" />
-      <BrowseView grid={grid} />
-    </>
-  );
+  return <AppShell grid={grid} />;
 }

@@ -3,37 +3,11 @@
  * sorties courtes = pas de troncature JSON), contrat de sortie validé par zod.
  * L'agent ne propose JAMAIS de note : il évalue la couverture.
  */
-import { z } from "zod";
 import { getProvider } from "../llm";
-import {
-  SectorGrid, DimKey, Note, critsForNote, questionsFor, exigence,
-} from "../grid";
+import { SectorGrid, DimKey, critsForNote, questionsFor, exigence } from "../grid";
+import { BlockResult, type AnalyzeRequest, type AnalyzeTarget, type DimAnalysis } from "./types";
 
-export const Verdict = z.object({
-  id: z.string(),
-  statut: z.enum(["repondu", "partiel", "manquant"]),
-  disponibles: z.array(z.string()).default([]),
-  manquants: z.array(z.string()).default([]),
-});
-export const BlockResult = z.object({
-  verdicts: z.array(Verdict),
-  a_redemander: z.array(z.string()).default([]),
-});
-export type TBlockResult = z.infer<typeof BlockResult>;
-
-export interface ClientDoc { name: string; text: string }
-export interface AnalyzeTarget { note: Note; crit?: string | null }
-export interface AnalyzeRequest {
-  sector: string; subtype: string; geo: string; dealText: string;
-  targets: Partial<Record<DimKey, AnalyzeTarget>>;
-  docs: ClientDoc[];
-}
-export interface DimAnalysis {
-  dim: DimKey; note: Note; crit: string | null; exigence: string;
-  questions: { id: string; q: string; ress: string }[];
-  result: TBlockResult; engine: "ia" | "erreur";
-  error?: string;
-}
+export * from "./types";
 
 function blockPrompt(b: DimAnalysis, req: AnalyzeRequest, docs: string): string {
   return `Tu es un analyste de l'équipe Impact d'une institution de financement du développement. Tu lis et COMPRENDS les documents fournis (contexte, chiffres, engagements — pas une recherche de mots-clés). Tu ne proposes JAMAIS de note.
