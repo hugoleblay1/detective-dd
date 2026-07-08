@@ -52,7 +52,7 @@ export const critExcluded = (cr: Criterion) => {
 };
 export function critNAExpl(cr: Criterion): string {
   for (const t of Object.values(cr.summary.levels)) if (lvlNA(t))
-    return t.replace(/^\s*non applicable\s*[-–:]*\s*/i, "").trim() || t;
+    return t.replace(/^\s*non applicable\s*[-–—:]*\s*/i, "").trim() || t;
   return "non mobilisable pour ce type d'investissement";
 }
 /** Critères entièrement non mobilisables pour ce sous-type, avec l'explication à afficher. */

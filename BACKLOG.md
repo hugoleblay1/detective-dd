@@ -38,4 +38,4 @@ Règle de file : **parité avec le prototype validé d'abord** (P0), nouveautés
 ## Hors file (dettes et garde-fous)
 
 - Republication Excel → JSON industrialisée (commande unique, validation de schéma).
-- Jeu de tests sur `grid.ts` (les règles de non-applicabilité et de filtrage sont le cœur métier).
+- [x] Jeu de tests sur `grid.ts` (`pnpm test`, 28 tests) : non-applicabilité, périmètre restreint, logique OR, filtrage des questions, exigence — cas construits + invariants sur la grille publiée.

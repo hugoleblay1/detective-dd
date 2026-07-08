@@ -9,7 +9,8 @@
     "typecheck": "tsc --noEmit",
     "indexer": "tsx --env-file=.env scripts/indexer/index-share.ts",
     "parity": "tsx scripts/parity-audit.ts",
-    "db:seed": "tsx --env-file=.env scripts/db/seed.ts"
+    "db:seed": "tsx --env-file=.env scripts/db/seed.ts",
+    "test": "tsx --test tests/*.test.ts"
   },
   "dependencies": {
     "next": "^15.3.0",

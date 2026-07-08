@@ -8,6 +8,7 @@ Vision complète : `PRODUCT.md`. File de travail : `BACKLOG.md`. Spec UX de réf
 ```bash
 pnpm dev                  # serveur de dev (http://localhost:3000)
 pnpm typecheck            # obligatoire avant tout commit
+pnpm test                 # tests du cœur métier (grid.ts) — node:test via tsx
 docker compose up db -d   # Postgres
 pnpm indexer              # indexeur bibliothèque (LIBRARY_ROOT)
 ```
