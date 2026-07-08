@@ -97,12 +97,12 @@ export function GapResults({ grid, sub, geo, analyses }: { grid: SectorGrid; sub
             )}
             {a.context.length > 0 && (
               <div className="ctx-summary">
-                <div className="h">Résumé contextuel{geo.trim() ? ` — ${geo.trim()}` : ""} · source {a.context[0].source}</div>
+                <div className="h">Résumé contextuel{geo.trim() ? ` — ${geo.trim()}` : ""} · sources officielles</div>
                 <div className="ctx-grid">
                   {a.context.map((c) => (
                     <a key={c.label} className="ctx-src" href={c.sourceUrl} target="_blank" rel="noopener noreferrer">
                       <div className="nm">{c.value}{c.unit}</div>
-                      <div className="ds">{c.label} · {c.year} ↗</div>
+                      <div className="ds">{c.label} · {c.source}{c.year ? ` ${c.year}` : ""} ↗</div>
                     </a>
                   ))}
                 </div>

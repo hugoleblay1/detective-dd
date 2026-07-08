@@ -14,9 +14,9 @@ export const normGeo = (s: string) =>
 
 const COUNTRY: Record<string, Country> = {
   kenya: { slug: "kenya", iso3: "KEN", th: "133" },
-  nigeria: { slug: "nigeria", iso3: "NGA", th: null },
-  morocco: { slug: "morocco", iso3: "MAR", th: null }, maroc: { slug: "morocco", iso3: "MAR", th: null },
-  senegal: { slug: "senegal", iso3: "SEN", th: null }, "cote divoire": { slug: "cote-divoire", iso3: "CIV", th: null },
+  nigeria: { slug: "nigeria", iso3: "NGA", th: "182" },
+  morocco: { slug: "morocco", iso3: "MAR", th: "169" }, maroc: { slug: "morocco", iso3: "MAR", th: "169" },
+  senegal: { slug: "senegal", iso3: "SEN", th: "217" }, "cote divoire": { slug: "cote-divoire", iso3: "CIV", th: "66" },
   armenie: { slug: "armenia", iso3: "ARM", th: "13" }, armenia: { slug: "armenia", iso3: "ARM", th: "13" },
   jordanie: { slug: "jordan", iso3: "JOR", th: "130" }, jordan: { slug: "jordan", iso3: "JOR", th: "130" },
 };
@@ -24,8 +24,10 @@ export const geoInfo = (geo: string): Country | null => COUNTRY[normGeo(geo)] ??
 
 export const CTX: CtxTheme[] = [
   { theme: "Climat — adaptation", color: "#4d7fd6", dim: "Adaptation", sources: [
-    { name: "WRI Aqueduct", desc: "Stress hydrique & risque inondation", url: () => "https://www.wri.org/applications/aqueduct/water-risk-atlas/" },
-    { name: "ThinkHazard!", desc: "Aléas : chaleur, inondation, cyclone", url: (c) => (c && c.th) ? `https://thinkhazard.org/en/report/${c.th}-${c.slug}/` : "https://thinkhazard.org/en/" },
+    // Les trois sources de référence de l'équipe Adaptation (voir PRODUCT.md).
+    { name: "CCKP (Banque mondiale)", desc: "Climat observé & projections, jusqu'au niveau local", url: (c) => c ? `https://climateknowledgeportal.worldbank.org/country/${c.slug}` : "https://climateknowledgeportal.worldbank.org/" },
+    { name: "WRI Aqueduct", desc: "Risques eau (stress, inondation) au niveau local", url: () => "https://www.wri.org/applications/aqueduct/water-risk-atlas/" },
+    { name: "ThinkHazard!", desc: "Aléas naturels par zone : chaleur, inondation, cyclone", url: (c) => (c && c.th) ? `https://thinkhazard.org/fr/report/${c.th}-${c.slug}/` : "https://thinkhazard.org/fr/" },
     { name: "ND-GAIN", desc: "Vulnérabilité & préparation climatique", url: (c) => c ? `https://gain-new.crc.nd.edu/country/${c.slug}` : "https://gain.nd.edu/our-work/country-index/" },
   ] },
   { theme: "Climat — atténuation", color: "#1a4fb0", dim: "Atténuation", sources: [
