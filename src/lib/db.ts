@@ -24,6 +24,19 @@ export function ensureSchema(): Promise<void> {
         tags         TEXT[] NOT NULL DEFAULT '{}',
         qualified_at TIMESTAMPTZ
       );
+      CREATE TABLE IF NOT EXISTS context_indicator (
+        dim        TEXT NOT NULL,
+        geo        TEXT NOT NULL,   -- ISO3 du pays
+        label      TEXT NOT NULL,
+        pos        SMALLINT NOT NULL DEFAULT 0,  -- ordre d'affichage des connecteurs
+        value      JSONB NOT NULL,  -- nombre ou catégorie qualitative
+        unit       TEXT NOT NULL DEFAULT '',
+        year       TEXT NOT NULL DEFAULT '',
+        source     TEXT NOT NULL,
+        source_url TEXT NOT NULL,
+        fetched_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+        PRIMARY KEY (dim, geo, label)
+      );
     `).then(() => undefined).catch((e) => { schemaReady = null; throw e; });
   }
   return schemaReady;
