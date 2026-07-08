@@ -34,7 +34,7 @@ scripts/indexer/         Indexeur de bibliothèque interne (cron sur le serveur 
 
 | | Défaut produit | Profil « Proparco » |
 |---|---|---|
-| LLM | `LLM_PROVIDER=anthropic` (Claude Sonnet) | `internal` — implémenter `InternalProvider` selon l'API du LLM interne |
+| LLM | `LLM_PROVIDER=anthropic`, routage par tâche : analyse sur `LLM_MODEL` (Sonnet), extraction/indexation sur `LLM_MODEL_EXTRACTION` (Haiku) | `internal` — implémenter `InternalProvider` selon l'API du LLM interne |
 | Hébergement | VM cloud (GCP…), `docker compose --profile prod up` | Serveur on-prem ; ajouter le CA d'entreprise dans l'image (voir Dockerfile, bloc Fortinet) |
 | Bibliothèque | dossier local / bucket | partage réseau via `LIBRARY_ROOT` + cron indexeur |
 | Contenu | `content/<client>/` | `content/proparco/` |

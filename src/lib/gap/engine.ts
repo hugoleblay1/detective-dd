@@ -70,7 +70,7 @@ function parseLLMJson(txt: string): unknown {
 }
 
 export async function analyze(grid: SectorGrid, req: AnalyzeRequest): Promise<DimAnalysis[]> {
-  const provider = getProvider();
+  const provider = getProvider("analyse");
   const docs = req.docs.map((d) => `### ${d.name}\n${d.text.slice(0, 12000)}`).join("\n\n");
   const qualified: LibraryDoc[] = await listQualified().catch(() => []);
 

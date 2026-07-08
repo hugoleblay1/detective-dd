@@ -5,16 +5,29 @@
  *
  *  - "anthropic"  : défaut produit (Claude, clé API par client)
  *  - "internal"   : squelette pour un endpoint client (ex. LLM interne Proparco)
+ *
+ * Routage par tâche (voir PRODUCT.md, Architecture IA) : les tâches mécaniques
+ * (extraction, indexation) tournent sur un modèle léger et peu cher ; l'analyse
+ * d'écart et l'avis qualitatif sur un modèle de niveau supérieur.
  */
 export interface LLMProvider {
   /** Envoie un prompt, retourne le texte brut de la réponse. */
   complete(prompt: string, opts?: { maxTokens?: number }): Promise<string>;
 }
 
+/** Tâche appelante — détermine le modèle utilisé. */
+export type LLMTask = "analyse" | "extraction";
+
+/* Modèles par tâche, surchargeables par déploiement (.env). */
+const MODELS: Record<LLMTask, () => string> = {
+  analyse: () => process.env.LLM_MODEL ?? "claude-sonnet-4-6",
+  extraction: () => process.env.LLM_MODEL_EXTRACTION ?? "claude-haiku-4-5",
+};
+
 class AnthropicProvider implements LLMProvider {
   constructor(
+    private model: string,
     private apiKey = process.env.ANTHROPIC_API_KEY ?? "",
-    private model = process.env.LLM_MODEL ?? "claude-sonnet-4-6",
   ) {
     if (!this.apiKey) throw new Error("ANTHROPIC_API_KEY manquant (.env)");
   }
@@ -40,7 +53,9 @@ class AnthropicProvider implements LLMProvider {
 
 /** Adaptateur pour un endpoint interne client (à implémenter par déploiement). */
 class InternalProvider implements LLMProvider {
-  constructor(private baseUrl = process.env.INTERNAL_LLM_URL ?? "") {
+  // Le routage par tâche s'applique aussi ici : l'endpoint interne recevra le
+  // nom de tâche/modèle quand son contrat sera connu (profil Proparco).
+  constructor(private task: LLMTask, private baseUrl = process.env.INTERNAL_LLM_URL ?? "") {
     if (!this.baseUrl) throw new Error("INTERNAL_LLM_URL manquant (.env)");
   }
   async complete(_prompt: string): Promise<string> {
@@ -50,9 +65,10 @@ class InternalProvider implements LLMProvider {
   }
 }
 
-export function getProvider(): LLMProvider {
+/** Fournisseur pour une tâche donnée — "analyse" (défaut) ou "extraction". */
+export function getProvider(task: LLMTask = "analyse"): LLMProvider {
   const p = process.env.LLM_PROVIDER ?? "anthropic";
-  if (p === "anthropic") return new AnthropicProvider();
-  if (p === "internal") return new InternalProvider();
+  if (p === "anthropic") return new AnthropicProvider(MODELS[task]());
+  if (p === "internal") return new InternalProvider(task);
   throw new Error(`LLM_PROVIDER inconnu: ${p}`);
 }
