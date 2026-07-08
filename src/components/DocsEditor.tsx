@@ -59,7 +59,7 @@ export function DocsEditor({ docs, onAdd, onRemove }: {
           <button className="btn ghost small">Joindre un fichier .pdf / .txt / .md</button>
           <input type="file" accept=".pdf,.txt,.md,.csv" multiple onChange={(e) => { onFiles(e.target.files); e.target.value = ""; }} />
         </span>
-        <span className="hint">PDF : retranscription enrichie côté serveur (tableaux et graphiques lus).</span>
+        <span className="hint">PDF : retranscription enrichie (tableaux et graphiques lus) jusqu&apos;à <b>100 pages / 30 Mo</b> par document — au-delà, texte brut seul (tableaux et graphiques non exploités).</span>
       </div>
       {err && <div className="gap-error" style={{ margin: "10px 0 0" }}>{err}</div>}
       {notes.map((n) => <div key={n} className="hint" style={{ margin: "8px 0 0" }}>⚠ {n}</div>)}
