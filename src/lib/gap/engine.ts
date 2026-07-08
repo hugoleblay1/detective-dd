@@ -28,7 +28,7 @@ ${internalSources.length ? internalSources.map((s) => `- ${s}`).join("\n") : "(a
 Questions:
 ${b.questions.map((x) => `- [${x.id}] ${x.q.split("\n").join(" ")}${x.ress ? ` (docs attendus: ${x.ress})` : ""}`).join("\n")}
 
-Pour CHAQUE question: statut "repondu" (réellement couvert), "partiel" ou "manquant" (sois strict, ne déduis pas d'un thème voisin). "disponibles": max 2 points ultra-courts, chacun avec citation exacte ≤12 mots entre « » + nom du document. "manquants": max 2 points précis (nommer le document à demander).
+Pour CHAQUE question: statut "repondu" (réellement couvert), "partiel" ou "manquant" (sois strict, ne déduis pas d'un thème voisin). "disponibles": max 4 points courts, chacun avec citation exacte ≤25 mots entre « » + nom du document — exploite les tableaux et données chiffrées (une ligne de tableau retranscrite est une citation valable). "manquants": max 3 points précis (nommer le document à demander).
 Réponds STRICTEMENT en JSON compact sans backticks ni texte autour:
 {"verdicts":[{"id":"...","statut":"...","disponibles":["..."],"manquants":["..."]}],"a_redemander":["..."]}`;
 }
@@ -55,8 +55,8 @@ Couverture déjà établie question par question (appuie-toi dessus pour rester 
 ${verdicts}
 
 Produis :
-- "forces": max 3, ce que le dossier ÉTABLIT réellement. CHACUNE avec "citation" exacte ≤15 mots entre « » + nom du document/source. Pas de citation possible ⇒ ce n'est pas une force.
-- "faiblesses": max 3, ce qui est faible, vague ou absent. "citation" seulement si l'élément EST présent mais insuffisant ; une absence n'a pas de citation.
+- "forces": max 4, ce que le dossier ÉTABLIT réellement. CHACUNE avec "citation" exacte ≤25 mots entre « » + nom du document/source (données chiffrées et lignes de tableaux bienvenues). Pas de citation possible ⇒ ce n'est pas une force.
+- "faiblesses": max 4, ce qui est faible, vague ou absent. "citation" seulement si l'élément EST présent mais insuffisant ; une absence n'a pas de citation.
 - "a_obtenir": max 4, documents/preuves précis à demander au client (nomme le document).
 - "maturite": {"niveau":"complet"|"partiel"|"insuffisant","justification":"…"} — niveau = à quel point le DOSSIER fournit les éléments attendus par l'exigence de la note visée (complétude documentaire), JAMAIS le niveau de performance du projet ni une note. justification = une phrase, sans aucun chiffre de note.
 Réponds STRICTEMENT en JSON compact sans backticks ni texte autour:
@@ -71,7 +71,9 @@ function parseLLMJson(txt: string): unknown {
 
 export async function analyze(grid: SectorGrid, req: AnalyzeRequest): Promise<DimAnalysis[]> {
   const provider = getProvider("analyse");
-  const docs = req.docs.map((d) => `### ${d.name}\n${d.text.slice(0, 12000)}`).join("\n\n");
+  // 80k caractères ≈ 25-30 pages retranscrites : assez pour les rapports du
+  // dossier sans coupure des tableaux en fin de document (contexte 1M côté modèle).
+  const docs = req.docs.map((d) => `### ${d.name}\n${d.text.slice(0, 80000)}`).join("\n\n");
   const qualified: LibraryDoc[] = await listQualified().catch(() => []);
 
   const blocks: DimAnalysis[] = (Object.entries(req.targets) as [DimKey, AnalyzeTarget][]).map(([dk, t]) => {
@@ -91,7 +93,7 @@ export async function analyze(grid: SectorGrid, req: AnalyzeRequest): Promise<Di
     b.context = await getDimContext(b.dim, req.geo);
     const internalSources = libForDim(qualified, b.dim, req.geo).map((d) => `${d.title} (${d.geoName})`);
     try {
-      const raw = await provider.complete(blockPrompt(b, req, docs, internalSources), { maxTokens: 2000 });
+      const raw = await provider.complete(blockPrompt(b, req, docs, internalSources), { maxTokens: 3000 });
       b.result = BlockResult.parse(parseLLMJson(raw));
       b.engine = "ia";
     } catch (e) {
@@ -101,7 +103,7 @@ export async function analyze(grid: SectorGrid, req: AnalyzeRequest): Promise<Di
     // Avis qualitatif : appel dédié, nourri des verdicts ci-dessus. Échoue
     // indépendamment de la couverture (n'invalide pas le tableau).
     try {
-      const raw = await provider.complete(synthPrompt(b, req, docs, internalSources), { maxTokens: 1500 });
+      const raw = await provider.complete(synthPrompt(b, req, docs, internalSources), { maxTokens: 2000 });
       b.synthesis = DimSynthesis.parse(parseLLMJson(raw));
     } catch (e) {
       b.synthesisError = e instanceof Error ? e.message : String(e);

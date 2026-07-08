@@ -13,6 +13,18 @@
 export interface LLMProvider {
   /** Envoie un prompt, retourne le texte brut de la réponse. */
   complete(prompt: string, opts?: { maxTokens?: number }): Promise<string>;
+  /**
+   * Lecture native d'un PDF (pages rendues en texte + image : tableaux et
+   * graphiques sont réellement lus). Absent si le fournisseur ne le supporte
+   * pas — l'appelant doit prévoir un repli signalé.
+   */
+  extractPdf?(prompt: string, pdfBase64: string, opts?: { maxTokens?: number }): Promise<PdfExtraction>;
+}
+
+export interface PdfExtraction {
+  text: string;
+  /** true si la sortie a été coupée (max_tokens) : fin du document non couverte. */
+  truncated: boolean;
 }
 
 /** Tâche appelante — détermine le modèle utilisé. */
@@ -48,6 +60,36 @@ class AnthropicProvider implements LLMProvider {
     if (!res.ok) throw new Error(`Anthropic API ${res.status}: ${await res.text()}`);
     const data = (await res.json()) as { content: Array<{ type: string; text?: string }> };
     return data.content.filter((b) => b.type === "text").map((b) => b.text ?? "").join("\n");
+  }
+  async extractPdf(prompt: string, pdfBase64: string, opts?: { maxTokens?: number }): Promise<PdfExtraction> {
+    const res = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        "x-api-key": this.apiKey,
+        "anthropic-version": "2023-06-01",
+      },
+      body: JSON.stringify({
+        model: this.model,
+        max_tokens: opts?.maxTokens ?? 8000,
+        messages: [{
+          role: "user",
+          content: [
+            { type: "document", source: { type: "base64", media_type: "application/pdf", data: pdfBase64 } },
+            { type: "text", text: prompt },
+          ],
+        }],
+      }),
+    });
+    if (!res.ok) throw new Error(`Anthropic API ${res.status}: ${await res.text()}`);
+    const data = (await res.json()) as {
+      content: Array<{ type: string; text?: string }>;
+      stop_reason?: string;
+    };
+    return {
+      text: data.content.filter((b) => b.type === "text").map((b) => b.text ?? "").join("\n"),
+      truncated: data.stop_reason === "max_tokens",
+    };
   }
 }
 

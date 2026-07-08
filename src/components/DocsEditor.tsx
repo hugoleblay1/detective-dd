@@ -7,6 +7,7 @@ export function DocsEditor({ docs, onAdd, onRemove }: {
   const [paste, setPaste] = useState("");
   const [pending, setPending] = useState<string[]>([]);
   const [err, setErr] = useState<string | null>(null);
+  const [notes, setNotes] = useState<string[]>([]);
 
   function addPaste() {
     const t = paste.trim();
@@ -24,6 +25,7 @@ export function DocsEditor({ docs, onAdd, onRemove }: {
       const data = await res.json();
       if (!res.ok) throw new Error(data?.error ? `${f.name} : ${data.error}` : `${f.name} : extraction échouée (${res.status}).`);
       if (!String(data.text ?? "").trim()) throw new Error(`${f.name} : aucun texte extractible (PDF scanné ? OCR non géré).`);
+      if (data.note) setNotes((n) => [...n, `${f.name} : ${data.note}`]);
       onAdd({ name: f.name, text: data.text });
     } catch (e) {
       setErr(e instanceof Error ? e.message : String(e));
@@ -35,6 +37,7 @@ export function DocsEditor({ docs, onAdd, onRemove }: {
   function onFiles(files: FileList | null) {
     if (!files) return;
     setErr(null);
+    setNotes([]);
     for (const f of Array.from(files)) {
       if (/\.pdf$/i.test(f.name) || f.type === "application/pdf") {
         void extractPdf(f);
@@ -56,9 +59,10 @@ export function DocsEditor({ docs, onAdd, onRemove }: {
           <button className="btn ghost small">Joindre un fichier .pdf / .txt / .md</button>
           <input type="file" accept=".pdf,.txt,.md,.csv" multiple onChange={(e) => { onFiles(e.target.files); e.target.value = ""; }} />
         </span>
-        <span className="hint">PDF : extraction texte côté serveur (scannés/OCR non gérés).</span>
+        <span className="hint">PDF : retranscription enrichie côté serveur (tableaux et graphiques lus).</span>
       </div>
       {err && <div className="gap-error" style={{ margin: "10px 0 0" }}>{err}</div>}
+      {notes.map((n) => <div key={n} className="hint" style={{ margin: "8px 0 0" }}>⚠ {n}</div>)}
       <div>
         {pending.map((n) => (
           <div key={n} className="docpill" style={{ opacity: 0.7 }}>
