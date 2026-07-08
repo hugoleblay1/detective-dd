@@ -1,6 +1,6 @@
 services:
   db:
-    image: postgres:16-alpine
+    image: pgvector/pgvector:pg16   # Postgres 16 + extension vector (RAG bibliothèque)
     environment:
       POSTGRES_USER: dd
       POSTGRES_PASSWORD: dd

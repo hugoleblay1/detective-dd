@@ -10,6 +10,7 @@ let schemaReady: Promise<void> | null = null;
 export function ensureSchema(): Promise<void> {
   if (!schemaReady) {
     schemaReady = pool.query(`
+      CREATE EXTENSION IF NOT EXISTS vector;  -- image pgvector/pgvector (compose)
       CREATE TABLE IF NOT EXISTS library_document (
         id           TEXT PRIMARY KEY,
         file         TEXT NOT NULL,
@@ -37,6 +38,17 @@ export function ensureSchema(): Promise<void> {
         fetched_at TIMESTAMPTZ NOT NULL DEFAULT now(),
         PRIMARY KEY (dim, geo, label)
       );
+      CREATE TABLE IF NOT EXISTS library_chunk (
+        doc_id     TEXT NOT NULL REFERENCES library_document(id) ON DELETE CASCADE,
+        ord        SMALLINT NOT NULL,   -- position du passage dans le document
+        page       SMALLINT,            -- repère [page N] si connu
+        text       TEXT NOT NULL,
+        embedding  vector(384) NOT NULL, -- multilingual-e5-small (voir llm/embeddings.ts)
+        indexed_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+        PRIMARY KEY (doc_id, ord)
+      );
+      CREATE INDEX IF NOT EXISTS library_chunk_embedding_idx
+        ON library_chunk USING hnsw (embedding vector_cosine_ops);
     `).then(() => undefined).catch((e) => { schemaReady = null; throw e; });
   }
   return schemaReady;
