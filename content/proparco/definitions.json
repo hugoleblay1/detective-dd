@@ -1,0 +1,14 @@
+{
+  "definitions": [
+    {
+      "terme": "Populations défavorisées",
+      "dims": ["Social"],
+      "definition": "Sont considérées comme populations défavorisées, au sein d'un pays et en comparaison avec le reste de la population de ce même pays, des personnes présentant un ou plusieurs des critères suivants (liste non exhaustive) :\n- personnes à faibles revenus / niveau de richesse (dont notamment le Bottom 40) ;\n- personnes exclues ou discriminées (sur la base de leur appartenance de genre, leur ethnie, un handicap, une appartenance religieuse, etc.) ;\n- personnes déplacées ;\n- personnes vivant dans des territoires particulièrement défavorisés (quartiers précaires, zones urbaines ou rurales caractérisées par un niveau de pauvreté, de privation ou d'inégalités important…) ;\n- personnes ayant un accès limité, inexistant ou de qualité insatisfaisante à un bien ou service essentiel — on s'intéressera spécifiquement aux personnes ayant un accès limité au type de bien ou service essentiel fourni par le projet ou le client en question ;\n- petits exploitants agricoles caractérisés par de faibles revenus et/ou de petites superficies cultivées, exerçant une agriculture en partie vivrière et reposant sur une gestion familiale."
+    },
+    {
+      "terme": "Territoires défavorisés",
+      "dims": ["Social"],
+      "definition": "Territoires caractérisés par :\n- un niveau de pauvreté (de richesse) / de pauvreté multidimensionnelle / une proportion de population Bottom 40 supérieur(e) à la moyenne nationale de l'indicateur mesuré ;\n- des taux d'accès aux services parmi les plus bas du pays — on s'intéressera spécifiquement aux territoires ayant un accès limité au type de bien ou service essentiel fourni par le projet ou le client en question."
+    }
+  ]
+}

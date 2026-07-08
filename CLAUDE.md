@@ -17,7 +17,7 @@ pnpm indexer              # indexeur bibliothèque (LIBRARY_ROOT)
 - `src/lib/grid.ts` — **unique source de la logique métier** (non-applicabilité, logique OR, filtrage questions par dimension × critère × note, exigences). L'UI ne réimplémente jamais ces règles ; toute évolution métier passe par ce module et ses tests.
 - `src/lib/llm/` — abstraction fournisseur (anthropic | internal). Le moteur ne connaît que l'interface `LLMProvider`. Prévoir le routage par tâche (modèle léger pour extraction, supérieur pour analyse).
 - `src/lib/gap/engine.ts` — analyse d'écart : **un appel LLM par dimension** (jamais d'appel global : troncature JSON), contrats zod, citations obligatoires.
-- `content/<client>/` — grilles JSON par client. Le moteur n'embarque aucune méthodologie en dur.
+- `content/<client>/` — grilles JSON par client + `definitions.json` (référentiel méthodologique : termes définis par le client, injectés dans les prompts des dimensions concernées et affichés dans le parcours des critères). Le moteur n'embarque aucune méthodologie en dur.
 - `scripts/indexer/` — détection des documents de la bibliothèque interne ; la qualification (métadonnées) est faite par un expert dans l'appli.
 
 ## Règles métier non négociables

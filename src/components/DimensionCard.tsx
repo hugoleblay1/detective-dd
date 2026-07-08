@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { critExcluded, dimKeyOf, naList, singleNoteCrits, type Dimension, type SectorGrid } from "@/lib/grid";
+import { critExcluded, defsForDim, dimKeyOf, naList, singleNoteCrits, type Dimension, type MethodDefinition, type SectorGrid } from "@/lib/grid";
 import type { LibraryDoc } from "@/lib/library";
 import { ScoreTag } from "./ScoreTag";
 import { CriterionRow } from "./CriterionRow";
@@ -14,11 +14,12 @@ function pillClass(p: string) {
   return "pill-planete";
 }
 
-export function DimensionCard({ grid, subtype, geo, dim, defaultOpen, libDocs }: {
-  grid: SectorGrid; subtype: string; geo: string; dim: Dimension; defaultOpen: boolean; libDocs: LibraryDoc[];
+export function DimensionCard({ grid, subtype, geo, dim, defaultOpen, libDocs, defs }: {
+  grid: SectorGrid; subtype: string; geo: string; dim: Dimension; defaultOpen: boolean; libDocs: LibraryDoc[]; defs: MethodDefinition[];
 }) {
   const [open, setOpen] = useState(defaultOpen);
   const dk = dimKeyOf(dim.dimension);
+  const dimDefs = dk ? defsForDim(defs, dk) : [];
   const naL = dk ? naList(grid, subtype, dk) : [];
   const snc = dk ? singleNoteCrits(grid, subtype, dk) : [];
   const visibleCrits = dim.criteria.filter((c) => !critExcluded(c));
@@ -62,6 +63,16 @@ export function DimensionCard({ grid, subtype, geo, dim, defaultOpen, libDocs }:
             </div>
           )}
           {dim.objective && <div className="obj">{highlight(dim.objective)}</div>}
+          {dimDefs.length > 0 && (
+            <div className="na-note" style={{ background: "#f4f6fb", borderColor: "#c9d4ea" }}>
+              <span className="t">Définitions méthodologiques — référentiel appliqué à l&apos;analyse</span>
+              {dimDefs.map((d) => (
+                <span key={d.terme} className="item" style={{ whiteSpace: "pre-line" }}>
+                  <b>{d.terme}</b> — {d.definition}
+                </span>
+              ))}
+            </div>
+          )}
           {dim.criteria.length > 0 && (
             <div className="scale">
               {dim.scale.map((s) => (

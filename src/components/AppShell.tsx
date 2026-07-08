@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import type { SectorGrid } from "@/lib/grid";
+import type { MethodDefinition, SectorGrid } from "@/lib/grid";
 import type { LibraryDoc } from "@/lib/library";
 import { ControlBar } from "./ControlBar";
 import { BrowseView } from "./BrowseView";
@@ -11,7 +11,7 @@ type Tab = "browse" | "agent" | "lib";
 /** Démo : séparation de rôle visuelle, PAS un contrôle d'accès sécurisé (auth réelle = P2). */
 const IMP_PASSWORD = "imp2026";
 
-export function AppShell({ grid }: { grid: SectorGrid }) {
+export function AppShell({ grid, defs }: { grid: SectorGrid; defs: MethodDefinition[] }) {
   const subtypes = Object.keys(grid.subtypes);
   const [sub, setSub] = useState(subtypes.includes("Data Centre") ? "Data Centre" : subtypes[0]);
   const [geo, setGeo] = useState("Kenya");
@@ -60,7 +60,7 @@ export function AppShell({ grid }: { grid: SectorGrid }) {
           <button className={tab === "agent" ? "on" : ""} onClick={() => setTab("agent")}>Décrire mon dossier</button>
           {imp && <button className={tab === "lib" ? "on" : ""} onClick={() => setTab("lib")}>Bibliothèque IMP</button>}
         </div>
-        {tab === "browse" && <BrowseView grid={grid} sub={sub} geo={geo} libDocs={docs ?? []} />}
+        {tab === "browse" && <BrowseView grid={grid} sub={sub} geo={geo} libDocs={docs ?? []} defs={defs} />}
         {tab === "agent" && <AgentView grid={grid} sub={sub} geo={geo} />}
         {tab === "lib" && <LibraryView docs={docs} onQualified={onQualified} />}
         <div className="foot">

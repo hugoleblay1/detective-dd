@@ -30,6 +30,13 @@ export interface SectorGrid {
   subtypes: Record<string, { notation_dd: { title: string; dimensions: Dimension[] }; key_qs: { title: string; questions: KeyQuestion[] } }>;
 }
 
+/** Définition méthodologique du client (content/<client>/definitions.json) —
+ *  référentiel appliqué à la lecture des données et des critères. */
+export interface MethodDefinition { terme: string; dims: DimKey[]; definition: string }
+
+export const defsForDim = (defs: MethodDefinition[], dk: DimKey): MethodDefinition[] =>
+  defs.filter((d) => d.dims.includes(dk));
+
 /* ---------- non-applicabilité ---------- */
 const NA_RX = [
   /^\s*non applicable/i,

@@ -4,7 +4,8 @@
  * L'agent ne propose JAMAIS de note : il évalue la couverture.
  */
 import { getProvider } from "../llm";
-import { SectorGrid, DimKey, critsForNote, questionsFor, exigence } from "../grid";
+import { SectorGrid, DimKey, critsForNote, questionsFor, exigence, defsForDim, type MethodDefinition } from "../grid";
+import { loadDefinitions } from "../grid.loader";
 import { getDimContext } from "../context";
 import { listQualified } from "../library.server";
 import { libForDim, type LibraryDoc } from "../library";
@@ -12,7 +13,15 @@ import { BlockResult, DimSynthesis, type AnalyzeRequest, type AnalyzeTarget, typ
 
 export * from "./types";
 
-function blockPrompt(b: DimAnalysis, req: AnalyzeRequest, docs: string, internalSources: string[]): string {
+/* Référentiel méthodologique du client pour la dimension — prime sur toute
+   acception générique des termes (ex. « territoires défavorisés »). */
+function defsBlock(defs: MethodDefinition[]): string {
+  if (defs.length === 0) return "";
+  return `Référentiel méthodologique du client — ces définitions PRIMENT sur toute acception générique ; applique-les pour interpréter les données et les critères :
+${defs.map((d) => `### ${d.terme}\n${d.definition}`).join("\n")}\n`;
+}
+
+function blockPrompt(b: DimAnalysis, req: AnalyzeRequest, docs: string, internalSources: string[], defsText: string): string {
   return `Tu es un analyste de l'équipe Impact d'une institution de financement du développement. Tu lis et COMPRENDS les documents fournis (contexte, chiffres, engagements — pas une recherche de mots-clés). Tu ne proposes JAMAIS de note.
 Dossier: ${req.subtype}, ${req.geo}. Description: """${req.dealText.slice(0, 2500)}"""
 Documents du client:
@@ -21,7 +30,7 @@ ${docs || "(aucun document fourni)"}
 Dimension analysée: ${b.dim} — note visée ${b.note}${b.crit ? ` — critère visé : ${b.crit}` : ""}
 Exigence de la grille:
 ${b.exigence.slice(0, 1500)}
-Données de contexte officielles (${req.geo}) — chiffres réels ; si tu t'en sers, cite la valeur, l'année et la source :
+${defsText}Données de contexte officielles (${req.geo}) — chiffres réels ; si tu t'en sers, cite la valeur, l'année et la source :
 ${b.context.length ? b.context.map((c) => `- ${c.label} : ${c.value}${c.unit} (${c.year}, ${c.source})`).join("\n") : "(aucune donnée de contexte disponible)"}
 Ressources internes disponibles (renvoie le chargé d'affaires vers elles si pertinent ; n'invente PAS leur contenu) :
 ${internalSources.length ? internalSources.map((s) => `- ${s}`).join("\n") : "(aucune)"}
@@ -35,7 +44,7 @@ Réponds STRICTEMENT en JSON compact sans backticks ni texte autour:
 
 // Avis qualitatif consolidé — appel dédié, lancé APRÈS la couverture de la même
 // dimension et nourri de ses verdicts, pour rester cohérent avec le tableau.
-function synthPrompt(b: DimAnalysis, req: AnalyzeRequest, docs: string, internalSources: string[]): string {
+function synthPrompt(b: DimAnalysis, req: AnalyzeRequest, docs: string, internalSources: string[], defsText: string): string {
   const verdicts = b.result.verdicts.length
     ? b.result.verdicts.map((v) => `- [${v.statut}] ${v.id}${v.manquants.length ? ` — manque: ${v.manquants.join("; ")}` : ""}`).join("\n")
     : "(couverture non établie)";
@@ -47,7 +56,7 @@ ${docs || "(aucun document fourni)"}
 Dimension analysée: ${b.dim} — note visée ${b.note}${b.crit ? ` — critère visé : ${b.crit}` : ""}
 Exigence de la grille:
 ${b.exigence.slice(0, 1500)}
-Données de contexte officielles (${req.geo}) — chiffres réels ; si tu t'en sers, cite la valeur, l'année et la source :
+${defsText}Données de contexte officielles (${req.geo}) — chiffres réels ; si tu t'en sers, cite la valeur, l'année et la source :
 ${b.context.length ? b.context.map((c) => `- ${c.label} : ${c.value}${c.unit} (${c.year}, ${c.source})`).join("\n") : "(aucune donnée de contexte disponible)"}
 Ressources internes disponibles (pointeurs, n'invente PAS leur contenu) :
 ${internalSources.length ? internalSources.map((s) => `- ${s}`).join("\n") : "(aucune)"}
@@ -89,11 +98,13 @@ export async function analyze(grid: SectorGrid, req: AnalyzeRequest): Promise<Di
     };
   });
 
+  const definitions = loadDefinitions();
   await Promise.all(blocks.map(async (b) => {
     b.context = await getDimContext(b.dim, req.geo);
     const internalSources = libForDim(qualified, b.dim, req.geo).map((d) => `${d.title} (${d.geoName})`);
+    const defsText = defsBlock(defsForDim(definitions, b.dim));
     try {
-      const raw = await provider.complete(blockPrompt(b, req, docs, internalSources), { maxTokens: 3000 });
+      const raw = await provider.complete(blockPrompt(b, req, docs, internalSources, defsText), { maxTokens: 3000 });
       b.result = BlockResult.parse(parseLLMJson(raw));
       b.engine = "ia";
     } catch (e) {
@@ -103,7 +114,7 @@ export async function analyze(grid: SectorGrid, req: AnalyzeRequest): Promise<Di
     // Avis qualitatif : appel dédié, nourri des verdicts ci-dessus. Échoue
     // indépendamment de la couverture (n'invalide pas le tableau).
     try {
-      const raw = await provider.complete(synthPrompt(b, req, docs, internalSources), { maxTokens: 2000 });
+      const raw = await provider.complete(synthPrompt(b, req, docs, internalSources, defsText), { maxTokens: 2000 });
       b.synthesis = DimSynthesis.parse(parseLLMJson(raw));
     } catch (e) {
       b.synthesisError = e instanceof Error ? e.message : String(e);

@@ -1,4 +1,4 @@
-import { loadGrids } from "@/lib/grid.loader";
+import { loadDefinitions, loadGrids } from "@/lib/grid.loader";
 import { AppShell } from "@/components/AppShell";
 
 /**
@@ -16,5 +16,5 @@ export default function Home() {
       </div>
     );
   }
-  return <AppShell grid={grid} />;
+  return <AppShell grid={grid} defs={loadDefinitions()} />;
 }
