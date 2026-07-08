@@ -11,9 +11,11 @@ import type { ContextIndicator } from "./types";
 interface IndSpec { code: string; label: string; unit: string }
 
 const INDICATORS: Partial<Record<DimKey, IndSpec[]>> = {
+  // Atténuation : CO₂/habitant seulement — l'électricité (intensité carbone,
+  // part renouvelable) vient d'Ember via OWID, plus frais (voir owid.ts).
+  // EN.ATM.CO2E.PC est archivé ; le code actuel est la série GHG hors UTCATF.
   "Atténuation": [
-    { code: "EG.ELC.RNEW.ZS", label: "Part renouvelable de l'électricité", unit: " %" },
-    { code: "EN.ATM.CO2E.PC", label: "Émissions de CO₂ par habitant", unit: " t" },
+    { code: "EN.GHG.CO2.PC.CE.AR5", label: "Émissions de CO₂ par habitant", unit: " t éq. CO₂" },
   ],
   "Social": [
     { code: "EG.ELC.ACCS.ZS", label: "Accès à l'électricité", unit: " % pop." },
@@ -51,11 +53,13 @@ async function fetchOne(iso3: string, spec: IndSpec): Promise<ContextIndicator |
   let result: ContextIndicator | null = null;
   for (let attempt = 0; attempt < 3; attempt++) {
     try {
-      const res = await fetch(`https://api.worldbank.org/v2/country/${iso3}/indicator/${spec.code}?format=json&mrnev=1`);
+      // mrv (N dernières années, on prend la 1re non nulle) plutôt que mrnev :
+      // mrnev renvoie une erreur XML sur les codes récents (séries GHG).
+      const res = await fetch(`https://api.worldbank.org/v2/country/${iso3}/indicator/${spec.code}?format=json&mrv=15`);
       const txt = await res.text();
       if (!txt.trimStart().startsWith("[")) throw new Error("réponse non-JSON (limite de débit)");
       const data = JSON.parse(txt) as [unknown, Array<{ value: number | null; date: string }> | null];
-      const row = data?.[1]?.[0];
+      const row = data?.[1]?.find((x) => x.value !== null && x.value !== undefined);
       if (row && row.value !== null && row.value !== undefined) {
         result = {
           label: spec.label,
