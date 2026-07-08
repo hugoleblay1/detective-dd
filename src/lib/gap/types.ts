@@ -60,6 +60,9 @@ export interface DimAnalysis {
   dim: DimKey; note: Note; crit: string | null; exigence: string;
   questions: { id: string; q: string; ress: string }[];
   context: ContextIndicator[];
+  /** Documents de la bibliothèque IMP dont des passages ont nourri les prompts (RAG). */
+  library: Array<{ title: string; pages: number[] }>;
+  libraryError?: string;
   result: TBlockResult; engine: "ia" | "erreur";
   error?: string;
   synthesis: TDimSynthesis | null; synthesisError?: string;

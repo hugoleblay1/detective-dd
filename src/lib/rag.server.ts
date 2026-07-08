@@ -103,6 +103,33 @@ export async function indexLibraryDoc(doc: { id: string; file: string; path: str
   return { chunks: chunks.length, engine, note };
 }
 
+export interface LibraryPassage {
+  docId: string;
+  title: string;
+  page: number | null;
+  text: string;
+  score: number;
+}
+
+/** Passages les plus proches de la requête, restreints aux documents donnés
+ *  (le filtrage dimension × géographie est fait en amont par libForDim). */
+export async function searchLibrary(query: string, docIds: string[], k = 6): Promise<LibraryPassage[]> {
+  if (docIds.length === 0) return [];
+  await ensureSchema();
+  const v = await getEmbeddings().embedQuery(query);
+  const r = await pool.query<{ doc_id: string; title: string | null; file: string; page: number | null; text: string; score: number }>(
+    `SELECT c.doc_id, d.title, d.file, c.page, c.text,
+            1 - (c.embedding <=> $1::vector) AS score
+       FROM library_chunk c JOIN library_document d ON d.id = c.doc_id
+      WHERE c.doc_id = ANY($2)
+      ORDER BY c.embedding <=> $1::vector
+      LIMIT $3`,
+    [JSON.stringify(v), docIds, k]);
+  return r.rows.map((x) => ({
+    docId: x.doc_id, title: x.title ?? x.file, page: x.page, text: x.text, score: Number(x.score),
+  }));
+}
+
 /** Purge les documents disparus du partage (chunks supprimés en cascade).
  *  Ne purge JAMAIS sur un scan vide : un partage temporairement injoignable
  *  ne doit pas effacer les qualifications de l'IMP. */

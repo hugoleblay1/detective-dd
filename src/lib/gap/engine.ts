@@ -8,6 +8,7 @@ import { SectorGrid, DimKey, critsForNote, questionsFor, exigence, defsForDim, t
 import { loadDefinitions } from "../grid.loader";
 import { getDimContext } from "../context";
 import { listQualified } from "../library.server";
+import { searchLibrary, type LibraryPassage } from "../rag.server";
 import { libForDim, type LibraryDoc } from "../library";
 import { BlockResult, DimSynthesis, type AnalyzeRequest, type AnalyzeTarget, type DimAnalysis } from "./types";
 
@@ -21,7 +22,14 @@ function defsBlock(defs: MethodDefinition[]): string {
 ${defs.map((d) => `### ${d.terme}\n${d.definition}`).join("\n")}\n`;
 }
 
-function blockPrompt(b: DimAnalysis, req: AnalyzeRequest, docs: string, internalSources: string[], defsText: string): string {
+/* Extraits RAG de la bibliothèque IMP — contenu réel, citable (titre + page). */
+function libBlock(passages: LibraryPassage[]): string {
+  if (passages.length === 0) return "";
+  return `Extraits de la bibliothèque interne (documents qualifiés par l'équipe Impact — si tu t'en sers, cite « titre, p.X ») :
+${passages.map((p) => `- [${p.title}${p.page ? `, p.${p.page}` : ""}] ${p.text.slice(0, 700)}`).join("\n")}\n`;
+}
+
+function blockPrompt(b: DimAnalysis, req: AnalyzeRequest, docs: string, internalSources: string[], defsText: string, libText: string): string {
   return `Tu es un analyste de l'équipe Impact d'une institution de financement du développement. Tu lis et COMPRENDS les documents fournis (contexte, chiffres, engagements — pas une recherche de mots-clés). Tu ne proposes JAMAIS de note.
 Dossier: ${req.subtype}, ${req.geo}. Description: """${req.dealText.slice(0, 2500)}"""
 Documents du client:
@@ -32,7 +40,7 @@ Exigence de la grille:
 ${b.exigence.slice(0, 1500)}
 ${defsText}Données de contexte officielles (${req.geo}) — chiffres réels ; si tu t'en sers, cite la valeur, l'année et la source :
 ${b.context.length ? b.context.map((c) => `- ${c.label} : ${c.value}${c.unit} (${c.year}, ${c.source})`).join("\n") : "(aucune donnée de contexte disponible)"}
-Ressources internes disponibles (renvoie le chargé d'affaires vers elles si pertinent ; n'invente PAS leur contenu) :
+${libText}Ressources internes disponibles (renvoie le chargé d'affaires vers elles si pertinent ; n'invente PAS leur contenu au-delà des extraits ci-dessus) :
 ${internalSources.length ? internalSources.map((s) => `- ${s}`).join("\n") : "(aucune)"}
 Questions:
 ${b.questions.map((x) => `- [${x.id}] ${x.q.split("\n").join(" ")}${x.ress ? ` (docs attendus: ${x.ress})` : ""}`).join("\n")}
@@ -44,7 +52,7 @@ Réponds STRICTEMENT en JSON compact sans backticks ni texte autour:
 
 // Avis qualitatif consolidé — appel dédié, lancé APRÈS la couverture de la même
 // dimension et nourri de ses verdicts, pour rester cohérent avec le tableau.
-function synthPrompt(b: DimAnalysis, req: AnalyzeRequest, docs: string, internalSources: string[], defsText: string): string {
+function synthPrompt(b: DimAnalysis, req: AnalyzeRequest, docs: string, internalSources: string[], defsText: string, libText: string): string {
   const verdicts = b.result.verdicts.length
     ? b.result.verdicts.map((v) => `- [${v.statut}] ${v.id}${v.manquants.length ? ` — manque: ${v.manquants.join("; ")}` : ""}`).join("\n")
     : "(couverture non établie)";
@@ -58,7 +66,7 @@ Exigence de la grille:
 ${b.exigence.slice(0, 1500)}
 ${defsText}Données de contexte officielles (${req.geo}) — chiffres réels ; si tu t'en sers, cite la valeur, l'année et la source :
 ${b.context.length ? b.context.map((c) => `- ${c.label} : ${c.value}${c.unit} (${c.year}, ${c.source})`).join("\n") : "(aucune donnée de contexte disponible)"}
-Ressources internes disponibles (pointeurs, n'invente PAS leur contenu) :
+${libText}Ressources internes disponibles (pointeurs, n'invente PAS leur contenu au-delà des extraits ci-dessus) :
 ${internalSources.length ? internalSources.map((s) => `- ${s}`).join("\n") : "(aucune)"}
 Couverture déjà établie question par question (appuie-toi dessus pour rester cohérent) :
 ${verdicts}
@@ -93,7 +101,7 @@ export async function analyze(grid: SectorGrid, req: AnalyzeRequest): Promise<Di
     return {
       dim: dk, note: t.note, crit,
       exigence: exigence(grid, req.subtype, dk, t.note, crit),
-      questions, context: [], result: { verdicts: [], a_redemander: [] }, engine: "ia",
+      questions, context: [], library: [], result: { verdicts: [], a_redemander: [] }, engine: "ia",
       synthesis: null,
     };
   });
@@ -101,10 +109,31 @@ export async function analyze(grid: SectorGrid, req: AnalyzeRequest): Promise<Di
   const definitions = loadDefinitions();
   await Promise.all(blocks.map(async (b) => {
     b.context = await getDimContext(b.dim, req.geo);
-    const internalSources = libForDim(qualified, b.dim, req.geo).map((d) => `${d.title} (${d.geoName})`);
+    const libDocs = libForDim(qualified, b.dim, req.geo);
+    const internalSources = libDocs.map((d) => `${d.title} (${d.geoName})`);
     const defsText = defsBlock(defsForDim(definitions, b.dim));
+
+    // RAG : passages de la bibliothèque IMP pour cette dimension. Échec →
+    // absence signalée (libraryError), l'analyse continue avec les pointeurs.
+    let passages: LibraryPassage[] = [];
     try {
-      const raw = await provider.complete(blockPrompt(b, req, docs, internalSources, defsText), { maxTokens: 3000 });
+      passages = await searchLibrary(
+        `${b.dim}${b.crit ? ` — critère ${b.crit}` : ""} — ${req.subtype}, ${req.geo}. ${b.exigence.slice(0, 600)}`,
+        libDocs.map((d) => d.id));
+    } catch (e) {
+      b.libraryError = e instanceof Error ? e.message : String(e);
+    }
+    const byTitle = new Map<string, number[]>();
+    for (const p of passages) {
+      const pages = byTitle.get(p.title) ?? [];
+      if (p.page !== null && !pages.includes(p.page)) pages.push(p.page);
+      byTitle.set(p.title, pages);
+    }
+    b.library = [...byTitle.entries()].map(([title, pages]) => ({ title, pages: pages.sort((a, z) => a - z) }));
+    const libText = libBlock(passages);
+
+    try {
+      const raw = await provider.complete(blockPrompt(b, req, docs, internalSources, defsText, libText), { maxTokens: 3000 });
       b.result = BlockResult.parse(parseLLMJson(raw));
       b.engine = "ia";
     } catch (e) {
@@ -114,7 +143,7 @@ export async function analyze(grid: SectorGrid, req: AnalyzeRequest): Promise<Di
     // Avis qualitatif : appel dédié, nourri des verdicts ci-dessus. Échoue
     // indépendamment de la couverture (n'invalide pas le tableau).
     try {
-      const raw = await provider.complete(synthPrompt(b, req, docs, internalSources, defsText), { maxTokens: 2000 });
+      const raw = await provider.complete(synthPrompt(b, req, docs, internalSources, defsText, libText), { maxTokens: 2000 });
       b.synthesis = DimSynthesis.parse(parseLLMJson(raw));
     } catch (e) {
       b.synthesisError = e instanceof Error ? e.message : String(e);

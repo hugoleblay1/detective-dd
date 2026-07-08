@@ -108,6 +108,17 @@ export function GapResults({ grid, sub, geo, analyses }: { grid: SectorGrid; sub
                 </div>
               </div>
             )}
+            {a.library.length > 0 && (
+              <div className="hint" style={{ margin: "8px 15px 0" }}>
+                📚 Bibliothèque IMP mobilisée : {a.library.map((l) =>
+                  `${l.title}${l.pages.length ? ` (p.${l.pages.join(", ")})` : ""}`).join(" · ")}
+              </div>
+            )}
+            {a.libraryError && (
+              <div className="hint" style={{ margin: "8px 15px 0", color: "var(--ko)" }}>
+                Recherche bibliothèque IMP en échec — extraits non injectés ({a.libraryError.slice(0, 120)})
+              </div>
+            )}
             {a.engine === "erreur" ? (
               <div className="gap-error">
                 <b>Analyse indisponible pour cette dimension.</b> {a.error ?? "Échec du moteur."}
