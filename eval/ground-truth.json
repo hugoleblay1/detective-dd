@@ -1,0 +1,72 @@
+{
+  "sector": "Numérique",
+  "deals": [
+    {
+      "id": "A", "dir": "deal-A-voltagrid-datacentre-kenya",
+      "subtype": "Data Centre", "geo": "Kenya",
+      "deal_text": "Construction du campus data center Nairobi One (12 MW IT) à Athi River, Kenya, par VoltaGrid Data Centres. Prêt senior 28 MUSD.",
+      "cases": [
+        { "dim": "Atténuation", "note": "+2", "expected": "repondu" },
+        { "dim": "Atténuation", "note": "+3", "expected": "repondu" },
+        { "dim": "Adaptation",  "note": "+2", "expected": "repondu" },
+        { "dim": "Adaptation",  "note": "+3", "expected": "repondu" },
+        { "dim": "Social", "crit": "Emplois", "note": "+2", "expected": "repondu" },
+        { "dim": "Social", "crit": "Chaînes de valeur", "note": "+2", "expected": "repondu" }
+      ]
+    },
+    {
+      "id": "B", "dir": "deal-B-sahelia-mobile-senegal",
+      "subtype": "MNO", "geo": "Sénégal",
+      "deal_text": "Prêt corporate 35 MUSD à Sahelia Mobile, 3e opérateur mobile du Sénégal : refinancement et extension du cœur de réseau.",
+      "cases": [
+        { "dim": "Atténuation", "note": "+2", "expected": "manquant" },
+        { "dim": "Adaptation",  "note": "+2", "expected": "manquant" },
+        { "dim": "Social", "crit": "Accès",   "note": "+2", "expected": "manquant" },
+        { "dim": "Social", "crit": "Emplois", "note": "+2", "expected": "manquant" }
+      ],
+      "assertions": [
+        { "type": "no_status_anywhere", "statuses": ["repondu"], "hint": "STRICTNESS : le deal B ne contient AUCUNE substance DD — tout 'repondu' vient du marketing (« avenir durable », « connecter les communautés »)." },
+        { "type": "max_status_share", "status": "partiel", "max": 0.15, "hint": "STRICTNESS : trop de 'partiel' sur le deal B — l'agent confond communication et éléments probants." }
+      ]
+    },
+    {
+      "id": "C", "dir": "deal-C-atlas-towers-maroc",
+      "subtype": "Towers", "geo": "Maroc",
+      "deal_text": "Prêt senior 45 MUSD à Atlas Tower Partners (2 340 tours au Maroc) : 520 nouvelles tours et solarisation 2026-2028.",
+      "cases": [
+        { "dim": "Atténuation", "note": "+2", "expected": "partiel" },
+        { "dim": "Adaptation",  "note": "+2", "expected": "partiel" },
+        { "dim": "Social", "crit": "Accès",      "note": "+2", "expected": "partiel" },
+        { "dim": "Social", "crit": "Territoires","note": "+2", "expected": "partiel" },
+        { "dim": "Social", "crit": "Emplois",    "note": "+2", "expected": "manquant" }
+      ]
+    },
+    {
+      "id": "D", "dir": "deal-D-petracloud-datacentre-jordanie",
+      "subtype": "Data Centre", "geo": "Jordanie",
+      "deal_text": "Prêt senior 23 MUSD à PetraCloud pour le premier data center de colocation de Jordanie (8 MW IT, Amman).",
+      "cases": [
+        { "dim": "Adaptation",  "note": "+2", "expected": "repondu" },
+        { "dim": "Adaptation",  "note": "+3", "expected": "manquant",
+          "hint": "CONDITIONS COMPOSÉES : les 31% passent le seuil MAIS l'accompagnement est explicitement absent — le +3 doit échouer sur sa seconde condition." },
+        { "dim": "Atténuation", "note": "+2", "expected": "partiel" },
+        { "dim": "Social", "crit": "Emplois", "note": "+2", "expected": "manquant" }
+      ]
+    },
+    {
+      "id": "E", "dir": "deal-E-rift-towers-cotedivoire",
+      "subtype": "Towers", "geo": "Côte d'Ivoire",
+      "deal_text": "Prêt senior 30 MUSD à Rift Towers CI : programme « Connectivité pour tous », 240 nouvelles tours en zones sous-couvertes.",
+      "cases": [
+        { "dim": "Social", "crit": "Accès",       "note": "+2", "expected": "repondu" },
+        { "dim": "Social", "crit": "Accès",       "note": "+3", "expected": "repondu" },
+        { "dim": "Social", "crit": "Territoires", "note": "+2", "expected": "repondu" },
+        { "dim": "Social", "crit": "Chaînes de valeur", "note": "+2", "expected": "partiel",
+          "assert_mentions": "50", 
+          "hint": "SEUILS : 30% documentés < seuil de 50% — l'agent doit relever l'écart au seuil, pas seulement l'existence de la donnée." },
+        { "dim": "Social", "crit": "Emplois",     "note": "+2", "expected": "partiel" },
+        { "dim": "Atténuation", "note": "+2", "expected": "manquant" }
+      ]
+    }
+  ]
+}

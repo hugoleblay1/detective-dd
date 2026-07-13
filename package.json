@@ -10,7 +10,8 @@
     "indexer": "tsx --env-file=.env scripts/indexer/index-share.ts",
     "parity": "tsx scripts/parity-audit.ts",
     "db:seed": "tsx --env-file=.env scripts/db/seed.ts",
-    "test": "tsx --test tests/*.test.ts"
+    "test": "tsx --test tests/*.test.ts",
+    "eval": "tsx eval/run-eval.ts"
   },
   "dependencies": {
     "@huggingface/transformers": "^4.2.0",
