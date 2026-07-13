@@ -12,7 +12,7 @@
  */
 export interface LLMProvider {
   /** Envoie un prompt, retourne le texte brut de la réponse. */
-  complete(prompt: string, opts?: { maxTokens?: number }): Promise<string>;
+  complete(prompt: string, opts?: { maxTokens?: number; temperature?: number }): Promise<string>;
   /**
    * Lecture native d'un PDF (pages rendues en texte + image : tableaux et
    * graphiques sont réellement lus). Absent si le fournisseur ne le supporte
@@ -43,7 +43,7 @@ class AnthropicProvider implements LLMProvider {
   ) {
     if (!this.apiKey) throw new Error("ANTHROPIC_API_KEY manquant (.env)");
   }
-  async complete(prompt: string, opts?: { maxTokens?: number }): Promise<string> {
+  async complete(prompt: string, opts?: { maxTokens?: number; temperature?: number }): Promise<string> {
     const res = await fetch("https://api.anthropic.com/v1/messages", {
       method: "POST",
       headers: {
@@ -54,6 +54,7 @@ class AnthropicProvider implements LLMProvider {
       body: JSON.stringify({
         model: this.model,
         max_tokens: opts?.maxTokens ?? 2000,
+        ...(opts?.temperature !== undefined ? { temperature: opts.temperature } : {}),
         messages: [{ role: "user", content: prompt }],
       }),
     });

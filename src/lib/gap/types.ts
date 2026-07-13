@@ -58,12 +58,14 @@ export interface AnalyzeRequest {
 }
 export interface DimAnalysis {
   dim: DimKey; note: Note; crit: string | null; exigence: string;
-  questions: { id: string; q: string; ress: string }[];
+  questions: { id: string; q: string; ress: string; comm: string }[];
   context: ContextIndicator[];
   /** Documents de la bibliothèque IMP dont des passages ont nourri les prompts (RAG). */
   library: Array<{ title: string; pages: number[] }>;
   libraryError?: string;
   result: TBlockResult; engine: "ia" | "erreur";
   error?: string;
+  /** Citations « » introuvables verbatim dans les docs client, supprimées après retry (règle 5). */
+  citationsRejetees?: number;
   synthesis: TDimSynthesis | null; synthesisError?: string;
 }
