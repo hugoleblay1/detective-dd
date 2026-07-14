@@ -15,6 +15,6 @@ export function scoreStyle(note: string): React.CSSProperties {
   return st;
 }
 
-export function ScoreTag({ note, className = "", style }: { note: string; className?: string; style?: React.CSSProperties }) {
-  return <span className={className} style={{ ...scoreStyle(note), ...style }}>{note}</span>;
+export function ScoreTag({ note, className = "", style, onClick }: { note: string; className?: string; style?: React.CSSProperties; onClick?: () => void }) {
+  return <span className={className} style={{ ...scoreStyle(note), ...style }} onClick={onClick}>{note}</span>;
 }

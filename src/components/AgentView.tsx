@@ -12,6 +12,9 @@ export function AgentView({ grid, sub, geo }: { grid: SectorGrid; sub: string; g
   const [busy, setBusy] = useState(false);
   const [analyses, setAnalyses] = useState<DimAnalysis[] | null>(null);
   const [error, setError] = useState<string | null>(null);
+  // Une fois l'analyse rendue, le formulaire se replie en une ligne de résumé
+  // pour que les résultats arrivent en haut de l'écran.
+  const [formOpen, setFormOpen] = useState(true);
 
   function setNote(dk: DimKey, note: NoteT | null) {
     setTargets((prev) => {
@@ -27,6 +30,8 @@ export function AgentView({ grid, sub, geo }: { grid: SectorGrid; sub: string; g
   }
 
   const hasTargets = Object.keys(targets).length > 0;
+  const targetSummary = (Object.entries(targets) as [DimKey, { note: NoteT; crit: string | null }][])
+    .map(([dk, t]) => `${dk} ${t.note}${t.crit ? ` (${t.crit})` : ""}`).join(" · ");
 
   async function analyze() {
     if (!hasTargets || busy) return;
@@ -39,6 +44,7 @@ export function AgentView({ grid, sub, geo }: { grid: SectorGrid; sub: string; g
       const data = await res.json();
       if (!res.ok) throw new Error(typeof data?.error === "string" ? data.error : "Échec de l'analyse (" + res.status + ").");
       setAnalyses(data.analyses as DimAnalysis[]);
+      setFormOpen(false);
     } catch (e) {
       setError(e instanceof Error ? e.message : String(e));
     } finally {
@@ -49,27 +55,44 @@ export function AgentView({ grid, sub, geo }: { grid: SectorGrid; sub: string; g
   return (
     <div className="content">
       <div className="card agent">
-        <div className="step">
-          <div className="sh"><span className="num">1</span><span className="t">Dossier &amp; notes visées</span><span className="s">{sub} · {geo}</span></div>
-          <textarea value={dealText} onChange={(e) => setDealText(e.target.value)}
-            placeholder="Décrivez le dossier : client, projet, business model, éléments DD connus…" />
-          <TargetsEditor grid={grid} sub={sub} targets={targets} onSetNote={setNote} onSetCrit={setCrit} />
-        </div>
-        <div className="step">
-          <div className="sh"><span className="num">2</span><span className="t">Documents du client</span><span className="s">rapports ESG, business plan, certifications…</span></div>
-          <DocsEditor docs={docs} onAdd={(d) => setDocs((prev) => [...prev, d])} onRemove={(i) => setDocs((prev) => prev.filter((_, k) => k !== i))} />
-        </div>
-        <div className="step">
-          <div className="sh"><span className="num">3</span><span className="t">Analyse d&apos;écart</span><span className="s">critères exigés · questions couvertes · informations à redemander</span></div>
-          <div className="arow">
-            <span className="hint">L&apos;agent ne propose jamais de note : il vérifie la couverture pour la note que <b>vous</b> visez.</span>
-            <button className="btn" onClick={analyze} disabled={!hasTargets || busy}>{busy ? "Analyse en cours…" : "Analyser le dossier"}</button>
+        {!formOpen && analyses ? (
+          <div className="deal-summary">
+            <div className="ds-main">
+              <b>{sub} · {geo}</b>
+              <span>{targetSummary || "aucune note visée"}</span>
+              <span>{docs.length} document{docs.length > 1 ? "s" : ""} client</span>
+              {dealText.trim() && <span className="ds-desc">« {dealText.trim().slice(0, 90)}{dealText.trim().length > 90 ? "…" : ""} »</span>}
+            </div>
+            <div className="ds-actions">
+              <button className="btn ghost small" onClick={() => setFormOpen(true)}>Modifier le dossier</button>
+              <button className="btn small" onClick={analyze} disabled={busy}>{busy ? "Analyse en cours…" : "Relancer l'analyse"}</button>
+            </div>
           </div>
-          {error && <div className="gap-error" style={{ margin: "12px 0 0" }}><b>Erreur :</b> {error}</div>}
-          {busy && <div className="placeholder">Analyse de la couverture, dimension par dimension…</div>}
-          {!busy && !error && !analyses && <div className="placeholder">Sélectionnez au moins une note visée, ajoutez vos éléments, puis lancez l&apos;analyse.</div>}
-          {!busy && analyses && (analyses.length ? <GapResults grid={grid} sub={sub} geo={geo} analyses={analyses} /> : <div className="placeholder">Aucune dimension analysée.</div>)}
-        </div>
+        ) : (
+          <>
+            <div className="step">
+              <div className="sh"><span className="num">1</span><span className="t">Dossier &amp; notes visées</span><span className="s">{sub} · {geo}</span></div>
+              <textarea value={dealText} onChange={(e) => setDealText(e.target.value)}
+                placeholder="Décrivez le dossier : client, projet, business model, éléments DD connus…" />
+              <TargetsEditor grid={grid} sub={sub} targets={targets} onSetNote={setNote} onSetCrit={setCrit} />
+            </div>
+            <div className="step">
+              <div className="sh"><span className="num">2</span><span className="t">Documents du client</span><span className="s">rapports ESG, business plan, certifications…</span></div>
+              <DocsEditor docs={docs} onAdd={(d) => setDocs((prev) => [...prev, d])} onRemove={(i) => setDocs((prev) => prev.filter((_, k) => k !== i))} />
+            </div>
+            <div className="step">
+              <div className="sh"><span className="num">3</span><span className="t">Analyse d&apos;écart</span><span className="s">critères exigés · questions couvertes · informations à redemander</span></div>
+              <div className="arow">
+                <span className="hint">L&apos;agent ne propose jamais de note : il vérifie la couverture pour la note que <b>vous</b> visez.</span>
+                <button className="btn" onClick={analyze} disabled={!hasTargets || busy}>{busy ? "Analyse en cours…" : "Analyser le dossier"}</button>
+              </div>
+            </div>
+          </>
+        )}
+        {error && <div className="gap-error" style={{ margin: "12px 0 0" }}><b>Erreur :</b> {error}</div>}
+        {busy && <div className="placeholder">Analyse de la couverture, dimension par dimension…</div>}
+        {!busy && !error && !analyses && formOpen && <div className="placeholder">Sélectionnez au moins une note visée, ajoutez vos éléments, puis lancez l&apos;analyse.</div>}
+        {!busy && analyses && (analyses.length ? <GapResults grid={grid} sub={sub} geo={geo} analyses={analyses} /> : <div className="placeholder">Aucune dimension analysée.</div>)}
       </div>
     </div>
   );

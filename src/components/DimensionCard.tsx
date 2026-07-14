@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { critExcluded, defsForDim, dimKeyOf, naList, singleNoteCrits, type Dimension, type MethodDefinition, type SectorGrid } from "@/lib/grid";
+import { critExcluded, defsForDim, dimKeyOf, naList, questionsFor, singleNoteCrits, type Dimension, type MethodDefinition, type Note, type SectorGrid } from "@/lib/grid";
 import type { LibraryDoc } from "@/lib/library";
 import { ScoreTag } from "./ScoreTag";
 import { CriterionRow } from "./CriterionRow";
@@ -18,6 +18,9 @@ export function DimensionCard({ grid, subtype, geo, dim, defaultOpen, libDocs, d
   grid: SectorGrid; subtype: string; geo: string; dim: Dimension; defaultOpen: boolean; libDocs: LibraryDoc[]; defs: MethodDefinition[];
 }) {
   const [open, setOpen] = useState(defaultOpen);
+  // Note visée : filtre les critères et leurs questions sur ce niveau (+2 = la
+  // note qui qualifie, par défaut). null = tous les niveaux, comme avant.
+  const [note, setNote] = useState<Note | null>(dim.scale.includes("+2") ? "+2" : null);
   const dk = dimKeyOf(dim.dimension);
   const dimDefs = dk ? defsForDim(defs, dk) : [];
   const naL = dk ? naList(grid, subtype, dk) : [];
@@ -74,13 +77,24 @@ export function DimensionCard({ grid, subtype, geo, dim, defaultOpen, libDocs, d
             </div>
           )}
           {dim.criteria.length > 0 && (
-            <div className="scale">
-              {dim.scale.map((s) => (
-                <ScoreTag key={s} note={s} className="sbox" style={{ minWidth: 34, fontSize: 13, padding: "5px 0" }} />
-              ))}
+            <div className="scale-pick">
+              <div className="scale" style={{ margin: 0 }}>
+                {dim.scale.map((s) => (
+                  <ScoreTag key={s} note={s} className={"sbox pickable" + (note === s ? " picked" : "")}
+                    style={{ minWidth: 34, fontSize: 13, padding: "5px 0", ...(note && note !== s ? { opacity: 0.35 } : {}) }}
+                    onClick={() => setNote(note === (s as Note) ? null : (s as Note))} />
+                ))}
+              </div>
+              <span className="hint">
+                {note ? <>note visée <b>{note}</b> — critères et questions filtrés sur ce niveau (cliquer à nouveau pour tout voir)</>
+                  : "cliquez une note pour filtrer les critères et leurs questions"}
+              </span>
             </div>
           )}
-          {visibleCrits.map((cr) => <CriterionRow key={cr.criterion} cr={cr} />)}
+          {visibleCrits.map((cr) => (
+            <CriterionRow key={cr.criterion} cr={cr} note={note}
+              questions={dk && note ? questionsFor(grid, subtype, dk, cr.criterion, note) : []} />
+          ))}
           {dim.criteria.length === 0 && <div className="esg-note">Dimension renvoyée à l&apos;analyse ESG pour ce secteur.</div>}
           <ContextLinks dk={dk} geo={geo} libDocs={libDocs} />
         </div>

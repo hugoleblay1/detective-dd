@@ -1,7 +1,6 @@
 import type { MethodDefinition, SectorGrid } from "@/lib/grid";
 import type { LibraryDoc } from "@/lib/library";
 import { DimensionCard } from "./DimensionCard";
-import { KeyQuestions } from "./KeyQuestions";
 import { ScoreTag } from "./ScoreTag";
 
 const LEGEND: Array<[string, string]> = [
@@ -25,7 +24,6 @@ export function BrowseView({ grid, sub, geo, libDocs, defs }: { grid: SectorGrid
       {dims.map((d, i) => (
         <DimensionCard key={`${sub}:${d.dimension}`} grid={grid} subtype={sub} geo={geo} dim={d} defaultOpen={i === 3} libDocs={libDocs} defs={defs} />
       ))}
-      <KeyQuestions grid={grid} subtype={sub} />
     </div>
   );
 }
