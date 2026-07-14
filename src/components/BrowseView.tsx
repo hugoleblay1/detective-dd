@@ -21,8 +21,8 @@ export function BrowseView({ grid, sub, geo, libDocs, defs }: { grid: SectorGrid
           </div>
         ))}
       </div>
-      {dims.map((d, i) => (
-        <DimensionCard key={`${sub}:${d.dimension}`} grid={grid} subtype={sub} geo={geo} dim={d} defaultOpen={i === 3} libDocs={libDocs} defs={defs} />
+      {dims.map((d) => (
+        <DimensionCard key={`${sub}:${d.dimension}`} grid={grid} subtype={sub} geo={geo} dim={d} libDocs={libDocs} defs={defs} />
       ))}
     </div>
   );

@@ -4,6 +4,7 @@
  * motifs sont fusionnées, le reste est laissé en texte brut (échappé par React).
  */
 import React from "react";
+import type { MethodDefinition } from "@/lib/grid";
 
 const HL_PATTERNS: RegExp[] = [
   /(?:≥|≤|>|<)?\s*\d+(?:[.,]\d+)?\s*%/g,
@@ -74,5 +75,53 @@ export function highlight(input: string | null | undefined): React.ReactNode {
     i = e;
   }
   if (i < text.length) out.push(text.slice(i));
+  return out;
+}
+
+/* Occurrences d'un terme défini : pluriel final souple sur chaque mot
+   (« Territoires défavorisés » matche « territoire défavorisé »). */
+function defTermRegex(terme: string): RegExp {
+  const flex = terme.trim()
+    .replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+    .split(/\s+/).map((w) => w.replace(/s$/i, "") + "s?").join("\\s+");
+  return new RegExp(flex, "gi");
+}
+
+/**
+ * Comme `highlight`, mais les termes du référentiel méthodologique deviennent
+ * cliquables (la définition prime sur l'acception générique — règle métier) :
+ * le clic remonte la définition via `onTerm`, l'appelant décide de l'affichage.
+ */
+export function highlightDefs(input: string | null | undefined, defs: MethodDefinition[], onTerm: (d: MethodDefinition) => void): React.ReactNode {
+  const text = input ?? "";
+  if (!text || defs.length === 0) return highlight(text);
+  const ranges: Array<[number, number, MethodDefinition]> = [];
+  for (const d of defs) {
+    const re = defTermRegex(d.terme);
+    let m: RegExpExecArray | null;
+    while ((m = re.exec(text)) !== null) {
+      if (m[0].length === 0) { re.lastIndex++; continue; }
+      ranges.push([m.index, m.index + m[0].length, d]);
+    }
+  }
+  if (!ranges.length) return highlight(text);
+  ranges.sort((a, b) => a[0] - b[0] || b[1] - a[1]);
+  const kept: typeof ranges = [];
+  for (const r of ranges) {
+    const last = kept[kept.length - 1];
+    if (!last || r[0] >= last[1]) kept.push(r);
+  }
+  const out: React.ReactNode[] = [];
+  let i = 0, k = 0;
+  for (const [s, e, d] of kept) {
+    if (s > i) out.push(<React.Fragment key={k++}>{highlight(text.slice(i, s))}</React.Fragment>);
+    out.push(
+      <span key={k++} className="defterm" title="Voir la définition du référentiel"
+        onClick={(ev) => { ev.stopPropagation(); onTerm(d); }}>
+        {text.slice(s, e)}
+      </span>);
+    i = e;
+  }
+  if (i < text.length) out.push(<React.Fragment key={k++}>{highlight(text.slice(i))}</React.Fragment>);
   return out;
 }

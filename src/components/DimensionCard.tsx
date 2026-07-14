@@ -4,7 +4,7 @@ import type { LibraryDoc } from "@/lib/library";
 import { ScoreTag } from "./ScoreTag";
 import { CriterionRow } from "./CriterionRow";
 import { ContextLinks } from "./ContextLinks";
-import { highlight } from "./highlight";
+import { highlightDefs } from "./highlight";
 
 function pillClass(p: string) {
   const s = (p || "").toLowerCase();
@@ -14,13 +14,15 @@ function pillClass(p: string) {
   return "pill-planete";
 }
 
-export function DimensionCard({ grid, subtype, geo, dim, defaultOpen, libDocs, defs }: {
-  grid: SectorGrid; subtype: string; geo: string; dim: Dimension; defaultOpen: boolean; libDocs: LibraryDoc[]; defs: MethodDefinition[];
+export function DimensionCard({ grid, subtype, geo, dim, libDocs, defs }: {
+  grid: SectorGrid; subtype: string; geo: string; dim: Dimension; libDocs: LibraryDoc[]; defs: MethodDefinition[];
 }) {
-  const [open, setOpen] = useState(defaultOpen);
+  const [open, setOpen] = useState(false);
   // Note visée : filtre les critères et leurs questions sur ce niveau (+2 = la
-  // note qui qualifie, par défaut). null = tous les niveaux, comme avant.
+  // note qui qualifie, par défaut). null = tous les niveaux.
   const [note, setNote] = useState<Note | null>(dim.scale.includes("+2") ? "+2" : null);
+  // Définition du référentiel ouverte en modale (clic sur un terme souligné).
+  const [defOpen, setDefOpen] = useState<MethodDefinition | null>(null);
   const dk = dimKeyOf(dim.dimension);
   const dimDefs = dk ? defsForDim(defs, dk) : [];
   const naL = dk ? naList(grid, subtype, dk) : [];
@@ -28,6 +30,7 @@ export function DimensionCard({ grid, subtype, geo, dim, defaultOpen, libDocs, d
   const visibleCrits = dim.criteria.filter((c) => !critExcluded(c));
   const sncByNote = new Map<string, string[]>();
   for (const x of snc) sncByNote.set(x.note, [...(sncByNote.get(x.note) ?? []), x.crit]);
+  const onDef = (d: MethodDefinition) => setDefOpen(d);
   return (
     <div className={`card dim${open ? " open" : ""}`}>
       <div className="dim-head" onClick={() => setOpen((o) => !o)}>
@@ -37,18 +40,12 @@ export function DimensionCard({ grid, subtype, geo, dim, defaultOpen, libDocs, d
       </div>
       {open && (
         <div className="dim-body">
-          {dim.prerequisite && (
-            <div className="prereq">
-              <span className="ptag">PRÉREQUIS +2/+3</span>
-              <span className="ptxt">{highlight(dim.prerequisite)}</span>
-            </div>
-          )}
           {(naL.length > 0 || snc.length > 0) && (
             <div className="na-note">
               {naL.length > 0 && (
                 <>
                   <span className="t">Critères non mobilisables — {subtype}</span>
-                  {naL.map((x) => <span key={x.crit} className="item"><b>{x.crit}</b> — {highlight(x.expl)}</span>)}
+                  {naL.map((x) => <span key={x.crit} className="item"><b>{x.crit}</b> — {highlightDefs(x.expl, dimDefs, onDef)}</span>)}
                 </>
               )}
               {snc.length > 0 && (
@@ -65,17 +62,7 @@ export function DimensionCard({ grid, subtype, geo, dim, defaultOpen, libDocs, d
               )}
             </div>
           )}
-          {dim.objective && <div className="obj">{highlight(dim.objective)}</div>}
-          {dimDefs.length > 0 && (
-            <div className="na-note" style={{ background: "#f4f6fb", borderColor: "#c9d4ea" }}>
-              <span className="t">Définitions méthodologiques — référentiel appliqué à l&apos;analyse</span>
-              {dimDefs.map((d) => (
-                <span key={d.terme} className="item" style={{ whiteSpace: "pre-line" }}>
-                  <b>{d.terme}</b> — {d.definition}
-                </span>
-              ))}
-            </div>
-          )}
+          {dim.objective && <div className="obj">{highlightDefs(dim.objective, dimDefs, onDef)}</div>}
           {dim.criteria.length > 0 && (
             <div className="scale-pick">
               <div className="scale" style={{ margin: 0 }}>
@@ -93,10 +80,24 @@ export function DimensionCard({ grid, subtype, geo, dim, defaultOpen, libDocs, d
           )}
           {visibleCrits.map((cr) => (
             <CriterionRow key={cr.criterion} cr={cr} note={note}
-              questions={dk && note ? questionsFor(grid, subtype, dk, cr.criterion, note) : []} />
+              questions={dk && note ? questionsFor(grid, subtype, dk, cr.criterion, note) : []}
+              prerequisite={dim.prerequisite} defs={dimDefs} onDef={onDef} />
           ))}
           {dim.criteria.length === 0 && <div className="esg-note">Dimension renvoyée à l&apos;analyse ESG pour ce secteur.</div>}
           <ContextLinks dk={dk} geo={geo} libDocs={libDocs} />
+        </div>
+      )}
+
+      {defOpen && (
+        <div className="modal-bg show" onClick={(e) => { if (e.target === e.currentTarget) setDefOpen(null); }}>
+          <div className="modal defmodal">
+            <h3>{defOpen.terme}</h3>
+            <div className="defbody">{defOpen.definition}</div>
+            <div className="src" style={{ marginTop: 10 }}>Référentiel méthodologique du client — cette définition prime sur l&apos;acception générique.</div>
+            <div className="mrow">
+              <button className="btn small" onClick={() => setDefOpen(null)}>Fermer</button>
+            </div>
+          </div>
         </div>
       )}
     </div>
