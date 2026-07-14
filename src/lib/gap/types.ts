@@ -63,6 +63,8 @@ export interface DimAnalysis {
   /** Documents de la bibliothèque IMP dont des passages ont nourri les prompts (RAG). */
   library: Array<{ title: string; pages: number[] }>;
   libraryError?: string;
+  /** Docs qualifiés pour la dimension mais sans passage indexé — pas encore lisibles par l'IA. */
+  libraryNotIndexed?: string[];
   result: TBlockResult; engine: "ia" | "erreur";
   error?: string;
   /** Citations « » introuvables verbatim dans les docs client, supprimées après retry (règle 5). */

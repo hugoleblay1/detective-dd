@@ -114,6 +114,11 @@ export function GapResults({ grid, sub, geo, analyses }: { grid: SectorGrid; sub
                   `${l.title}${l.pages.length ? ` (p.${l.pages.join(", ")})` : ""}`).join(" · ")}
               </div>
             )}
+            {a.libraryNotIndexed && a.libraryNotIndexed.length > 0 && (
+              <div className="hint" style={{ margin: "8px 15px 0", color: "#8a5a00" }}>
+                ⏳ {a.libraryNotIndexed.length} document(s) de la bibliothèque pas encore lisible(s) par l&apos;IA (indexation requise) : {a.libraryNotIndexed.join(" · ")}
+              </div>
+            )}
             {a.libraryError && (
               <div className="hint" style={{ margin: "8px 15px 0", color: "var(--ko)" }}>
                 Recherche bibliothèque IMP en échec — extraits non injectés ({a.libraryError.slice(0, 120)})

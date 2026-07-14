@@ -112,19 +112,25 @@ export interface LibraryPassage {
 }
 
 /** Passages les plus proches de la requête, restreints aux documents donnés
- *  (le filtrage dimension × géographie est fait en amont par libForDim). */
+ *  (le filtrage dimension × géographie est fait en amont par libForDim).
+ *  Quota par document : un document volumineux ne doit pas saturer le top-k et
+ *  évincer les autres documents qualifiés (chacun a été jugé pertinent par l'IMP). */
 export async function searchLibrary(query: string, docIds: string[], k = 6): Promise<LibraryPassage[]> {
   if (docIds.length === 0) return [];
   await ensureSchema();
   const v = await getEmbeddings().embedQuery(query);
+  const perDoc = Math.max(2, Math.ceil(k / docIds.length));
   const r = await pool.query<{ doc_id: string; title: string | null; file: string; page: number | null; text: string; score: number }>(
-    `SELECT c.doc_id, d.title, d.file, c.page, c.text,
-            1 - (c.embedding <=> $1::vector) AS score
-       FROM library_chunk c JOIN library_document d ON d.id = c.doc_id
-      WHERE c.doc_id = ANY($2)
-      ORDER BY c.embedding <=> $1::vector
+    `SELECT doc_id, title, file, page, text, score FROM (
+       SELECT c.doc_id, d.title, d.file, c.page, c.text,
+              1 - (c.embedding <=> $1::vector) AS score,
+              row_number() OVER (PARTITION BY c.doc_id ORDER BY c.embedding <=> $1::vector) AS rn
+         FROM library_chunk c JOIN library_document d ON d.id = c.doc_id
+        WHERE c.doc_id = ANY($2)) t
+      WHERE rn <= $4
+      ORDER BY score DESC
       LIMIT $3`,
-    [JSON.stringify(v), docIds, k]);
+    [JSON.stringify(v), docIds, k, perDoc]);
   return r.rows.map((x) => ({
     docId: x.doc_id, title: x.title ?? x.file, page: x.page, text: x.text, score: Number(x.score),
   }));

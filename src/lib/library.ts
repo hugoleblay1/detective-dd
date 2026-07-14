@@ -10,7 +10,12 @@ export interface LibraryDoc {
   detectedAt: string; qualified: boolean;
   title: string | null; geoLevel: string | null; geoName: string | null;
   dims: string[]; tags: string[]; qualifiedAt: string | null;
+  /** Passages indexés pour le RAG — 0 sur un format indexable = pas encore lisible par l'IA. */
+  chunks: number;
 }
+
+/** Formats dont le contenu peut alimenter le RAG (les autres restent des pointeurs). */
+export const isRagIndexable = (file: string) => /\.(pdf|txt|md)$/i.test(file);
 
 export interface QualifyInput {
   title: string; geoLevel: string; geoName: string; dims: string[]; tags: string[];

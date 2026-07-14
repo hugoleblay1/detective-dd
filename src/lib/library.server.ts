@@ -9,6 +9,7 @@ interface Row {
   id: string; file: string; path: string; mtime: Date | null; detected_at: Date; qualified: boolean;
   title: string | null; geo_level: string | null; geo_name: string | null;
   dims: string[]; tags: string[]; qualified_at: Date | null;
+  chunks: number;
 }
 const toDoc = (r: Row): LibraryDoc => ({
   id: r.id, file: r.file, path: r.path,
@@ -17,17 +18,21 @@ const toDoc = (r: Row): LibraryDoc => ({
   title: r.title, geoLevel: r.geo_level, geoName: r.geo_name,
   dims: r.dims ?? [], tags: r.tags ?? [],
   qualifiedAt: r.qualified_at ? r.qualified_at.toISOString() : null,
+  chunks: r.chunks,
 });
+
+// Compte de passages RAG joint à chaque document (0 = pas encore lisible par l'IA).
+const CHUNKS = "(SELECT count(*)::int FROM library_chunk c WHERE c.doc_id = library_document.id) AS chunks";
 
 export async function listDocuments(): Promise<LibraryDoc[]> {
   await ensureSchema();
-  const r = await pool.query<Row>("SELECT * FROM library_document ORDER BY qualified ASC, detected_at DESC");
+  const r = await pool.query<Row>(`SELECT *, ${CHUNKS} FROM library_document ORDER BY qualified ASC, detected_at DESC`);
   return r.rows.map(toDoc);
 }
 
 export async function listQualified(): Promise<LibraryDoc[]> {
   await ensureSchema();
-  const r = await pool.query<Row>("SELECT * FROM library_document WHERE qualified = true ORDER BY qualified_at DESC");
+  const r = await pool.query<Row>(`SELECT *, ${CHUNKS} FROM library_document WHERE qualified = true ORDER BY qualified_at DESC`);
   return r.rows.map(toDoc);
 }
 
@@ -36,7 +41,7 @@ export async function qualifyDocument(id: string, meta: QualifyInput): Promise<L
   const r = await pool.query<Row>(
     `UPDATE library_document
        SET qualified = true, title = $2, geo_level = $3, geo_name = $4, dims = $5, tags = $6, qualified_at = now()
-     WHERE id = $1 RETURNING *`,
+     WHERE id = $1 RETURNING *, ${CHUNKS}`,
     [id, meta.title, meta.geoLevel, meta.geoName, meta.dims, meta.tags],
   );
   return r.rows[0] ? toDoc(r.rows[0]) : null;

@@ -233,6 +233,7 @@ input[type=text]:focus, input[type=password]:focus, select:focus { outline: 2px 
 
 /* ---- sources internes dans le contexte ---- */
 .tagint { font-size: 10px; font-weight: 700; color: #1f7a44; background: #eaf6ee; border-radius: 4px; padding: 2px 6px; white-space: nowrap; }
+.tagpend { font-size: 10px; font-weight: 700; color: #8a5a00; background: #fdf3d7; border-radius: 4px; padding: 2px 6px; white-space: nowrap; }
 .ctx-src.int { border-left: 3px solid #1f7a44; }
 .ctx-src.int .nm { color: var(--ink); }
 .pathln { font-size: 10.5px; color: #9a9aab; margin-top: 3px; word-break: break-all; font-family: ui-monospace, Menlo, Consolas, monospace; }

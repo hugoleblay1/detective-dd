@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { LibraryDoc } from "@/lib/library";
+import { isRagIndexable, type LibraryDoc } from "@/lib/library";
 
 const ALL_DIMS = ["Atténuation", "Adaptation", "Social", "Genre", "Biodiversité"];
 const GEO_LEVELS = ["Monde", "Continental", "Pays"];
@@ -81,7 +81,11 @@ export function LibraryView({ docs, onQualified }: { docs: LibraryDoc[] | null; 
         <h4>Bibliothèque qualifiée ({qualified.length})</h4>
         {qualified.map((d) => (
           <div key={d.id} className="doc-row">
-            <div className="doc-top"><span className="doc-file" style={{ flex: "unset" }}>{d.title}</span><span className="tagint">qualifié</span></div>
+            <div className="doc-top">
+              <span className="doc-file" style={{ flex: "unset" }}>{d.title}</span>
+              <span className="tagint">qualifié</span>
+              {d.chunks === 0 && isRagIndexable(d.file) && <span className="tagpend">Pas encore lisible par l&apos;IA — indexation requise</span>}
+            </div>
             <div className="doc-meta">
               <span>{d.geoLevel} · {d.geoName}</span><span>·</span><span>{d.dims.join(", ")}</span><span>·</span><span>{(d.qualifiedAt ?? d.detectedAt).slice(0, 10)}</span>
               {d.tags.map((t) => <span key={t} className="tagchip">#{t}</span>)}
