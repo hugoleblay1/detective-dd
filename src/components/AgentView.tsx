@@ -112,16 +112,14 @@ export function AgentView({ grid, sub, geo, subtypes, onSub, onGeo, onPhase }: {
   if (analyses && !formOpen) {
     return (
       <div className="content">
-        <div className="deal-summary">
-          <div className="ds-main">
-            <b>{sub} · {geo}</b>
-            <span>{targetSummary || "aucune note visée"}</span>
-            <span>{docs.length} document{docs.length > 1 ? "s" : ""} client</span>
-            {dealText.trim() && <span className="ds-desc">« {dealText.trim().slice(0, 90)}{dealText.trim().length > 90 ? "…" : ""} »</span>}
+        <div className="res-head">
+          <div>
+            <div className="rh-title">Résultats de l&apos;analyse</div>
+            <div className="rh-sub">
+              {sub} · {geo} · {targetSummary || "aucune note visée"} · {docs.length} document{docs.length > 1 ? "s" : ""} lu{docs.length > 1 ? "s" : ""} · grille {sub} (source de vérité)
+            </div>
           </div>
-          <div className="ds-actions">
-            <button className="btn ghost small" onClick={() => setFormOpen(true)}>↺ Modifier le dossier et relancer</button>
-          </div>
+          <button className="btn ghost small" onClick={() => setFormOpen(true)}>↺ Modifier le dossier et relancer</button>
         </div>
         {error && <div className="gap-error" style={{ margin: "12px 0 0" }}><b>Erreur :</b> {error}</div>}
         {analyses.length ? <GapResults grid={grid} sub={sub} geo={geo} analyses={analyses} /> : <div className="placeholder">Aucune dimension analysée.</div>}

@@ -30,6 +30,9 @@ Contrôle visuel : **http://localhost:3000/style-guide** (la page ne consomme qu
 | `--color-control-border` | `#C9CADD` | Bordures des contrôles (segments, chips, champs) |
 | `--color-surface-tint` | `#FAFAFE` | Fonds de lignes légèrement bleutés, survols de cartes |
 | `--color-on-primary-strong` / `-on-primary` / `-on-primary-muted` | `#DCDCF6` / `#CFCFF2` / `#B9B9E8` | Textes posés sur fond bleu (header, bandeau de synthèse) |
+| `--on-primary-ok` / `-mid` / `-ko` | `#7BDB9B` / `#FDC533` / `#FF9B94` | Statuts lisibles sur fond bleu (chips du bandeau de résultats) |
+| `--cov-ok` / `--cov-mid` / `--cov-ko` | `#2E9E52` / `#F0A800` / `#E2231A` | Barre de couverture tri-couleur des accordéons |
+| `--status-mid-faint` / `--status-mid-ghost` / `--status-ko-ghost` | `#FFFBEE` / `#FFFDF6` / `#FFFAF9` | Fond du bloc « Exigence », fonds des cartes de verdict partiel/manquant |
 
 ## Statuts d'exigence (couvert / partiel / manquant)
 

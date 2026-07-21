@@ -29,6 +29,14 @@
   --color-on-primary-strong: #DCDCF6;
   --color-on-primary: #CFCFF2;
   --color-on-primary-muted: #B9B9E8;
+  /* Statuts lisibles sur fond bleu primaire (chips du bandeau de résultats) */
+  --on-primary-ok: #7BDB9B;
+  --on-primary-mid: #FDC533;
+  --on-primary-ko: #FF9B94;
+  /* Barre de couverture tri-couleur (segments vifs de la maquette) */
+  --cov-ok: #2E9E52;
+  --cov-mid: #F0A800;
+  --cov-ko: #E2231A;
 
   /* ---- Statuts d'exigence : couvert / partiel / manquant ---- */
   --status-ok: #1E7A3C;
@@ -37,9 +45,12 @@
   --status-mid: #8A6100;
   --status-mid-tint: #FBF3DC;
   --status-mid-border: #F3E3AC;
+  --status-mid-faint: #FFFBEE;  /* fond du bloc « Exigence de la grille » */
+  --status-mid-ghost: #FFFDF6;  /* fond des cartes de verdict « partiel » */
   --status-ko: #E2231A;
   --status-ko-tint: #FCEBEA;
   --status-ko-border: #F5C6C2;
+  --status-ko-ghost: #FFFAF9;   /* fond des cartes de verdict « manquant » */
 
   /* ---- Échelle de notation −2 … +3 (scaleDefs de la maquette)
          txt = texte au repos, tint = fond au repos,

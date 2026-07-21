@@ -3,7 +3,7 @@ import { DIMS_EXCLUDED_FROM_ANALYSIS } from "@/lib/gap/types";
 
 export type NoteT = "+1" | "+2" | "+3";
 export type Targets = Partial<Record<DimKey, { note: NoteT; crit: string | null }>>;
-const ALL_DIMS: DimKey[] = ["Atténuation", "Adaptation", "Social", "Genre", "Biodiversité"];
+export const ALL_DIMS: DimKey[] = ["Atténuation", "Adaptation", "Social", "Genre", "Biodiversité"];
 const NOTES: NoteT[] = ["+1", "+2", "+3"];
 
 export function TargetsEditor({ grid, sub, targets, onSetNote, onSetCrit }: {
