@@ -1,0 +1,97 @@
+/* Thème Détective DD — design tokens extraits de la maquette Claude design
+   (design/Detective DD.dc.html). Fichier de thème UNIQUE : toute couleur, typo,
+   espacement, arrondi ou ombre de l'UI doit venir d'ici (voir TOKENS.md).
+   Charte Proparco : primaire #000191, accent #FDC533, alerte #E2231A. */
+:root {
+  /* ---- Marque ---- */
+  --color-primary: #000191;
+  --color-primary-hover: #1A1AAE;
+  --color-link-hover: #3535B8;
+  --color-accent: #FDC533;        /* or : accent de marque (brandline, onglet actif) */
+  --color-accent-ink: #3A2E00;    /* texte posé sur l'or */
+  --color-accent-border: #C9A227;
+  --color-alert: #E2231A;
+
+  /* ---- Neutres ---- */
+  --color-bg: #F2F3F8;
+  --color-surface: #FFFFFF;
+  --color-ink: #17173A;
+  --color-ink-soft: #41415E;
+  --color-muted: #6A6A85;
+  --color-faint: #8A8AA5;
+  --color-line: #E2E3EE;
+  --color-line-soft: #EEEFF6;
+  --color-primary-tint: #EBEBF9;  /* fonds bleutés (pilier Planète, survols) */
+  --color-primary-faint: #F5F5FD;
+
+  /* ---- Statuts d'exigence : couvert / partiel / manquant ---- */
+  --status-ok: #1E7A3C;
+  --status-ok-tint: #E9F5EC;
+  --status-ok-border: #BFE3CA;
+  --status-mid: #8A6100;
+  --status-mid-tint: #FBF3DC;
+  --status-mid-border: #F3E3AC;
+  --status-ko: #E2231A;
+  --status-ko-tint: #FCEBEA;
+  --status-ko-border: #F5C6C2;
+
+  /* ---- Échelle de notation −2 … +3 (scaleDefs de la maquette)
+         txt = texte au repos, tint = fond au repos,
+         sel-bg / sel-txt = segment sélectionné.
+         Négatif = rouges, 0 = neutre blanc à bordure, positif = dégradé de vert
+         (l'or ne code plus le +2 : il reste l'accent de marque). ---- */
+  --score-m2-txt: #7F100B; --score-m2-tint: #F9DEDC; --score-m2-sel-bg: #A3170F; --score-m2-sel-txt: #FFFFFF;
+  --score-m1-txt: #E2231A; --score-m1-tint: #FCEBEA; --score-m1-sel-bg: #E2231A; --score-m1-sel-txt: #FFFFFF;
+  --score-0-txt: #5A5A72;  --score-0-tint: #FFFFFF;  --score-0-sel-bg: #FFFFFF;  --score-0-sel-txt: #17173A;
+  --score-p1-txt: #2E7D46; --score-p1-tint: #EDF7F0; --score-p1-sel-bg: #6FBE85; --score-p1-sel-txt: #FFFFFF;
+  --score-p2-txt: #1E7A3C; --score-p2-tint: #D9EFE0; --score-p2-sel-bg: #2E9E52; --score-p2-sel-txt: #FFFFFF;
+  --score-p3-txt: #0F4D24; --score-p3-tint: #C3E5CE; --score-p3-sel-bg: #136A31; --score-p3-sel-txt: #FFFFFF;
+  /* Niveau 0 neutre : bordure au repos / sélectionné, fond du badge */
+  --score-0-border: #D5D6E6;
+  --score-0-border-sel: #17173A;
+  --score-0-badge-bg: #F4F4F8;
+
+  /* ---- Piliers ---- */
+  --pillar-planete-bg: #E9F5EC;
+  --pillar-planete-ink: #1E7A3C;
+  --pillar-inclusion-bg: #FFF2C9;
+  --pillar-inclusion-ink: #7A5600;
+
+  /* ---- Typographie ---- */
+  --font-sans: "Source Sans 3", Helvetica, Arial, sans-serif;
+  --font-serif: "Source Serif 4", Georgia, serif; /* avis éditoriaux et citations uniquement */
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace; /* chemins de fichiers */
+  --text-xs: 11px;
+  --text-sm: 13px;
+  --text-md: 14px;
+  --text-base: 16px;
+  --text-lg: 18px;
+  --text-xl: 22px;
+  --text-2xl: 30px;
+  --weight-regular: 400;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  --leading-normal: 1.5;
+  --tracking-caps: 0.08em; /* labels en majuscules */
+
+  /* ---- Espacements ---- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+
+  /* ---- Arrondis ---- */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-pill: 999px;
+
+  /* ---- Ombres (teintées navy) ---- */
+  --shadow-card: 0 1px 3px rgba(23, 23, 58, 0.08);
+  --shadow-sticky: 0 4px 18px rgba(23, 23, 58, 0.07);
+  --shadow-pop: 0 8px 24px rgba(23, 23, 58, 0.25);
+  --shadow-drawer: -12px 0 40px rgba(23, 23, 58, 0.18);
+}

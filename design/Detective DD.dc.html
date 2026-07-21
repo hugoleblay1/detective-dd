@@ -1,0 +1,1347 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F2F3F8;font-family:'Source Sans 3',Helvetica,Arial,sans-serif;color:#17173A;}
+a{color:#000191;} a:hover{color:#3535B8;}
+@keyframes ddspin{to{transform:rotate(360deg)}}
+@keyframes ddfade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes ddpulse{0%,100%{opacity:1}50%{opacity:.45}}
+</style>
+</helmet>
+<div style="min-height:100vh;display:flex;flex-direction:column;">
+  <div style="background:#000191;color:#FFFFFF;">
+    <div style="max-width:1000px;margin:0 auto;padding:18px 24px;display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+      <div style="display:flex;flex-direction:column;gap:4px;">
+        <div style="font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:#B9B9E8;font-weight:600;">Proparco · Secteur numérique</div>
+        <div style="display:flex;align-items:baseline;gap:12px;">
+          <div style="font-size:26px;font-weight:700;">Détective DD</div>
+          <div style="font-size:14px;color:#CFCFF2;">Aide à la notation développement durable</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div style="font-size:12px;color:#CFCFF2;max-width:220px;text-align:right;line-height:1.35;">L'outil vérifie la couverture et cite ses sources. La note reste une décision humaine.</div>
+        <div style="border:1px solid #FDC533;color:#FDC533;font-size:11px;font-weight:700;letter-spacing:0.1em;padding:4px 10px;border-radius:999px;">INTERNE</div>
+      </div>
+    </div>
+  </div>
+  <div style="background:#FFFFFF;border-bottom:1px solid #E2E3EE;">
+    <div style="max-width:1100px;margin:0 auto;padding:0 24px;display:flex;gap:28px;align-items:center;flex-wrap:wrap;">
+      <sc-for list="{{ tabs }}" as="tb" hint-placeholder-count="2">
+        <div onClick="{{ tb.onPick }}" style="padding:13px 2px;font-size:14.5px;font-weight:700;color:{{ tb.color }};border-bottom:3px solid {{ tb.bar }};margin-bottom:-1px;cursor:pointer;" style-hover="color:#000191">{{ tb.label }}</div>
+      </sc-for>
+      <div style="flex:1;"></div>
+      <sc-if value="{{ isDossier }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;gap:24px;">
+          <sc-for list="{{ steps }}" as="st" hint-placeholder-count="3">
+            <div style="display:flex;align-items:center;gap:7px;padding:12px 0;">
+              <div style="width:19px;height:19px;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:700;background:{{ st.numBg }};color:{{ st.numColor }};border:1px solid {{ st.numBorder }};">{{ st.num }}</div>
+              <div style="font-size:12.5px;font-weight:600;color:{{ st.labelColor }};">{{ st.label }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+    </div>
+  </div>
+
+  <sc-if value="{{ isCriteres }}" hint-placeholder-val="{{ false }}">
+  <div style="max-width:1100px;width:100%;margin:0 auto;padding:20px 24px 64px;box-sizing:border-box;display:flex;flex-direction:column;gap:16px;animation:ddfade .3s ease;">
+    <div style="background:#FFFFFF;border:1px solid #E2E3EE;border-radius:10px;padding:13px 20px;display:flex;align-items:center;gap:28px;flex-wrap:wrap;">
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+        <div style="font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#6A6A85;">Secteur</div>
+        <div style="display:flex;border:1px solid #C9CADD;border-radius:8px;overflow:hidden;">
+          <sc-for list="{{ secteurs }}" as="sec" hint-placeholder-count="2">
+            <div onClick="{{ sec.onPick }}" style="padding:7px 16px;font-size:13px;font-weight:600;cursor:pointer;background:{{ sec.bg }};color:{{ sec.color }};border-right:1px solid #C9CADD;" style-hover="background:{{ sec.hoverBg }}">{{ sec.label }}</div>
+          </sc-for>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+        <div style="font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#6A6A85;">Grille applicable</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <sc-for list="{{ grilles }}" as="g" hint-placeholder-count="3">
+            <div onClick="{{ g.onPick }}" style="padding:6px 13px;font-size:13px;font-weight:600;border-radius:999px;border:1px solid {{ g.border }};background:{{ g.bg }};color:{{ g.color }};cursor:pointer;" style-hover="border-color:#000191">{{ g.label }}</div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:250px 1fr;gap:16px;align-items:start;">
+      <div style="background:#FFFFFF;border:1px solid #E2E3EE;border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:16px;position:sticky;top:16px;">
+        <sc-for list="{{ piliers }}" as="pi" hint-placeholder-count="2">
+          <div style="display:flex;flex-direction:column;gap:5px;">
+            <div style="font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:{{ pi.color }};padding:0 10px 3px;">{{ pi.label }}</div>
+            <sc-for list="{{ pi.items }}" as="it" hint-placeholder-count="3">
+              <div onClick="{{ it.onPick }}" style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:9px 12px;border-radius:8px;cursor:pointer;background:{{ it.bg }};color:{{ it.color }};font-size:14px;font-weight:600;" style-hover="background:{{ it.hoverBg }}">
+                <span>{{ it.label }}</span>
+                <span style="font-size:11.5px;font-weight:600;color:{{ it.metaColor }};white-space:nowrap;">{{ it.meta }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </sc-for>
+        <div style="border-top:1px solid #EEEFF6;padding-top:10px;font-size:12px;color:#8A8AA5;line-height:1.5;padding-left:10px;padding-right:10px;">La grille est la source de vérité, republiée vers l'outil.</div>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E3EE;border-radius:10px;padding:24px;display:flex;flex-direction:column;gap:16px;">
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+            <div style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:{{ dimPilierColor }};background:{{ dimPilierBg }};padding:4px 10px;border-radius:5px;">{{ dimPilier }}</div>
+            <div style="font-size:19px;font-weight:700;">{{ dimLabel }}</div>
+            <div style="font-size:13.5px;color:#6A6A85;">{{ dimSub }}</div>
+          </div>
+          <div onClick="{{ onResOpen }}" style="border:1px solid #C9CADD;color:#000191;font-size:12.5px;font-weight:700;padding:7px 14px;border-radius:8px;cursor:pointer;background:#FFFFFF;white-space:nowrap;width:fit-content;" style-hover="border-color:#000191;background:#F2F2FC">Ressources par pays ↗</div>
+          <sc-if value="{{ hasDimNote }}" hint-placeholder-val="{{ false }}">
+            <div style="font-size:12.5px;color:#8A6100;background:#FFFBEE;border:1px solid #F3E3AC;border-radius:6px;padding:7px 12px;width:fit-content;">{{ dimNote }}</div>
+          </sc-if>
+        </div>
+        <div style="background:#F5F5FD;border:1px solid #E2E3EE;border-radius:8px;padding:13px 16px;font-size:14px;color:#33335A;line-height:1.6;">
+          <sc-for list="{{ enjeuSegs }}" as="seg" hint-placeholder-count="1"><sc-if value="{{ seg.isText }}" hint-placeholder-val="{{ true }}"><span>{{ seg.text }}</span></sc-if><sc-if value="{{ seg.isTerm }}" hint-placeholder-val="{{ false }}"><span style="position:relative;display:inline-block;"><span onClick="{{ seg.onToggle }}" style="border-bottom:1.5px dotted #000191;color:#000191;font-weight:600;cursor:pointer;">{{ seg.label }}</span><sc-if value="{{ seg.open }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;top:calc(100% + 6px);left:0;z-index:30;width:260px;background:#17173A;color:#FFFFFF;font-size:12.5px;font-weight:400;line-height:1.5;padding:10px 12px;border-radius:8px;box-shadow:0 8px 24px rgba(23,23,58,0.25);display:block;">{{ seg.def }}</span></sc-if></span></sc-if></sc-for>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;">
+            <div style="font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#6A6A85;">Échelle de notation</div>
+            <div style="font-size:12.5px;color:#8A8AA5;">{{ scaleHint }}</div>
+          </div>
+          <div style="display:flex;gap:6px;">
+            <sc-for list="{{ scale }}" as="lv" hint-placeholder-count="6">
+              <div onClick="{{ lv.onPick }}" style="flex:1;border-radius:8px;padding:10px 6px;text-align:center;cursor:pointer;border:2px solid {{ lv.border }};background:{{ lv.bg }};display:flex;flex-direction:column;gap:2px;" style-hover="border-color:{{ lv.hoverBorder }}">
+                <div style="font-size:16px;font-weight:700;color:{{ lv.noteColor }};">{{ lv.note }}</div>
+                <div style="font-size:11px;font-weight:600;color:{{ lv.labelColor }};line-height:1.25;">{{ lv.label }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        <sc-if value="{{ showOrBanner }}" hint-placeholder-val="{{ false }}">
+          <div style="background:#F2F2FC;border-radius:8px;padding:10px 14px;font-size:13px;color:#33335A;line-height:1.5;"><strong>Un seul critère suffit</strong> pour valider un niveau : plusieurs chemins mènent à la même note. Les notes +2 et +3 supposent en plus que le niveau +1 reste couvert.</div>
+        </sc-if>
+        <sc-for list="{{ levelsView }}" as="lv2" hint-placeholder-count="1">
+          <div style="display:flex;flex-direction:column;gap:10px;padding-top:4px;">
+            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+              <div style="font-size:14px;font-weight:700;color:{{ lv2.badgeColor }};background:{{ lv2.badgeBg }};padding:3px 11px;border-radius:6px;">{{ lv2.note }}</div>
+              <div style="font-size:14px;font-weight:700;">{{ lv2.label }}</div>
+              <sc-if value="{{ lv2.multi }}" hint-placeholder-val="{{ false }}">
+                <div style="font-size:12px;color:#6A6A85;">{{ lv2.nbChemins }} chemins possibles — un seul suffit</div>
+              </sc-if>
+            </div>
+            <sc-if value="{{ lv2.prereq }}" hint-placeholder-val="{{ false }}">
+              <div style="font-size:12.5px;color:#8A6100;background:#FFFBEE;border:1px solid #F3E3AC;border-radius:6px;padding:6px 12px;width:fit-content;">Prérequis : les exigences du niveau +1 restent couvertes.</div>
+            </sc-if>
+            <sc-for list="{{ lv2.chemins }}" as="ch" hint-placeholder-count="1">
+              <sc-if value="{{ ch.showOu }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex;align-items:center;gap:10px;">
+                  <div style="height:1px;background:#E2E3EE;width:24px;"></div>
+                  <div style="font-size:11px;font-weight:700;letter-spacing:0.1em;color:#000191;background:#EBEBF9;padding:3px 10px;border-radius:999px;">OU</div>
+                  <div style="height:1px;background:#E2E3EE;flex:1;"></div>
+                </div>
+              </sc-if>
+              <sc-if value="{{ ch.isNa }}" hint-placeholder-val="{{ false }}">
+                <div style="border:1px dashed #D5D6E6;border-radius:8px;padding:12px 16px;background:#F7F7FB;display:flex;gap:12px;align-items:baseline;">
+                  <div style="font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#8A8AA5;background:#EEEFF6;padding:3px 8px;border-radius:5px;white-space:nowrap;">Non applicable</div>
+                  <div style="flex:1;font-size:13.5px;color:#8A8AA5;line-height:1.55;">{{ ch.naTexte }} <span style="font-style:italic;">— ne concerne pas la grille « {{ grilleLabel }} ».</span></div>
+                </div>
+              </sc-if>
+              <sc-if value="{{ ch.isOn }}" hint-placeholder-val="{{ true }}">
+                <div style="border:1px solid #E2E3EE;border-radius:8px;background:#FFFFFF;overflow:hidden;">
+                  <div style="padding:13px 16px;display:flex;gap:12px;align-items:baseline;flex-wrap:wrap;">
+                    <sc-if value="{{ ch.showNum }}" hint-placeholder-val="{{ false }}">
+                      <div style="font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#000191;background:#EBEBF9;padding:3px 8px;border-radius:5px;white-space:nowrap;">Chemin {{ ch.num }}</div>
+                    </sc-if>
+                    <div style="flex:1;min-width:240px;font-size:14px;color:#2A2A4A;line-height:1.6;">
+                      <sc-for list="{{ ch.segs }}" as="seg" hint-placeholder-count="1"><sc-if value="{{ seg.isText }}" hint-placeholder-val="{{ true }}"><span>{{ seg.text }}</span></sc-if><sc-if value="{{ seg.isTerm }}" hint-placeholder-val="{{ false }}"><span style="position:relative;display:inline-block;"><span onClick="{{ seg.onToggle }}" style="border-bottom:1.5px dotted #000191;color:#000191;font-weight:600;cursor:pointer;">{{ seg.label }}</span><sc-if value="{{ seg.open }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;top:calc(100% + 6px);left:0;z-index:30;width:260px;background:#17173A;color:#FFFFFF;font-size:12.5px;font-weight:400;line-height:1.5;padding:10px 12px;border-radius:8px;box-shadow:0 8px 24px rgba(23,23,58,0.25);display:block;">{{ seg.def }}</span></sc-if></span></sc-if></sc-for>
+                    </div>
+                    <sc-if value="{{ ch.hasDetail }}" hint-placeholder-val="{{ false }}">
+                      <div onClick="{{ ch.onToggle }}" style="font-size:12.5px;font-weight:700;color:#000191;cursor:pointer;white-space:nowrap;" style-hover="text-decoration:underline">{{ ch.detailLabel }}</div>
+                    </sc-if>
+                  </div>
+                  <sc-if value="{{ ch.open }}" hint-placeholder-val="{{ false }}">
+                    <div style="border-top:1px solid #EEEFF6;background:#FAFAFE;padding:14px 16px;display:flex;flex-direction:column;gap:14px;animation:ddfade .2s ease;">
+                      <sc-if value="{{ ch.hasExigences }}" hint-placeholder-val="{{ false }}">
+                        <div style="display:flex;flex-direction:column;gap:7px;">
+                          <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#6A6A85;">Exigences détaillées</div>
+                          <sc-for list="{{ ch.exigences }}" as="ex" hint-placeholder-count="2">
+                            <div style="display:flex;gap:8px;font-size:13.5px;color:#41415E;line-height:1.55;">
+                              <div style="color:#000191;">•</div>
+                              <div><sc-for list="{{ ex.segs }}" as="seg" hint-placeholder-count="1"><sc-if value="{{ seg.isText }}" hint-placeholder-val="{{ true }}"><span>{{ seg.text }}</span></sc-if><sc-if value="{{ seg.isTerm }}" hint-placeholder-val="{{ false }}"><span style="position:relative;display:inline-block;"><span onClick="{{ seg.onToggle }}" style="border-bottom:1.5px dotted #000191;color:#000191;font-weight:600;cursor:pointer;">{{ seg.label }}</span><sc-if value="{{ seg.open }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;top:calc(100% + 6px);left:0;z-index:30;width:260px;background:#17173A;color:#FFFFFF;font-size:12.5px;font-weight:400;line-height:1.5;padding:10px 12px;border-radius:8px;box-shadow:0 8px 24px rgba(23,23,58,0.25);display:block;">{{ seg.def }}</span></sc-if></span></sc-if></sc-for></div>
+                            </div>
+                          </sc-for>
+                        </div>
+                      </sc-if>
+                      <sc-if value="{{ ch.hasQuestions }}" hint-placeholder-val="{{ false }}">
+                        <div style="display:flex;flex-direction:column;gap:9px;">
+                          <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#6A6A85;">Questions clés de due diligence</div>
+                          <sc-for list="{{ ch.questions }}" as="qq" hint-placeholder-count="2">
+                            <div style="display:flex;gap:8px;font-size:13.5px;line-height:1.55;">
+                              <div style="color:#000191;font-weight:700;">›</div>
+                              <div style="display:flex;flex-direction:column;gap:2px;">
+                                <div style="color:#2A2A4A;"><sc-for list="{{ qq.segs }}" as="seg" hint-placeholder-count="1"><sc-if value="{{ seg.isText }}" hint-placeholder-val="{{ true }}"><span>{{ seg.text }}</span></sc-if><sc-if value="{{ seg.isTerm }}" hint-placeholder-val="{{ false }}"><span style="position:relative;display:inline-block;"><span onClick="{{ seg.onToggle }}" style="border-bottom:1.5px dotted #000191;color:#000191;font-weight:600;cursor:pointer;">{{ seg.label }}</span><sc-if value="{{ seg.open }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;top:calc(100% + 6px);left:0;z-index:30;width:260px;background:#17173A;color:#FFFFFF;font-size:12.5px;font-weight:400;line-height:1.5;padding:10px 12px;border-radius:8px;box-shadow:0 8px 24px rgba(23,23,58,0.25);display:block;">{{ seg.def }}</span></sc-if></span></sc-if></sc-for></div>
+                                <div style="font-size:12px;color:#8A8AA5;">{{ qq.docs }}</div>
+                              </div>
+                            </div>
+                          </sc-for>
+                        </div>
+                      </sc-if>
+                    </div>
+                  </sc-if>
+                </div>
+              </sc-if>
+            </sc-for>
+          </div>
+        </sc-for>
+        <sc-if value="{{ hasSel }}" hint-placeholder-val="{{ false }}">
+          <div onClick="{{ onVoirTous }}" style="border:1px solid #C9CADD;color:#000191;font-size:13px;font-weight:700;padding:9px 16px;border-radius:8px;cursor:pointer;width:fit-content;background:#FFFFFF;" style-hover="border-color:#000191">Voir tous les niveaux — {{ dimLabel }}</div>
+        </sc-if>
+      </div>
+    </div>
+  </div>
+  <sc-if value="{{ resOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ onResClose }}" style="position:fixed;inset:0;background:rgba(23,23,58,0.35);z-index:60;"></div>
+    <div style="position:fixed;top:0;right:0;bottom:0;width:390px;max-width:90vw;background:#FFFFFF;z-index:61;box-shadow:-12px 0 40px rgba(23,23,58,0.18);display:flex;flex-direction:column;animation:ddfade .2s ease;">
+      <div style="background:#000191;color:#FFFFFF;padding:18px 22px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;">
+        <div style="display:flex;flex-direction:column;gap:3px;">
+          <div style="font-size:16px;font-weight:700;">Ressources mobilisables</div>
+          <div style="font-size:12.5px;color:#CFCFF2;">{{ dimLabel }} · contexte pays pour l'analyse</div>
+        </div>
+        <div onClick="{{ onResClose }}" style="font-size:18px;cursor:pointer;color:#CFCFF2;line-height:1;padding:2px 6px;" style-hover="color:#FFFFFF">✕</div>
+      </div>
+      <div style="flex:1;overflow-y:auto;padding:18px 22px;display:flex;flex-direction:column;gap:18px;">
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#6A6A85;">Pays</div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;">
+            <sc-for list="{{ resPaysChips }}" as="rp" hint-placeholder-count="7">
+              <div onClick="{{ rp.onPick }}" style="padding:5px 11px;font-size:12px;font-weight:600;border-radius:999px;border:1px solid {{ rp.border }};background:{{ rp.bg }};color:{{ rp.color }};cursor:pointer;" style-hover="border-color:#000191">{{ rp.label }}</div>
+            </sc-for>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#6A6A85;">Sources externes — {{ dimLabel }}</div>
+          <sc-if value="{{ hasResExternes }}" hint-placeholder-val="{{ true }}">
+            <sc-for list="{{ resExternes }}" as="rx" hint-placeholder-count="3">
+              <div style="border:1px solid #E2E3EE;border-radius:8px;padding:11px 14px;display:flex;flex-direction:column;gap:3px;">
+                <div style="display:flex;align-items:center;gap:8px;justify-content:space-between;">
+                  <a href="{{ rx.url }}" target="_blank" style="font-size:13.5px;font-weight:700;text-decoration:none;">{{ rx.nom }} ↗</a>
+                  <div style="font-size:10.5px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#8A6100;background:#FFF7DE;padding:2px 7px;border-radius:4px;">externe</div>
+                </div>
+                <div style="font-size:12.5px;color:#41415E;line-height:1.45;">{{ rx.desc }}</div>
+                <div style="font-size:11.5px;color:#8A8AA5;">{{ rx.note }}</div>
+              </div>
+            </sc-for>
+          </sc-if>
+          <sc-if value="{{ noResExternes }}" hint-placeholder-val="{{ false }}">
+            <div style="font-size:12.5px;color:#8A8AA5;font-style:italic;">Pas de source externe liée à cette dimension pour le moment.</div>
+          </sc-if>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#6A6A85;">Bibliothèque interne — {{ resPays }} & monde</div>
+          <sc-if value="{{ hasResInternes }}" hint-placeholder-val="{{ true }}">
+            <sc-for list="{{ resInternes }}" as="ri" hint-placeholder-count="2">
+              <div style="border:1px solid #E2E3EE;border-radius:8px;padding:11px 14px;display:flex;flex-direction:column;gap:3px;background:#FAFAFE;">
+                <div style="display:flex;align-items:center;gap:8px;justify-content:space-between;">
+                  <div style="font-size:13.5px;font-weight:700;color:#17173A;">{{ ri.title }}</div>
+                  <div style="font-size:10.5px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#1E7A3C;background:#E9F5EC;padding:2px 7px;border-radius:4px;">interne</div>
+                </div>
+                <div style="font-size:11.5px;color:#8A8AA5;">{{ ri.meta }}</div>
+              </div>
+            </sc-for>
+          </sc-if>
+          <sc-if value="{{ noResInternes }}" hint-placeholder-val="{{ false }}">
+            <div style="font-size:12.5px;color:#8A8AA5;font-style:italic;">Aucun document qualifié pour {{ resPays }} sur cette dimension — à signaler à l'équipe Impact.</div>
+          </sc-if>
+        </div>
+        <div style="font-size:11.5px;color:#8A8AA5;line-height:1.5;border-top:1px solid #EEEFF6;padding-top:12px;">Ces ressources sont mobilisées automatiquement par l'analyse. La bibliothèque interne est gérée par l'équipe Impact (onglet Bibliothèque IMP).</div>
+      </div>
+    </div>
+  </sc-if>
+  </sc-if>
+
+  <sc-if value="{{ impGate }}" hint-placeholder-val="{{ false }}">
+  <div style="max-width:420px;width:100%;margin:0 auto;padding:72px 24px;box-sizing:border-box;animation:ddfade .3s ease;">
+    <div style="background:#FFFFFF;border:1px solid #E2E3EE;border-radius:12px;padding:32px;display:flex;flex-direction:column;gap:16px;">
+      <div style="width:44px;height:44px;border-radius:10px;background:#EBEBF9;color:#000191;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;">⚿</div>
+      <div style="display:flex;flex-direction:column;gap:4px;">
+        <div style="font-size:18px;font-weight:700;">Espace réservé à l'équipe Impact</div>
+        <div style="font-size:13.5px;color:#6A6A85;line-height:1.5;">La bibliothèque de référence alimente les citations de l'analyse. Son accès est limité aux experts IMP.</div>
+      </div>
+      <input type="password" placeholder="Mot de passe" value="{{ impPwVal }}" onChange="{{ onImpPw }}" onKeyDown="{{ onImpKey }}" style="border:1px solid #C9CADD;border-radius:8px;padding:11px 14px;font-family:'Source Sans 3',sans-serif;font-size:14.5px;outline-color:#000191;">
+      <sc-if value="{{ impErr }}" hint-placeholder-val="{{ false }}">
+        <div style="font-size:13px;color:#E2231A;">Mot de passe incorrect.</div>
+      </sc-if>
+      <div onClick="{{ onImpSubmit }}" style="background:#000191;color:#FFFFFF;font-size:14.5px;font-weight:700;padding:12px;border-radius:8px;cursor:pointer;text-align:center;" style-hover="background:#1A1AAE">Entrer</div>
+      <div style="font-size:12px;color:#8A8AA5;">Prototype : le mot de passe est IMP2026.</div>
+    </div>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ impMain }}" hint-placeholder-val="{{ false }}">
+  <div style="max-width:1000px;width:100%;margin:0 auto;padding:20px 24px 64px;box-sizing:border-box;display:flex;flex-direction:column;gap:20px;animation:ddfade .3s ease;">
+    <div style="background:#FFFBEE;border:1px solid #F3E3AC;border-radius:8px;padding:10px 16px;font-size:12.5px;color:#8A6100;line-height:1.5;">Démonstration : index et fichiers factices. En production, un script planifié scanne le réseau et écrit l'index ; la qualification est enregistrée en base.</div>
+    <div style="display:grid;grid-template-columns:1fr 1.1fr;gap:16px;align-items:stretch;">
+      <div style="background:#FFFFFF;border:1px solid #E2E3EE;border-radius:10px;padding:20px 24px;display:flex;flex-direction:column;gap:16px;">
+        <div style="font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#6A6A85;">Bibliothèque de référence</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <div style="display:flex;flex-direction:column;gap:2px;">
+            <div style="font-size:30px;font-weight:700;color:#000191;">{{ nbTotal }}</div>
+            <div style="font-size:12.5px;color:#6A6A85;">documents au total</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:2px;">
+            <div style="font-size:30px;font-weight:700;color:#1E7A3C;">{{ nbQ }}</div>
+            <div style="font-size:12.5px;color:#6A6A85;">qualifiés, citables</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:2px;">
+            <div style="font-size:30px;font-weight:700;color:#8A6100;">{{ nbA }}</div>
+            <div style="font-size:12.5px;color:#6A6A85;">à qualifier</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:2px;">
+            <div style="font-size:30px;font-weight:700;color:#C21F16;">{{ nbR }}</div>
+            <div style="font-size:12.5px;color:#6A6A85;">à revoir</div>
+          </div>
+        </div>
+        <div style="border-top:1px solid #EEEFF6;padding-top:12px;font-size:12.5px;color:#8A8AA5;line-height:1.5;">Un document mal qualifié = une citation inutilisable côté chargé d'affaires.</div>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E3EE;border-radius:10px;padding:20px 24px;display:flex;flex-direction:column;gap:12px;">
+        <div style="font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#6A6A85;">Couverture par dimension</div>
+        <div style="display:flex;flex-direction:column;gap:9px;">
+          <sc-for list="{{ couverture }}" as="cv" hint-placeholder-count="5">
+            <div style="display:flex;flex-direction:column;gap:6px;">
+              <div onClick="{{ cv.onToggle }}" style="display:flex;align-items:center;gap:12px;cursor:pointer;border-radius:6px;padding:2px 4px;margin:-2px -4px;" style-hover="background:#FAFAFE">
+                <div style="width:118px;font-size:13px;font-weight:600;">{{ cv.label }}</div>
+                <div style="flex:1;height:8px;background:#EEEFF6;border-radius:999px;overflow:hidden;">
+                  <div style="height:100%;width:{{ cv.pct }}%;background:{{ cv.barColor }};border-radius:999px;transition:width .4s ease;"></div>
+                </div>
+                <div style="width:14px;font-size:13px;font-weight:700;text-align:right;">{{ cv.count }}</div>
+                <div style="width:96px;font-size:11px;font-weight:700;color:{{ cv.chipColor }};background:{{ cv.chipBg }};padding:3px 0;border-radius:5px;text-align:center;">{{ cv.chipLabel }}</div>
+                <div style="font-size:11px;color:#8A8AA5;transform:rotate({{ cv.chev }}deg);transition:transform .2s;">▾</div>
+              </div>
+              <sc-if value="{{ cv.open }}" hint-placeholder-val="{{ false }}">
+                <div style="background:#FAFAFE;border:1px solid #EEEFF6;border-radius:8px;padding:10px 12px;display:flex;flex-direction:column;gap:8px;animation:ddfade .2s ease;">
+                  <div style="font-size:12px;font-weight:600;color:#41415E;">{{ cv.breakdown }}</div>
+                  <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                    <sc-for list="{{ cv.paysDetail }}" as="pv" hint-placeholder-count="7">
+                      <div style="font-size:11.5px;font-weight:600;color:{{ pv.color }};background:{{ pv.bg }};border:1px solid {{ pv.border }};padding:2px 9px;border-radius:999px;">{{ pv.label }}</div>
+                    </sc-for>
+                  </div>
+                  <div style="font-size:11.5px;color:#8A8AA5;line-height:1.45;">{{ cv.missingLine }}</div>
+                </div>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <div style="display:flex;align-items:baseline;gap:10px;">
+        <div style="font-size:16px;font-weight:700;">À qualifier d'abord</div>
+        <div style="font-size:13px;color:#6A6A85;">{{ nbFile }} document(s) en attente — la file se vide par le haut</div>
+      </div>
+      <sc-for list="{{ queue }}" as="qd" hint-placeholder-count="2">
+        <div style="background:#FFFFFF;border:1px solid #E2E3EE;border-radius:10px;overflow:hidden;">
+          <div style="padding:14px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+            <div style="font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:{{ qd.badgeColor }};background:{{ qd.badgeBg }};padding:4px 9px;border-radius:5px;white-space:nowrap;">{{ qd.badge }}</div>
+            <div style="flex:1;min-width:240px;display:flex;flex-direction:column;gap:2px;">
+              <div style="font-size:14.5px;font-weight:600;">{{ qd.nom }}</div>
+              <div style="font-size:12px;color:#8A8AA5;font-family:monospace;">{{ qd.path }}</div>
+              <div style="font-size:12.5px;color:#6A6A85;">{{ qd.sub }}</div>
+            </div>
+            <div onClick="{{ qd.onOpen }}" style="background:#000191;color:#FFFFFF;font-size:13.5px;font-weight:700;padding:9px 20px;border-radius:8px;cursor:pointer;" style-hover="background:#1A1AAE">{{ qd.btnLabel }}</div>
+          </div>
+          <sc-if value="{{ qd.isOpen }}" hint-placeholder-val="{{ false }}">
+            <div style="border-top:1px solid #EEEFF6;background:#FAFAFE;padding:18px 20px;display:flex;flex-direction:column;gap:14px;animation:ddfade .2s ease;">
+              <div style="display:flex;flex-direction:column;gap:6px;">
+                <div style="font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#6A6A85;">Titre lisible <span style="font-weight:400;text-transform:none;letter-spacing:0;">— c'est lui qui apparaît dans les citations</span></div>
+                <input type="text" value="{{ form.qTitre }}" onChange="{{ form.onQTitre }}" style="border:1px solid #C9CADD;border-radius:8px;padding:10px 14px;font-family:'Source Sans 3',sans-serif;font-size:14.5px;outline-color:#000191;max-width:560px;">
+              </div>
+              <div style="display:flex;flex-direction:column;gap:6px;">
+                <div style="font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#6A6A85;">Portée géographique</div>
+                <div style="display:flex;gap:7px;flex-wrap:wrap;">
+                  <sc-for list="{{ form.paysOpts }}" as="fp" hint-placeholder-count="4">
+                    <div onClick="{{ fp.onPick }}" style="padding:5px 12px;font-size:12.5px;font-weight:600;border-radius:999px;border:1px solid {{ fp.border }};background:{{ fp.bg }};color:{{ fp.color }};cursor:pointer;" style-hover="border-color:#000191">{{ fp.label }}</div>
+                  </sc-for>
+                </div>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:6px;">
+                <div style="font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#6A6A85;">Dimensions concernées</div>
+                <div style="display:flex;gap:7px;flex-wrap:wrap;">
+                  <sc-for list="{{ form.dimOpts }}" as="fd" hint-placeholder-count="5">
+                    <div onClick="{{ fd.onPick }}" style="padding:5px 12px;font-size:12.5px;font-weight:700;border-radius:999px;border:1px solid {{ fd.border }};background:{{ fd.bg }};color:{{ fd.color }};cursor:pointer;" style-hover="border-color:#C9A227">{{ fd.label }}</div>
+                  </sc-for>
+                </div>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:6px;">
+                <div style="font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#6A6A85;">Mots-clés <span style="font-weight:400;text-transform:none;letter-spacing:0;">— séparés par des virgules</span></div>
+                <input type="text" value="{{ form.qTags }}" onChange="{{ form.onQTags }}" placeholder="eau, benchmarks, data centre…" style="border:1px solid #C9CADD;border-radius:8px;padding:10px 14px;font-family:'Source Sans 3',sans-serif;font-size:14.5px;outline-color:#000191;max-width:560px;">
+              </div>
+              <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding-top:2px;">
+                <div onClick="{{ form.onSave }}" style="background:{{ form.saveBg }};color:#FFFFFF;font-size:14px;font-weight:700;padding:11px 24px;border-radius:8px;cursor:{{ form.saveCursor }};">Enregistrer dans la bibliothèque</div>
+                <div onClick="{{ form.onCancel }}" style="font-size:13.5px;font-weight:600;color:#6A6A85;cursor:pointer;" style-hover="color:#000191">Annuler</div>
+                <div style="font-size:12.5px;color:#8A8AA5;">{{ form.saveHint }}</div>
+              </div>
+            </div>
+          </sc-if>
+        </div>
+      </sc-for>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;">
+        <div style="font-size:16px;font-weight:700;">Bibliothèque qualifiée</div>
+        <div style="font-size:13px;color:#6A6A85;">{{ filtreLine }}</div>
+        <sc-if value="{{ hasFilter }}" hint-placeholder-val="{{ false }}">
+          <div onClick="{{ onResetFiltres }}" style="font-size:12.5px;font-weight:700;color:#000191;cursor:pointer;" style-hover="text-decoration:underline">Réinitialiser les filtres</div>
+        </sc-if>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E2E3EE;border-radius:10px;padding:14px 20px;display:flex;flex-direction:column;gap:10px;">
+        <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;">
+          <div style="width:82px;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#6A6A85;">Dimension</div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;">
+            <sc-for list="{{ fDims }}" as="fc" hint-placeholder-count="6">
+              <div onClick="{{ fc.onPick }}" style="padding:4px 11px;font-size:12px;font-weight:600;border-radius:999px;border:1px solid {{ fc.border }};background:{{ fc.bg }};color:{{ fc.color }};cursor:pointer;" style-hover="border-color:#000191">{{ fc.label }}</div>
+            </sc-for>
+          </div>
+        </div>
+        <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;">
+          <div style="width:82px;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#6A6A85;">Géographie</div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;">
+            <sc-for list="{{ fGeos }}" as="fc2" hint-placeholder-count="5">
+              <div onClick="{{ fc2.onPick }}" style="padding:4px 11px;font-size:12px;font-weight:600;border-radius:999px;border:1px solid {{ fc2.border }};background:{{ fc2.bg }};color:{{ fc2.color }};cursor:pointer;" style-hover="border-color:#000191">{{ fc2.label }}</div>
+            </sc-for>
+          </div>
+        </div>
+        <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;">
+          <div style="width:82px;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#6A6A85;">Mot-clé</div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;">
+            <sc-for list="{{ fTags }}" as="fc3" hint-placeholder-count="6">
+              <div onClick="{{ fc3.onPick }}" style="padding:4px 11px;font-size:12px;font-weight:600;border-radius:999px;border:1px solid {{ fc3.border }};background:{{ fc3.bg }};color:{{ fc3.color }};cursor:pointer;" style-hover="border-color:#000191">{{ fc3.label }}</div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <sc-for list="{{ biblio }}" as="bd" hint-placeholder-count="4">
+          <div style="background:#FFFFFF;border:1px solid #E2E3EE;border-radius:10px;padding:13px 20px;display:flex;flex-direction:column;gap:6px;">
+            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+              <div style="font-size:14.5px;font-weight:600;">{{ bd.title }}</div>
+              <div style="font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#1E7A3C;background:#E9F5EC;padding:3px 8px;border-radius:5px;">Qualifié</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+              <div style="font-size:12.5px;color:#6A6A85;">{{ bd.metaLine }}</div>
+              <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                <sc-for list="{{ bd.tags }}" as="tg" hint-placeholder-count="2">
+                  <div style="font-size:11.5px;font-weight:600;color:#000191;background:#EBEBF9;padding:2px 8px;border-radius:999px;">#{{ tg }}</div>
+                </sc-for>
+              </div>
+            </div>
+            <div style="font-size:11.5px;color:#8A8AA5;font-family:monospace;">{{ bd.path }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <div style="display:flex;align-items:baseline;gap:10px;">
+        <div style="font-size:16px;font-weight:700;">Ressources externes liées</div>
+        <div style="font-size:13px;color:#6A6A85;">sources publiques mobilisées par l'analyse — suivent le filtre Dimension</div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+        <sc-for list="{{ externesImp }}" as="xr" hint-placeholder-count="4">
+          <div style="background:#FFFFFF;border:1px solid #E2E3EE;border-radius:10px;padding:13px 18px;display:flex;flex-direction:column;gap:4px;">
+            <div style="display:flex;align-items:center;gap:8px;justify-content:space-between;">
+              <a href="{{ xr.url }}" target="_blank" style="font-size:14px;font-weight:700;text-decoration:none;">{{ xr.nom }} ↗</a>
+              <div style="font-size:10.5px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#8A6100;background:#FFF7DE;padding:2px 7px;border-radius:4px;">externe</div>
+            </div>
+            <div style="font-size:12.5px;color:#41415E;line-height:1.45;">{{ xr.desc }}</div>
+            <div style="font-size:11.5px;color:#8A8AA5;">{{ xr.dimLine }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ isForm }}" hint-placeholder-val="{{ true }}">
+  <div style="max-width:1000px;width:100%;margin:0 auto;padding:28px 24px 96px;box-sizing:border-box;display:flex;flex-direction:column;gap:20px;animation:ddfade .3s ease;">
+    <div style="background:#FFFFFF;border:1px solid #E2E3EE;border-radius:10px;padding:24px;display:flex;flex-direction:column;gap:18px;">
+      <div style="display:flex;align-items:baseline;gap:10px;">
+        <div style="font-size:17px;font-weight:700;">Votre dossier</div>
+        <div style="font-size:13px;color:#6A6A85;">type d'investissement, pays, contexte</div>
+      </div>
+      <div style="display:flex;gap:40px;flex-wrap:wrap;">
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#6A6A85;">Type d'investissement</div>
+          <div style="display:flex;gap:0;border:1px solid #C9CADD;border-radius:8px;overflow:hidden;width:fit-content;">
+            <sc-for list="{{ types }}" as="t" hint-placeholder-count="3">
+              <div onClick="{{ t.onPick }}" style="padding:8px 18px;font-size:14px;font-weight:600;cursor:pointer;background:{{ t.bg }};color:{{ t.color }};border-right:1px solid #C9CADD;" style-hover="background:{{ t.hoverBg }}">{{ t.label }}</div>
+            </sc-for>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#6A6A85;">Géographie du projet</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <sc-for list="{{ pays }}" as="p" hint-placeholder-count="5">
+              <div onClick="{{ p.onPick }}" style="padding:7px 14px;font-size:13.5px;font-weight:600;cursor:pointer;border-radius:999px;border:1px solid {{ p.border }};background:{{ p.bg }};color:{{ p.color }};" style-hover="border-color:#000191">{{ p.label }}</div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div style="font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#6A6A85;">Description libre <span style="font-weight:400;text-transform:none;letter-spacing:0;">(facultatif)</span></div>
+        <textarea placeholder="Décrivez le dossier : client, projet, business model, éléments DD connus…" style="width:100%;box-sizing:border-box;min-height:76px;border:1px solid #C9CADD;border-radius:8px;padding:12px 14px;font-family:'Source Sans 3',sans-serif;font-size:14.5px;color:#17173A;resize:vertical;outline-color:#000191;">Construction d'un data center Tier III à Amman par DataMena. Refroidissement adiabatique en circuit fermé, PPA solaire prévu. Zone de stress hydrique élevé.</textarea>
+      </div>
+    </div>
+
+    <div style="background:#FFFFFF;border:1px solid #E2E3EE;border-radius:10px;padding:24px;display:flex;flex-direction:column;gap:16px;">
+      <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;">
+        <div style="font-size:17px;font-weight:700;">Notes visées par dimension</div>
+        <div style="font-size:13px;color:#6A6A85;">l'analyse vérifie la couverture pour la note que <strong>vous</strong> visez</div>
+      </div>
+      <div style="display:flex;flex-direction:column;">
+        <sc-for list="{{ noteRows }}" as="row" hint-placeholder-count="4">
+          <div style="display:flex;align-items:center;gap:20px;padding:10px 0;border-bottom:1px solid #EEEFF6;">
+            <div style="width:120px;font-size:14.5px;font-weight:600;">{{ row.label }}</div>
+            <sc-if value="{{ row.excluded }}" hint-placeholder-val="{{ false }}">
+              <div style="font-size:13px;color:#6A6A85;font-style:italic;">évaluée via le questionnaire Genre dédié — hors de cette analyse</div>
+            </sc-if>
+            <sc-if value="{{ row.selectable }}" hint-placeholder-val="{{ true }}">
+              <div style="display:flex;border:1px solid #C9CADD;border-radius:8px;overflow:hidden;">
+                <sc-for list="{{ row.opts }}" as="o" hint-placeholder-count="4">
+                  <div onClick="{{ o.onPick }}" style="padding:6px 16px;font-size:13.5px;font-weight:700;cursor:pointer;background:{{ o.bg }};color:{{ o.color }};border-right:1px solid #C9CADD;" style-hover="background:{{ o.hoverBg }}">{{ o.label }}</div>
+                </sc-for>
+              </div>
+              <div style="font-size:12.5px;color:{{ row.hintColor }};">{{ row.hint }}</div>
+            </sc-if>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+    <div style="background:#FFFFFF;border:1px solid #E2E3EE;border-radius:10px;padding:24px;display:flex;flex-direction:column;gap:14px;">
+      <div style="display:flex;align-items:baseline;gap:10px;">
+        <div style="font-size:17px;font-weight:700;">Documents du client</div>
+        <div style="font-size:13px;color:#6A6A85;">rapports ESG, business plan, études, certifications…</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <sc-for list="{{ docs }}" as="d" hint-placeholder-count="3">
+          <div style="display:flex;align-items:center;gap:12px;border:1px solid #E2E3EE;border-radius:8px;padding:10px 14px;background:#FAFAFE;">
+            <div style="width:34px;height:34px;border-radius:6px;background:#EBEBF9;color:#000191;display:flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:700;letter-spacing:0.05em;">PDF</div>
+            <div style="flex:1;display:flex;flex-direction:column;">
+              <div style="font-size:14px;font-weight:600;">{{ d.name }}</div>
+              <div style="font-size:12px;color:#6A6A85;">{{ d.meta }}</div>
+            </div>
+            <div onClick="{{ d.onRemove }}" style="font-size:12.5px;color:#6A6A85;cursor:pointer;padding:4px 8px;border-radius:6px;" style-hover="color:#E2231A;background:#FCEBEA">Retirer</div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="display:flex;gap:10px;align-items:center;">
+        <div onClick="{{ onAddDoc }}" style="border:1px dashed #9A9BC4;color:#000191;font-size:13.5px;font-weight:600;padding:9px 16px;border-radius:8px;cursor:pointer;" style-hover="background:#F2F2FC;border-color:#000191">+ Joindre un fichier (.pdf, .txt, .md)</div>
+        <div style="font-size:12px;color:#6A6A85;">jusqu'à 100 pages / 30 Mo par document</div>
+      </div>
+    </div>
+
+    <div style="position:sticky;bottom:0;background:linear-gradient(to top, #F2F3F8 70%, rgba(242,243,248,0));padding:16px 0 20px;">
+      <div style="background:#FFFFFF;border:1px solid #E2E3EE;border-radius:10px;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;box-shadow:0 4px 18px rgba(23,23,58,0.07);">
+        <div style="font-size:13.5px;color:#41415E;max-width:560px;line-height:1.4;">{{ ctaHint }}</div>
+        <div onClick="{{ onAnalyse }}" style="background:#000191;color:#FFFFFF;font-size:15px;font-weight:700;padding:13px 28px;border-radius:8px;cursor:pointer;white-space:nowrap;" style-hover="background:#1A1AAE">Analyser le dossier →</div>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ isAnalyse }}" hint-placeholder-val="{{ false }}">
+  <div style="max-width:640px;width:100%;margin:0 auto;padding:56px 24px;box-sizing:border-box;animation:ddfade .3s ease;">
+    <div style="background:#FFFFFF;border:1px solid #E2E3EE;border-radius:12px;padding:32px;display:flex;flex-direction:column;gap:24px;">
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <div style="font-size:19px;font-weight:700;">Analyse en cours…</div>
+        <div style="font-size:14px;color:#6A6A85;">Data centre · Jordanie · {{ nbVises }} dimension(s) visée(s) · {{ nbDocs }} documents</div>
+      </div>
+      <div style="height:6px;background:#EEEFF6;border-radius:999px;overflow:hidden;">
+        <div style="height:100%;width:{{ progressPct }}%;background:#000191;border-radius:999px;transition:width .5s ease;"></div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:2px;">
+        <sc-for list="{{ analyseSteps }}" as="a" hint-placeholder-count="6">
+          <div style="display:flex;align-items:center;gap:14px;padding:9px 0;opacity:{{ a.opacity }};">
+            <sc-if value="{{ a.done }}" hint-placeholder-val="{{ false }}">
+              <div style="width:22px;height:22px;border-radius:999px;background:#E9F5EC;color:#1E7A3C;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;">✓</div>
+            </sc-if>
+            <sc-if value="{{ a.active }}" hint-placeholder-val="{{ false }}">
+              <div style="width:18px;height:18px;border-radius:999px;border:3px solid #D6D6F0;border-top-color:#000191;animation:ddspin .8s linear infinite;"></div>
+            </sc-if>
+            <sc-if value="{{ a.pending }}" hint-placeholder-val="{{ false }}">
+              <div style="width:20px;height:20px;border-radius:999px;border:1px solid #D5D6E6;margin:1px;"></div>
+            </sc-if>
+            <div style="display:flex;flex-direction:column;">
+              <div style="font-size:14.5px;font-weight:{{ a.weight }};color:{{ a.color }};">{{ a.label }}</div>
+              <sc-if value="{{ a.active }}" hint-placeholder-val="{{ false }}">
+                <div style="font-size:12.5px;color:#6A6A85;animation:ddpulse 1.6s ease infinite;">{{ a.detail }}</div>
+              </sc-if>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="border-top:1px solid #EEEFF6;padding-top:16px;font-size:13px;color:#6A6A85;line-height:1.5;">Chaque constat sera appuyé par une citation de vos documents (« document, p. X »). L'outil ne propose jamais de note.</div>
+    </div>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ isResults }}" hint-placeholder-val="{{ false }}">
+  <div style="max-width:1000px;width:100%;margin:0 auto;padding:28px 24px 64px;box-sizing:border-box;display:flex;flex-direction:column;gap:20px;animation:ddfade .3s ease;">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+      <div style="display:flex;flex-direction:column;gap:4px;">
+        <div style="font-size:21px;font-weight:700;">Résultats de l'analyse</div>
+        <div style="font-size:13.5px;color:#6A6A85;">Data centre · Jordanie · {{ nbDocs }} documents lus · grille Data Centre (source de vérité)</div>
+      </div>
+      <div onClick="{{ onRestart }}" style="border:1px solid #C9CADD;color:#000191;font-size:13.5px;font-weight:600;padding:9px 16px;border-radius:8px;cursor:pointer;background:#FFFFFF;" style-hover="border-color:#000191">↺ Modifier le dossier et relancer</div>
+    </div>
+
+    <div style="background:#000191;color:#FFFFFF;border-radius:10px;padding:20px 24px;display:flex;align-items:center;gap:24px;flex-wrap:wrap;">
+      <div style="flex:1;min-width:260px;display:flex;flex-direction:column;gap:4px;">
+        <div style="font-size:16.5px;font-weight:700;">{{ syntheseTitre }}</div>
+        <div style="font-size:13.5px;color:#CFCFF2;line-height:1.45;">{{ syntheseSub }}</div>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <sc-for list="{{ dimChips }}" as="c" hint-placeholder-count="3">
+          <div onClick="{{ c.onGo }}" style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.25);border-radius:8px;padding:8px 14px;display:flex;flex-direction:column;gap:3px;cursor:pointer;min-width:104px;" style-hover="background:rgba(255,255,255,0.16)">
+            <div style="font-size:12.5px;font-weight:600;color:#DCDCF6;">{{ c.label }} <span style="color:#FDC533;">{{ c.note }}</span></div>
+            <div style="font-size:12px;font-weight:700;color:{{ c.color }};">{{ c.statut }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+    <sc-for list="{{ dims }}" as="dim" hint-placeholder-count="3">
+      <div style="background:#FFFFFF;border:1px solid {{ dim.borderColor }};border-radius:10px;overflow:hidden;">
+        <div onClick="{{ dim.onToggle }}" style="display:flex;align-items:center;gap:16px;padding:18px 24px;cursor:pointer;flex-wrap:wrap;" style-hover="background:#FAFAFE">
+          <div style="display:flex;align-items:center;gap:10px;min-width:220px;">
+            <div style="font-size:16.5px;font-weight:700;">{{ dim.label }}</div>
+            <div style="background:#FDC533;color:#3A2E00;font-size:12px;font-weight:700;padding:3px 9px;border-radius:999px;">note visée {{ dim.note }}</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;flex:1;min-width:200px;">
+            <div style="display:flex;height:8px;border-radius:999px;overflow:hidden;width:130px;">
+              <div style="width:{{ dim.pctOk }}%;background:#2E9E52;"></div>
+              <div style="width:{{ dim.pctMid }}%;background:#F0A800;"></div>
+              <div style="width:{{ dim.pctKo }}%;background:#E2231A;"></div>
+            </div>
+            <div style="font-size:12.5px;color:#6A6A85;">{{ dim.countLine }}</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;">
+            <div style="font-size:13px;font-weight:700;color:{{ dim.verdictColor }};background:{{ dim.verdictBg }};padding:5px 12px;border-radius:999px;">{{ dim.verdict }}</div>
+            <div style="font-size:13px;color:#6A6A85;transform:rotate({{ dim.chev }}deg);transition:transform .2s;">▾</div>
+          </div>
+        </div>
+        <sc-if value="{{ dim.open }}" hint-placeholder-val="{{ false }}">
+          <div style="border-top:1px solid #EEEFF6;padding:20px 24px 24px;display:flex;flex-direction:column;gap:18px;animation:ddfade .25s ease;">
+            <div style="font-family:'Source Serif 4',Georgia,serif;font-size:15.5px;line-height:1.55;color:#2A2A4A;max-width:820px;">{{ dim.avis }}</div>
+            <div style="border:1px solid #F3E3AC;border-radius:8px;overflow:hidden;background:#FFFBEE;">
+              <div onClick="{{ dim.onToggleGrille }}" style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 16px;cursor:pointer;" style-hover="background:#FFF7DE">
+                <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;">
+                  <div style="font-size:12px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:#8A6100;">Exigence de la grille</div>
+                  <div style="font-size:13.5px;font-weight:600;color:#2A2A4A;">{{ dim.exigenceTexte }}</div>
+                </div>
+                <div style="font-size:12.5px;font-weight:600;color:#8A6100;white-space:nowrap;">{{ dim.grilleLabel }} <span style="display:inline-block;transform:rotate({{ dim.grilleChev }}deg);transition:transform .2s;">▾</span></div>
+              </div>
+              <sc-if value="{{ dim.grilleOpen }}" hint-placeholder-val="{{ false }}">
+                <div style="border-top:1px solid #F3E3AC;padding:14px 16px;display:flex;flex-direction:column;gap:8px;animation:ddfade .2s ease;">
+                  <div style="font-size:12px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:#8A6100;">Questions de due diligence</div>
+                  <sc-for list="{{ dim.questions }}" as="q" hint-placeholder-count="3">
+                    <div style="display:flex;gap:8px;font-size:13.5px;color:#41415E;line-height:1.5;">
+                      <div style="color:#C9A227;">•</div>
+                      <div>{{ q }}</div>
+                    </div>
+                  </sc-for>
+                </div>
+              </sc-if>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:12px;">
+              <sc-for list="{{ dim.reqs }}" as="r" hint-placeholder-count="3">
+                <div style="border:1px solid #EEEFF6;border-radius:8px;padding:14px 16px;display:flex;gap:14px;background:{{ r.bg }};">
+                  <div style="width:88px;flex-shrink:0;padding-top:1px;">
+                    <div style="font-size:11px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:{{ r.stColor }};background:{{ r.stBg }};padding:4px 8px;border-radius:5px;text-align:center;">{{ r.statut }}</div>
+                  </div>
+                  <div style="flex:1;display:flex;flex-direction:column;gap:8px;">
+                    <div style="font-size:14.5px;font-weight:700;">{{ r.titre }}</div>
+                    <div style="font-size:13.5px;color:#41415E;line-height:1.5;">{{ r.constat }}</div>
+                    <sc-if value="{{ r.hasQuote }}" hint-placeholder-val="{{ false }}">
+                      <div style="display:flex;flex-direction:column;gap:3px;padding:8px 12px;background:rgba(0,1,145,0.035);border-radius:6px;">
+                        <div style="font-family:'Source Serif 4',Georgia,serif;font-style:italic;font-size:13.5px;color:#33335A;line-height:1.5;">« {{ r.quote }} »</div>
+                        <div style="font-size:12px;font-weight:600;color:#000191;">{{ r.source }}</div>
+                      </div>
+                    </sc-if>
+                    <sc-if value="{{ r.hasAction }}" hint-placeholder-val="{{ false }}">
+                      <div style="display:flex;gap:8px;align-items:baseline;font-size:13.5px;line-height:1.5;">
+                        <div style="font-weight:700;color:#8A6100;white-space:nowrap;">→ À demander :</div>
+                        <div style="color:#41415E;">{{ r.action }}</div>
+                      </div>
+                    </sc-if>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </sc-if>
+      </div>
+    </sc-for>
+
+    <div style="background:#FFFFFF;border:1px solid #E2E3EE;border-radius:10px;padding:16px 24px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+      <div style="font-size:14.5px;font-weight:700;">Biodiversité</div>
+      <div style="font-size:13.5px;color:#6A6A85;">pas de note visée — non analysée.</div>
+      <div style="flex:1;"></div>
+      <div style="font-size:14.5px;font-weight:700;">Genre</div>
+      <div style="font-size:13.5px;color:#6A6A85;">évaluée via le questionnaire et l'outil Genre dédiés.</div>
+    </div>
+
+    <div style="background:#FFFFFF;border:1px solid #E2E3EE;border-radius:10px;overflow:hidden;">
+      <div style="background:#FFF7DE;border-bottom:1px solid #F3E3AC;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+        <div style="display:flex;flex-direction:column;gap:2px;">
+          <div style="font-size:16px;font-weight:700;">À redemander au client — synthèse</div>
+          <div style="font-size:13px;color:#6A6A85;">{{ nbDemandes }} demande(s), prêtes à copier dans un e-mail</div>
+        </div>
+        <div onClick="{{ onCopy }}" style="border:1px solid #C9A227;color:#6E5200;font-size:13px;font-weight:700;padding:8px 16px;border-radius:8px;cursor:pointer;background:#FFFFFF;" style-hover="background:#FFF2C9">{{ copyLabel }}</div>
+      </div>
+      <div style="padding:18px 24px;display:flex;flex-direction:column;gap:12px;">
+        <sc-for list="{{ demandes }}" as="dm" hint-placeholder-count="4">
+          <div style="display:flex;gap:12px;align-items:baseline;">
+            <div style="font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#000191;background:#EBEBF9;padding:3px 8px;border-radius:5px;white-space:nowrap;">{{ dm.dim }}</div>
+            <div style="font-size:14px;color:#2A2A4A;line-height:1.5;">{{ dm.texte }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+    <div style="text-align:center;font-size:12.5px;color:#8A8AA5;line-height:1.5;padding-top:4px;">Grille sectorielle = source de vérité. L'outil évalue la couverture et cite ses sources ; la note reste une décision humaine.</div>
+  </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;onglet&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;criteres&quot;,&quot;options&quot;:[&quot;criteres&quot;,&quot;dossier&quot;],&quot;tsType&quot;:&quot;'criteres'|'dossier'&quot;,&quot;section&quot;:&quot;Navigation&quot;},&quot;ecran&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;description&quot;,&quot;options&quot;:[&quot;description&quot;,&quot;analyse&quot;,&quot;resultats&quot;],&quot;tsType&quot;:&quot;'description'|'analyse'|'resultats'&quot;,&quot;section&quot;:&quot;Navigation&quot;},&quot;toutDeplier&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Résultats&quot;}}">
+class Component extends DCLogic {
+  state = {
+    screen: null, type: 'Data Centre', pays: 'Jordanie',
+    notes: { attenuation: '+2', adaptation: '+2', social: '+1', biodiversite: null },
+    docs: [
+      { name: '01_etude_adaptation_eau.pdf', meta: '42 pages · étude eau & adaptation' },
+      { name: '02_memo_investissement.pdf', meta: '28 pages · mémo d\'investissement' },
+      { name: '03_note_technique_refroidissement.pdf', meta: '15 pages · note technique' },
+      { name: '04_rapport_esg.pdf', meta: '31 pages · rapport ESG 2025' }
+    ],
+    step: -1, openDims: { adaptation: true }, openGrille: {}, copied: false,
+    tab: null, secteur: 'Numérique', grille: 'Data centre', selDim: 'attenuation', selLevel: '+2', openChemins: {}, openTip: null,
+    impUnlocked: false, impPw: '', impErr: false, qualifId: null, qTitre: '', qPays: 'Monde', qDims: [], qTags: '',
+    bibDim: 'Toutes', bibGeo: 'Toutes', bibTag: 'Tous', resOpen: false, resPays: 'Kenya',
+    bib: [
+      { id: 1, statut: 'attente', file: 'rapport_genre_2X_v3_final.pdf', path: 'bibliotheque/_nouveaux/rapport_genre_2X_v3_final.pdf', sub: 'Détecté sur le réseau le 07/07/2026' },
+      { id: 2, statut: 'attente', file: 'DC_wateruse_benchmarks_draft.xlsx', path: 'bibliotheque/_nouveaux/DC_wateruse_benchmarks_draft.xlsx', sub: 'Détecté sur le réseau le 07/07/2026' },
+      { id: 3, statut: 'revoir', title: 'Fiche méthodo co-bénéfices climat (brouillon)', path: 'bibliotheque/fiche_methodo_cobenefices_climat.pdf', pays: 'Monde', dims: ['Atténuation', 'Adaptation'], tags: ['co-bénéfices', 'méthodologie', 'finance climat'], date: '13/07/2026', sub: 'Version brouillon — remplacer par la version finale avant citation.' },
+      { id: 4, statut: 'qualifie', title: 'Freedom on the Net — Arménie', path: 'bibliotheque/FOTN_2026_Armenia.pdf', pays: 'Arménie', dims: ['Social & emplois'], tags: ['inégalités', 'libertés', 'internet'], date: '14/07/2026' },
+      { id: 5, statut: 'qualifie', title: 'Armenia Poverty Snapshot 2020-2024', path: 'bibliotheque/Armenia_poverty_2025.pdf', pays: 'Arménie', dims: ['Social & emplois'], tags: ['inégalités', 'pauvreté'], date: '14/07/2026' },
+      { id: 6, statut: 'qualifie', title: 'Données numériques, résilience et politiques — Arménie', path: 'bibliotheque/Armenia_Digital_Data_Resilience.pdf', pays: 'Arménie', dims: ['Social & emplois'], tags: ['numérique'], date: '14/07/2026' },
+      { id: 7, statut: 'qualifie', title: 'Profil inclusion numérique — Sénégal', path: 'bibliotheque/Senegal_Profil_inclusion_numerique.pdf', pays: 'Sénégal', dims: ['Social & emplois'], tags: ['fracture numérique', 'rural'], date: '07/07/2026' },
+      { id: 8, statut: 'qualifie', title: 'Note risque climatique — Kenya', path: 'bibliotheque/Kenya_Adaptation_Note_risque_climatique.pdf', pays: 'Kenya', dims: ['Adaptation'], tags: ['eau', 'chaleur', 'inondation'], date: '07/07/2026' },
+      { id: 9, statut: 'qualifie', title: 'Facteurs d\'émission réseaux — Afrique', path: 'bibliotheque/Afrique_Attenuation_Facteurs_emission_reseaux.xlsx', pays: 'Afrique', dims: ['Atténuation'], tags: ['facteurs d\'émission'], date: '07/07/2026' }
+    ]
+  };
+  stepLabels() {
+    const labels = { attenuation: 'Atténuation', adaptation: 'Adaptation', social: 'Social', biodiversite: 'Biodiversité' };
+    const mid = Object.entries(this.state.notes).filter(([k, v]) => v).map(([k, v]) =>
+      ({ label: 'Vérification des exigences · ' + labels[k], detail: 'recherche des preuves pour la note visée ' + v }));
+    return [
+      { label: 'Lecture des documents du dossier', detail: '03_note_technique_refroidissement.pdf…' },
+      { label: 'Chargement de la grille sectorielle Data Centre', detail: 'grille maître, version en vigueur' },
+      ...mid,
+      { label: 'Rédaction des constats et des citations', detail: 'chaque constat est relié à un document, page à l\'appui' }
+    ];
+  }
+  dimData = [
+    { id: 'attenuation', label: 'Atténuation', note: '+2', verdict: 'Presque couvert', level: 'mid',
+      exigence: { '+1': 'Projet avec des mesures d\'atténuation documentées.', '+2': 'Projet avec co-bénéfices atténuation ≥ 30 % du financement, ou réduction significative et chiffrée des émissions.', '+3': 'Projet dédié à l\'atténuation (co-bénéfices ≥ 85 %).' },
+      questions: [
+        'Le bilan carbone du projet (émissions générées / évitées) est-il chiffré et documenté ?',
+        'La part d\'énergies renouvelables dans la consommation est-elle établie et contractualisée ?',
+        'Une trajectoire de réduction avec jalons intermédiaires est-elle formalisée ?'
+      ],
+      avis: 'Le dossier démontre solidement l\'atténuation : bilan des émissions évitées, part d\'énergies renouvelables et efficacité énergétique sont documentés et chiffrés. Seule la trajectoire de réduction manque de jalons intermédiaires pour valider pleinement la note visée.',
+      reqs: [
+        { statut: 'partiel', titre: 'Trajectoire de réduction formalisée', constat: 'Un objectif de neutralité est affiché, mais sans jalons intermédiaires chiffrés.', quote: 'l\'objectif de neutralité carbone est mentionné à horizon 2035, sans étapes intermédiaires', source: '02_memo_investissement.pdf, p. 11', action: 'des jalons intermédiaires chiffrés (ex. 2028, 2031) et le périmètre couvert (scopes 1-2).' },
+        { statut: 'couvert', titre: 'Émissions évitées chiffrées', constat: 'Le refroidissement adiabatique et son impact carbone sont quantifiés.', quote: 'émissions évitées estimées à 12 400 tCO₂e/an grâce au refroidissement adiabatique en circuit fermé', source: '03_note_technique_refroidissement.pdf, p. 3' },
+        { statut: 'couvert', titre: 'Part d\'énergies renouvelables', constat: 'Un PPA solaire couvre la majorité de la consommation dès la mise en service.', quote: 'PPA solaire couvrant 60 % de la consommation électrique dès la mise en service', source: '02_memo_investissement.pdf, p. 6' },
+        { statut: 'couvert', titre: 'Efficacité énergétique (PUE)', constat: 'Le PUE de conception est simulé et documenté.', quote: 'PUE simulé à charge nominale : 1,38 – 1,42', source: '03_note_technique_refroidissement.pdf, p. 2' }
+      ] },
+    { id: 'adaptation', label: 'Adaptation', note: '+2', verdict: 'Pas encore couvert', level: 'ko',
+      exigence: { '+1': 'Projet intégrant des mesures d\'adaptation identifiées.', '+2': 'Projet avec co-bénéfices adaptation ≥ 30 % du financement, méthode de chiffrage validée.', '+3': 'Projet dédié à l\'adaptation (co-bénéfices ≥ 85 %).' },
+      questions: [
+        'Une analyse des risques climatiques physiques (méthode explicite, scénarios, horizons) est-elle disponible ?',
+        'Les mesures d\'adaptation sont-elles chiffrées (CAPEX) avec une méthode validée par les spécialistes climat ?',
+        'Un objectif de performance énergétique ou environnementale est-il formalisé (engagement, certification) ?',
+        'La vulnérabilité du système au sens large (territoire, bénéficiaires, continuité de service) est-elle analysée ?'
+      ],
+      avis: 'Le dossier réunit les fondations de la démonstration adaptation — diagnostic des risques, mesures chiffrées, co-bénéfices au-dessus du seuil. Mais la méthode de calcul n\'est pas validée par les spécialistes climat, l\'engagement sur la performance énergétique n\'est pas formalisé, et l\'analyse de vulnérabilité reste limitée au seul risque hydrique du projet.',
+      reqs: [
+        { statut: 'manquant', titre: 'Analyse de vulnérabilité du système au sens large', constat: 'Aucune analyse ne couvre le territoire, les bénéficiaires du data centre ou la continuité de service — l\'étude se limite au risque hydrique du projet lui-même.', quote: 'la contribution du projet à la résilience du système hydrique local reste limitée à la convention d\'eaux grises', source: '01_etude_adaptation_eau.pdf, p. 19', action: 'une analyse de vulnérabilité climatique du système dans lequel le projet opère (territoire jordanien, bénéficiaires, continuité de service numérique).' },
+        { statut: 'partiel', titre: 'Méthode de chiffrage validée', constat: 'L\'approche forfaitaire AFD est retenue, mais elle n\'a pas été confirmée par les spécialistes climat et le CAPEX éligible n\'est pas détaillé.', quote: 'l\'approche forfaitaire AFD (15 % par risque pertinent traité) est retenue comme méthode alternative', source: '03_note_technique_refroidissement.pdf, p. 7', action: 'la validation de la méthode par les spécialistes climat, avec le détail du CAPEX éligible et le dénominateur utilisé.' },
+        { statut: 'partiel', titre: 'Objectif de performance énergétique formalisé', constat: 'Le PUE cible est mentionné, mais sans engagement contractuel ni certification visée.', quote: 'PUE cible de 1,40 mentionné dans le dossier technique, sans engagement contractuel à ce stade', source: '02_memo_investissement.pdf, p. 9', action: 'de préciser si le PUE cible fera l\'objet d\'un engagement contractuel, ou si une certification (EDGE, LEED) est visée.' },
+        { statut: 'couvert', titre: 'Diagnostic des risques climatiques physiques', constat: 'Analyse complète avec méthode explicite, scénarios et horizons temporels.', quote: 'stress hydrique de référence « extrêmement élevé » (> 80 %), projections CMIP6 (SSP2-4.5 / SSP5-8.5), horizons 2035 et 2050', source: '01_etude_adaptation_eau.pdf, p. 4' },
+        { statut: 'couvert', titre: 'Mesures d\'adaptation chiffrées (seuil ≥ 30 %)', constat: 'Le CAPEX d\'adaptation est isolé et dépasse le seuil de co-bénéfices.', quote: 'CAPEX des mesures d\'adaptation : 7,1 MUSD, soit 31 % du financement sollicité', source: '01_etude_adaptation_eau.pdf, p. 12' }
+      ] },
+    { id: 'social', label: 'Social', note: '+1', verdict: 'Couvert', level: 'ok',
+      exigence: { '+1': 'Système de gestion E&S conforme et retombées sociales documentées.', '+2': 'Retombées sociales significatives et mesurées (emplois, accès aux services).', '+3': 'Projet à finalité sociale dédiée.' },
+      questions: [
+        'Le système de gestion E&S est-il conforme aux référentiels attendus (IFC) et audité ?',
+        'Les retombées locales (emplois, formation) sont-elles chiffrées ?',
+        'Un mécanisme de plainte opérationnel et accessible existe-t-il ?'
+      ],
+      avis: 'Les exigences de la note visée +1 sont toutes couvertes : système de gestion E&S conforme, retombées locales documentées et mécanisme de plainte opérationnel.',
+      reqs: [
+        { statut: 'couvert', titre: 'Système de gestion E&S conforme', constat: 'Le SGES est aligné sur les référentiels attendus et audité récemment.', quote: 'SGES aligné sur les normes de performance IFC, audité en mars 2025', source: '04_rapport_esg.pdf, p. 5' },
+        { statut: 'couvert', titre: 'Emplois locaux et formation', constat: 'Les retombées en emploi et en compétences sont chiffrées.', quote: '85 emplois directs et un programme de certification technique pour les techniciens locaux', source: '02_memo_investissement.pdf, p. 14' },
+        { statut: 'couvert', titre: 'Mécanisme de plainte opérationnel', constat: 'Un mécanisme de recours est en place et accessible.', quote: 'mécanisme de recours accessible aux communautés riveraines, avec registre et délais de réponse', source: '04_rapport_esg.pdf, p. 9' }
+      ] }
+  ];
+  startAnalysis() {
+    this.clearTimer();
+    this.setState({ screen: 'analyse', step: 0 });
+    this._timer = setInterval(() => {
+      this.setState(s => {
+        const n = this.stepLabels().length;
+        if (s.step >= n - 1) {
+          this.clearTimer();
+          setTimeout(() => this.setState({ screen: 'resultats' }), 700);
+          return { step: n };
+        }
+        return { step: s.step + 1 };
+      });
+    }, 850);
+  }
+  clearTimer() { if (this._timer) { clearInterval(this._timer); this._timer = null; } }
+  glossary = {
+    'PUE': 'Power Usage Effectiveness : rapport entre l\'énergie totale consommée par le data centre et l\'énergie réellement utile aux serveurs. Plus il est proche de 1, plus le site est efficace.',
+    'efficacité énergétique': 'Capacité du projet à fournir le même service en consommant moins d\'énergie. Pour un data centre, elle se mesure principalement par le PUE.',
+    'NDC': 'Contribution déterminée au niveau national : les engagements climatiques officiels du pays au titre de l\'Accord de Paris.',
+    'plan de transition': 'Feuille de route de décarbonation du client, avec des objectifs datés. « Certifié » signifie validé par un tiers reconnu (ex. SBTi).',
+    'co-bénéfices': 'Part du financement qui contribue au climat, exprimée en % du montant total. Calculée selon la méthodologie AFD.',
+    'CAPEX éligible': 'Part de l\'investissement comptabilisable comme finance climat, selon la méthodologie AFD (fiche méthodo co-bénéfices).',
+    '2X Challenge': 'Référentiel international qui qualifie un investissement comme contribuant à l\'égalité femmes-hommes (actionnariat, direction, emploi, produits).',
+    'SGES': 'Système de gestion environnementale et sociale : l\'organisation interne du client pour identifier et gérer ses risques E&S.'
+  };
+  scaleDefs = {
+    '-2': { label: 'Désaligné', txt: '#7F100B', tint: '#F9DEDC', selBg: '#A3170F', selTxt: '#FFFFFF' },
+    '-1': { label: 'Enjeu mal géré', txt: '#E2231A', tint: '#FCEBEA', selBg: '#E2231A', selTxt: '#FFFFFF' },
+    '0': { label: 'Pas d\'enjeu', txt: '#5A5A72', tint: '#FFFFFF', selBg: '#FFFFFF', selTxt: '#17173A', neutral: true },
+    '+1': { label: 'Pris en compte', txt: '#2E7D46', tint: '#EDF7F0', selBg: '#6FBE85', selTxt: '#FFFFFF' },
+    '+2': { label: 'Qualifie l\'objectif stratégique', txt: '#1E7A3C', tint: '#D9EFE0', selBg: '#2E9E52', selTxt: '#FFFFFF' },
+    '+3': { label: 'Excellence', txt: '#0F4D24', tint: '#C3E5CE', selBg: '#136A31', selTxt: '#FFFFFF' }
+  };
+  critData = [
+    { id: 'attenuation', pilier: 'Planète', label: 'Atténuation', sub: 'Climat — réduction des émissions',
+      enjeu: 'Les data centres sont très énergivores. L\'enjeu atténuation est de vérifier que l\'[[efficacité énergétique]] du site est suffisante. Les certifications (EDGE, LEED) sont fortement recommandées : elles simplifient beaucoup la due diligence.',
+      levels: {
+        '-2': [{ ex: 'Le projet est directement lié à une activité de la liste d\'exclusion climatique (ex. production d\'électricité à partir de charbon).' }],
+        '-1': [
+          { ex: 'Le projet n\'atteint pas les meilleurs standards d\'[[efficacité énergétique]] ([[PUE]] > 1,56 en climat humide, > 1,45 ailleurs).', only: ['Data centre'] },
+
+          { ex: 'Le projet requiert, directement ou indirectement, des capacités fossiles additionnelles pour sa consommation électrique.' },
+          { ex: 'Le projet n\'est pas aligné avec les objectifs climatiques du pays ([[NDC]], stratégie long terme).' }
+        ],
+        '0': [{ ex: 'Pas d\'enjeu : le projet n\'entre dans aucun des cas de vigilance et ne mobilise pas de finance climat.' }],
+        '+1': [
+          { ex: 'Le client a mis en place un [[plan de transition]] climatique certifié.' },
+          { ex: 'Le projet dégage des [[co-bénéfices]] climat atténuation, en dessous de 30 % du financement.' }
+        ],
+        '+2': [
+          { ex: 'Le [[CAPEX éligible]] comme finance climat atténuation dépasse 30 % du financement.', only: ['Data centre', 'Opérateurs télécoms', 'Tours télécoms'],
+            exigences: [
+              '[[PUE]] < 1,56 en climat humide (< 1,45 ailleurs) : coûts de construction hors terrain éligibles à 40 % de [[co-bénéfices]], + 10 % si certification internationale (EDGE, LEED).',
+              '[[PUE]] < 1,17 en climat humide (< 1,09 ailleurs) : éligibilité portée à 70 %, + 10 % avec certification.',
+              'Les CAPEX solaires sont éligibles à 100 %.',
+              'Se rapprocher d\'IMP pour le calcul final : un plan de CAPEX détaillé et le [[PUE]] sont nécessaires.'
+            ],
+            questions: [
+              { q: 'Le data centre sera-t-il certifié avec une certification reconnue internationalement (EDGE, LEED) ?', docs: 'Client' },
+              { q: 'Quel est le [[PUE]] du projet ? Est-il vraisemblable en pratique ?', docs: 'Client ou LTA' },
+              { q: 'Le client a-t-il réalisé un bilan gaz à effet de serre ? Quel périmètre, quelle méthodologie, quels résultats chiffrés ?', docs: 'Rapport de durabilité du client' }
+            ] },
+          { ex: 'Certification climat du portefeuille de l\'institution financière.', only: ['Institution de microfinance', 'Ligne de crédit bancaire', 'Fonds d\'investissement'] }
+        ],
+        '+3': [{ ex: 'Proparco soutient le client dans la mise en place d\'un [[plan de transition]] climatique certifié (assistance technique).' }]
+      } },
+    { id: 'adaptation', pilier: 'Planète', label: 'Adaptation', sub: 'Climat — résilience aux risques physiques',
+      enjeu: 'L\'enjeu adaptation est de démontrer que le projet résiste aux risques climatiques physiques (eau, chaleur) et qu\'il renforce la résilience du système dans lequel il opère — pas seulement la sienne.',
+      levels: {
+        '-1': [{ ex: 'Des risques climatiques physiques importants sont identifiés mais ne sont pas traités par le projet.' }],
+        '0': [{ ex: 'Pas d\'enjeu : le projet n\'est pas exposé à un risque physique significatif.' }],
+        '+1': [{ ex: 'Les risques physiques sont analysés et des mesures d\'adaptation sont identifiées et documentées.' }],
+        '+2': [
+          { ex: 'Les [[co-bénéfices]] adaptation atteignent 30 % du financement, avec une méthode de chiffrage validée.',
+            exigences: [
+              'Analyse des risques avec méthode explicite : scénarios climatiques et horizons temporels.',
+              'CAPEX d\'adaptation isolé et rapporté au financement sollicité.',
+              'Méthode validée par les spécialistes climat (incrémentale ou forfaitaire AFD à 15 % par risque traité).'
+            ],
+            questions: [
+              { q: 'Une analyse des risques physiques avec scénarios et horizons est-elle disponible ?', docs: 'Étude climat' },
+              { q: 'Le CAPEX d\'adaptation est-il isolé, et la méthode de chiffrage validée ?', docs: 'Fiche méthodo co-bénéfices climat' },
+              { q: 'La vulnérabilité du système au sens large (territoire, bénéficiaires, continuité de service) est-elle analysée ?', docs: 'Étude ou note du client' }
+            ] }
+        ],
+        '+3': [{ ex: 'Le projet est dédié à l\'adaptation : [[co-bénéfices]] ≥ 85 % du financement.' }]
+      } },
+    { id: 'biodiversite', pilier: 'Planète', label: 'Biodiversité', sub: 'Ressources naturelles et habitats',
+      enjeu: 'L\'enjeu est de vérifier que le projet ne dégrade pas d\'habitat sensible (emprise, eau, matériaux) et, au-delà, qu\'il contribue à la gestion durable des ressources naturelles.',
+      levels: {
+        '-1': [{ ex: 'Le projet a un impact sur des habitats critiques ou des ressources sensibles, sans mesures d\'atténuation.' }],
+        '0': [{ ex: 'Pas d\'enjeu : emprise et ressources sans sensibilité particulière.' }],
+        '+1': [{ ex: 'Un plan de gestion des impacts biodiversité est en place et suivi.' }],
+        '+2': [
+          { ex: 'Le projet génère des gains nets mesurés pour la biodiversité ou les ressources naturelles (ex. réutilisation d\'eaux grises, restauration d\'habitat).',
+            questions: [
+              { q: 'Les gains sont-ils mesurés, avec une situation de référence documentée ?', docs: 'Étude ou plan de gestion' },
+              { q: 'Un suivi dans le temps est-il prévu (indicateurs, fréquence) ?', docs: 'Plan de suivi du client' }
+            ] }
+        ],
+        '+3': [{ ex: 'Le projet est dédié à la conservation ou à la restauration de la biodiversité.' }]
+      } },
+    { id: 'social', pilier: 'Inclusion', label: 'Social & emplois', sub: 'Retombées sociales et conditions de travail',
+      enjeu: 'L\'enjeu est double : des risques sociaux bien gérés ([[SGES]], conditions de travail, communautés) et des retombées positives documentées (emplois, formation, accès aux services).',
+      levels: {
+        '-1': [{ ex: 'Des risques sociaux significatifs (travail, communautés) ne sont pas gérés par le client.' }],
+        '0': [{ ex: 'Pas d\'enjeu social particulier au-delà de la conformité.' }],
+        '+1': [
+          { ex: 'Le [[SGES]] du client est conforme aux référentiels attendus (normes IFC) et les retombées locales sont documentées.',
+            questions: [
+              { q: 'Le [[SGES]] est-il audité, et par qui ?', docs: 'Rapport ESG ou audit' },
+              { q: 'Les retombées en emploi et en formation sont-elles chiffrées ?', docs: 'Mémo d\'investissement' }
+            ] }
+        ],
+        '+2': [
+          { ex: 'Les retombées sociales sont significatives et mesurées : emplois créés, accès aux services essentiels, développement de compétences.',
+            questions: [
+              { q: 'Les retombées sont-elles mesurées avec des indicateurs suivis dans le temps ?', docs: 'Rapport ESG' },
+              { q: 'Un mécanisme de plainte opérationnel et accessible existe-t-il ?', docs: 'Rapport ESG' }
+            ] }
+        ],
+        '+3': [{ ex: 'Le projet a une finalité sociale dédiée (services essentiels pour des populations mal desservies).' }]
+      } },
+    { id: 'genre', pilier: 'Inclusion', label: 'Genre', sub: 'Égalité femmes-hommes',
+      noteDim: 'La notation Genre passe par le questionnaire et l\'outil dédiés — cette page rappelle la grille pour information.',
+      enjeu: 'L\'enjeu est de qualifier la contribution du projet à l\'égalité femmes-hommes, sur la base du référentiel [[2X Challenge]].',
+      levels: {
+        '0': [{ ex: 'Le projet ne remplit aucun critère [[2X Challenge]].' }],
+        '+1': [{ ex: 'Le projet atteint les seuils [[2X Challenge]] sur au moins un pilier (actionnariat, direction, emploi, produits).' }],
+        '+2': [
+          { ex: 'Le client dispose d\'une stratégie genre formalisée, avec des objectifs suivis.',
+            questions: [
+              { q: 'La stratégie genre est-elle formalisée et portée par la direction ?', docs: 'Politique ou stratégie du client' },
+              { q: 'Les indicateurs 2X sont-ils mesurés et suivis ?', docs: 'Questionnaire Genre' }
+            ] }
+        ],
+        '+3': [{ ex: 'Le projet a une finalité genre dédiée.' }]
+      } }
+  ];
+  externes = [
+    { nom: 'WRI Aqueduct', desc: 'Stress hydrique de base, par bassin', url: 'https://www.wri.org/aqueduct', dims: ['Adaptation'] },
+    { nom: 'ThinkHazard (GFDRR)', desc: 'Aléas naturels : inondation, chaleur, pénurie d\'eau', url: 'https://thinkhazard.org', dims: ['Adaptation', 'Biodiversité'] },
+    { nom: 'Banque mondiale — CCKP', desc: 'Projections climatiques par pays (2040-2059)', url: 'https://climateknowledgeportal.worldbank.org', dims: ['Adaptation', 'Atténuation'] },
+    { nom: 'IEA', desc: 'Mix énergétique & électricité', url: 'https://www.iea.org', dims: ['Atténuation'] },
+    { nom: 'Ember', desc: 'Intensité carbone du réseau électrique', url: 'https://ember-climate.org', dims: ['Atténuation'] },
+    { nom: 'Freedom on the Net', desc: 'Libertés numériques et accès à internet', url: 'https://freedomhouse.org', dims: ['Social & emplois'] },
+    { nom: '2X Global', desc: 'Critères et ressources 2X Challenge', url: 'https://www.2xglobal.org', dims: ['Genre'] }
+  ];
+  impVals(tab) {
+    const S = this.state;
+    const isImp = tab === 'imp';
+    const tryUnlock = () => {
+      if (S.impPw.trim() === 'IMP2026') this.setState({ impUnlocked: true, impErr: false, impPw: '' });
+      else this.setState({ impErr: true });
+    };
+    const dimNames = ['Atténuation', 'Adaptation', 'Biodiversité', 'Social & emplois', 'Genre'];
+    const paysOpts = ['Monde', 'Afrique', 'Kenya', 'Nigeria', 'Maroc', 'Côte d\'Ivoire', 'Sénégal', 'Arménie', 'Jordanie'];
+    const paysRef = ['Kenya', 'Nigeria', 'Maroc', 'Côte d\'Ivoire', 'Sénégal', 'Arménie', 'Jordanie'];
+    const continents = ['Afrique'];
+    const qualifies = S.bib.filter(d => d.statut === 'qualifie');
+    const attente = S.bib.filter(d => d.statut === 'attente');
+    const revoir = S.bib.filter(d => d.statut === 'revoir');
+    const maxCov = Math.max(1, ...dimNames.map(n => qualifies.filter(d => d.dims && d.dims.includes(n)).length));
+    const couverture = dimNames.map(n => {
+      const dDocs = qualifies.filter(d => d.dims && d.dims.includes(n));
+      const c = dDocs.length;
+      const nMonde = dDocs.filter(d => d.pays === 'Monde').length;
+      const nCont = dDocs.filter(d => continents.includes(d.pays)).length;
+      const nP = c - nMonde - nCont;
+      const lvl = c === 0 ? ['aucun document', '#FCEBEA', '#C21F16', '#E2231A'] : (c < 3 ? ['à enrichir', '#FBF3DC', '#8A6100', '#F0A800'] : ['bien couverte', '#E9F5EC', '#1E7A3C', '#2E9E52']);
+      const open = !!(S.openCov && S.openCov[n]);
+      const paysDetail = paysRef.map(p => {
+        const k = dDocs.filter(d => d.pays === p).length;
+        return {
+          label: p + (k ? ' · ' + k : ''),
+          bg: k ? '#E9F5EC' : '#FCEBEA', color: k ? '#1E7A3C' : '#C21F16', border: k ? '#BFE3CA' : '#F5C6C2'
+        };
+      });
+      const nMissing = paysDetail.filter(p => p.color === '#C21F16').length;
+      return {
+        label: n, count: c, pct: Math.max(4, 100 * c / maxCov), chipLabel: lvl[0], chipBg: lvl[1], chipColor: lvl[2], barColor: lvl[3],
+        breakdown: nMonde + ' monde · ' + nCont + ' continent · ' + nP + ' pays',
+        open, chev: open ? 180 : 0,
+        onToggle: () => this.setState(s => ({ openCov: { ...(s.openCov || {}), [n]: !(s.openCov && s.openCov[n]) } })),
+        paysDetail,
+        missingLine: nMissing === 0 ? 'Tous les pays de référence ont au moins un document.' : nMissing + ' pays de référence sans document dédié' + (nMonde + nCont > 0 ? ' (les documents monde/continent s\'appliquent partout, mais sans donnée locale)' : '') + '.'
+      };
+    });
+    const openQualif = (d) => {
+      const f = (d.file || d.title || '').toLowerCase();
+      const guess = [];
+      if (f.includes('genre') || f.includes('2x')) guess.push('Genre');
+      if (f.includes('water') || f.includes('eau') || f.includes('climat')) guess.push('Adaptation');
+      this.setState({
+        qualifId: d.id,
+        qTitre: d.title || (d.file || '').replace(/\.(pdf|xlsx|docx|txt|md)$/i, '').replace(/_/g, ' '),
+        qPays: d.pays || 'Monde', qDims: d.dims ? [...d.dims] : guess,
+        qTags: d.tags ? d.tags.join(', ') : ''
+      });
+    };
+    const canSave = !!(S.qTitre.trim() && S.qDims.length);
+    const form = {
+      qTitre: S.qTitre, onQTitre: (e) => this.setState({ qTitre: e.target.value }),
+      qTags: S.qTags, onQTags: (e) => this.setState({ qTags: e.target.value }),
+      paysOpts: paysOpts.map(p => ({
+        label: p, onPick: () => this.setState({ qPays: p }),
+        bg: S.qPays === p ? '#000191' : '#FFFFFF', color: S.qPays === p ? '#FFFFFF' : '#41415E',
+        border: S.qPays === p ? '#000191' : '#C9CADD'
+      })),
+      dimOpts: dimNames.map(n => {
+        const on = S.qDims.includes(n);
+        return {
+          label: n, onPick: () => this.setState(s => ({ qDims: on ? s.qDims.filter(x => x !== n) : [...s.qDims, n] })),
+          bg: on ? '#FDC533' : '#FFFFFF', color: on ? '#3A2E00' : '#41415E', border: on ? '#C9A227' : '#C9CADD'
+        };
+      }),
+      canSave, saveBg: canSave ? '#000191' : '#C9CADD', saveCursor: canSave ? 'pointer' : 'default',
+      saveHint: canSave ? 'Le document devient citable : « ' + S.qTitre.trim() + ', p. X »' : 'Un titre lisible et au moins une dimension sont nécessaires.',
+      onSave: () => {
+        if (!canSave) return;
+        this.setState(s => ({
+          qualifId: null,
+          bib: s.bib.map(d => d.id === s.qualifId ? {
+            ...d, statut: 'qualifie', title: s.qTitre.trim(), pays: s.qPays, dims: [...s.qDims],
+            tags: s.qTags.split(',').map(t => t.trim()).filter(Boolean), date: '21/07/2026', sub: null
+          } : d)
+        }));
+      },
+      onCancel: () => this.setState({ qualifId: null })
+    };
+    const mkQueueItem = (d, isNew) => ({
+      id: d.id, isNew, isOpen: S.qualifId === d.id,
+      badge: isNew ? 'Nouveau' : 'À revoir', badgeBg: isNew ? '#FDC533' : '#FCEBEA', badgeColor: isNew ? '#3A2E00' : '#C21F16',
+      nom: d.title || d.file, path: d.path, sub: d.sub,
+      btnLabel: S.qualifId === d.id ? 'Fermer' : 'Qualifier',
+      onOpen: () => S.qualifId === d.id ? this.setState({ qualifId: null }) : openQualif(d)
+    });
+    return {
+      isImp, impGate: isImp && !S.impUnlocked, impMain: isImp && S.impUnlocked,
+      impPwVal: S.impPw, impErr: S.impErr,
+      onImpPw: (e) => this.setState({ impPw: e.target.value, impErr: false }),
+      onImpKey: (e) => { if (e.key === 'Enter') tryUnlock(); },
+      onImpSubmit: tryUnlock,
+      nbTotal: S.bib.length, nbQ: qualifies.length, nbA: attente.length, nbR: revoir.length,
+      nbFile: attente.length + revoir.length,
+      couverture,
+      queue: [...attente.map(d => mkQueueItem(d, true)), ...revoir.map(d => mkQueueItem(d, false))],
+      form,
+      ...this.bibFilterVals(qualifies, dimNames, continents)
+    };
+  }
+  bibFilterVals(qualifies, dimNames, continents) {
+    const S = this.state;
+    const mkChip = (label, cur, key) => ({
+      label, onPick: () => this.setState({ [key]: label }),
+      bg: cur === label ? '#000191' : '#FFFFFF', color: cur === label ? '#FFFFFF' : '#41415E',
+      border: cur === label ? '#000191' : '#C9CADD'
+    });
+    const geoPresent = [...new Set(qualifies.map(d => d.pays))];
+    const geoOpts = ['Toutes', 'Monde', ...continents.filter(c => geoPresent.includes(c)), ...geoPresent.filter(p => p !== 'Monde' && !continents.includes(p)).sort()];
+    const tagOpts = ['Tous', ...[...new Set(qualifies.flatMap(d => d.tags || []))].sort()];
+    const filtered = qualifies.filter(d =>
+      (S.bibDim === 'Toutes' || (d.dims && d.dims.includes(S.bibDim))) &&
+      (S.bibGeo === 'Toutes' || d.pays === S.bibGeo) &&
+      (S.bibTag === 'Tous' || (d.tags && d.tags.includes(S.bibTag))));
+    const hasFilter = S.bibDim !== 'Toutes' || S.bibGeo !== 'Toutes' || S.bibTag !== 'Tous';
+    return {
+      fDims: ['Toutes', ...dimNames].map(l => mkChip(l, S.bibDim, 'bibDim')),
+      fGeos: geoOpts.map(l => mkChip(l, S.bibGeo, 'bibGeo')),
+      fTags: tagOpts.map(t => {
+        const on = S.bibTag === t;
+        return {
+          label: t === 'Tous' ? t : '#' + t, onPick: () => this.setState({ bibTag: t }),
+          bg: on ? '#000191' : '#FFFFFF', color: on ? '#FFFFFF' : '#41415E', border: on ? '#000191' : '#C9CADD'
+        };
+      }),
+      nbFiltre: filtered.length, hasFilter,
+      filtreLine: hasFilter ? filtered.length + ' document(s) sur ' + qualifies.length + ' correspondent aux filtres' : qualifies.length + ' documents citables par l\'analyse',
+      onResetFiltres: () => this.setState({ bibDim: 'Toutes', bibGeo: 'Toutes', bibTag: 'Tous' }),
+      biblio: filtered.map(d => ({
+        title: d.title, path: d.path,
+        metaLine: d.pays + ' · ' + d.dims.join(', ') + ' · qualifié le ' + d.date,
+        tags: d.tags
+      })),
+      externesImp: this.externes.filter(x => S.bibDim === 'Toutes' || x.dims.includes(S.bibDim)).map(x => ({ ...x, dimLine: x.dims.join(', ') }))
+    };
+  }
+  parse(text, ctx) {
+    const parts = String(text).split(/\[\[|\]\]/);
+    return parts.map((p, i) => {
+      if (i % 2 === 0) return { isText: true, isTerm: false, text: p };
+      const id = ctx + '|' + i;
+      return {
+        isText: false, isTerm: true, label: p, def: this.glossary[p] || '',
+        open: this.state.openTip === id,
+        onToggle: (e) => { if (e && e.stopPropagation) e.stopPropagation(); this.setState(s => ({ openTip: s.openTip === id ? null : id })); }
+      };
+    }).filter(s => s.isTerm || s.text);
+  }
+  componentWillUnmount() { this.clearTimer(); }
+  renderVals() {
+    const S = this.state, P = this.props;
+    const tab = S.tab ?? P.onglet ?? 'criteres';
+    const screen = tab === 'dossier' ? (S.screen ?? P.ecran ?? 'description') : null;
+    if (screen === 'analyse' && S.step < 0 && !this._timer) setTimeout(() => this.startAnalysis(), 50);
+    const stepDefs = [
+      { num: '1', label: 'Décrire le dossier', key: 'description' },
+      { num: '2', label: 'Analyse', key: 'analyse' },
+      { num: '3', label: 'Résultats', key: 'resultats' }
+    ];
+    const order = { description: 0, analyse: 1, resultats: 2 };
+    const cur = order[screen] ?? 0;
+    const steps = stepDefs.map((st, i) => ({
+      ...st,
+      barColor: i === cur ? '#000191' : 'transparent',
+      numBg: i < cur ? '#E9F5EC' : (i === cur ? '#000191' : '#FFFFFF'),
+      numColor: i < cur ? '#1E7A3C' : (i === cur ? '#FFFFFF' : '#8A8AA5'),
+      numBorder: i < cur ? '#BFE3CA' : (i === cur ? '#000191' : '#C9CADD'),
+      labelColor: i === cur ? '#000191' : '#6A6A85',
+      num: i < cur ? '✓' : st.num
+    }));
+    const types = ['MNO', 'Towers', 'Data Centre'].map(t => ({
+      label: t, onPick: () => this.setState({ type: t }),
+      bg: S.type === t ? '#000191' : '#FFFFFF', color: S.type === t ? '#FFFFFF' : '#41415E',
+      hoverBg: S.type === t ? '#000191' : '#F2F2FC'
+    }));
+    const pays = ['Kenya', 'Nigeria', 'Maroc', 'Côte d\'Ivoire', 'Sénégal', 'Arménie', 'Jordanie'].map(p => ({
+      label: p, onPick: () => this.setState({ pays: p }),
+      bg: S.pays === p ? '#000191' : '#FFFFFF', color: S.pays === p ? '#FFFFFF' : '#41415E',
+      border: S.pays === p ? '#000191' : '#C9CADD'
+    }));
+    const dimDefs = [
+      { id: 'attenuation', label: 'Atténuation', selectable: true },
+      { id: 'adaptation', label: 'Adaptation', selectable: true },
+      { id: 'social', label: 'Social', selectable: true },
+      { id: 'genre', label: 'Genre', excluded: true },
+      { id: 'biodiversite', label: 'Biodiversité', selectable: true }
+    ];
+    const noteRows = dimDefs.map(d => {
+      const sel = S.notes[d.id];
+      return {
+        label: d.label, excluded: !!d.excluded, selectable: !!d.selectable,
+        hint: sel ? 'note visée : ' + sel : 'pas de note visée',
+        hintColor: sel ? '#000191' : '#8A8AA5',
+        opts: d.selectable ? ['—', '+1', '+2', '+3'].map(o => {
+          const val = o === '—' ? null : o, on = sel === val;
+          const gold = on && val === '+2';
+          return {
+            label: o, onPick: () => this.setState(s => ({ notes: { ...s.notes, [d.id]: val } })),
+            bg: gold ? '#FDC533' : (on ? '#000191' : '#FFFFFF'),
+            color: gold ? '#3A2E00' : (on ? '#FFFFFF' : '#41415E'),
+            hoverBg: on ? (gold ? '#FDC533' : '#000191') : '#F2F2FC'
+          };
+        }) : []
+      };
+    });
+    const docs = S.docs.map((d, i) => ({ ...d, onRemove: () => this.setState(s => ({ docs: s.docs.filter((x, j) => j !== i) })) }));
+    const nbVises = Object.values(S.notes).filter(Boolean).length;
+    const stColors = {
+      couvert: { c: '#1E7A3C', b: '#E9F5EC', bg: '#FFFFFF' },
+      partiel: { c: '#8A6100', b: '#FBF3DC', bg: '#FFFDF6' },
+      manquant: { c: '#C21F16', b: '#FCEBEA', bg: '#FFFAF9' }
+    };
+    const openAll = !!P.toutDeplier;
+    const visibles = this.dimData.filter(d => S.notes[d.id]);
+    const dims = visibles.map(d => {
+      const n = { couvert: 0, partiel: 0, manquant: 0 };
+      d.reqs.forEach(r => n[r.statut]++);
+      const tot = d.reqs.length;
+      const lv = { ok: ['#2E9E52', '#E9F5EC', '#1E7A3C'], mid: ['#F0A800', '#FBF3DC', '#8A6100'], ko: ['#E2231A', '#FCEBEA', '#C21F16'] }[d.level];
+      const open = openAll || !!S.openDims[d.id];
+      const note = S.notes[d.id];
+      const gOpen = !!S.openGrille[d.id];
+      return {
+        ...d, open, chev: open ? 180 : 0, note,
+        exigenceTexte: note + ' — ' + (d.exigence[note] || d.exigence['+2']),
+        grilleOpen: gOpen, grilleChev: gOpen ? 180 : 0,
+        grilleLabel: gOpen ? 'Masquer l\'exigence de la grille et les questions de due diligence' : 'Voir l\'exigence de la grille et les questions de due diligence',
+        onToggleGrille: () => this.setState(s => ({ openGrille: { ...s.openGrille, [d.id]: !s.openGrille[d.id] } })),
+        onToggle: () => this.setState(s => ({ openDims: { ...s.openDims, [d.id]: !(openAll || s.openDims[d.id]) } })),
+        borderColor: open ? '#C9CADD' : '#E2E3EE',
+        pctOk: 100 * n.couvert / tot, pctMid: 100 * n.partiel / tot, pctKo: 100 * n.manquant / tot,
+        countLine: n.couvert + ' couvert' + (n.couvert > 1 ? 's' : '') + (n.partiel ? ' · ' + n.partiel + ' partiel' + (n.partiel > 1 ? 's' : '') : '') + (n.manquant ? ' · ' + n.manquant + ' manquant' + (n.manquant > 1 ? 's' : '') : ''),
+        verdictColor: lv[2], verdictBg: lv[1], verdict: d.verdict,
+        reqs: d.reqs.map(r => ({
+          ...r, statut: r.statut, stColor: stColors[r.statut].c, stBg: stColors[r.statut].b, bg: stColors[r.statut].bg,
+          hasQuote: !!r.quote, hasAction: !!r.action
+        }))
+      };
+    });
+    const dimChips = visibles.map(d => ({
+      label: d.label, note: S.notes[d.id],
+      statut: d.level === 'ok' ? '✓ Couvert' : (d.level === 'mid' ? 'Presque' : 'À compléter'),
+      color: d.level === 'ok' ? '#7BDB9B' : (d.level === 'mid' ? '#FDC533' : '#FF9B94'),
+      onGo: () => this.setState(s => ({ openDims: { ...s.openDims, [d.id]: true } }))
+    }));
+    const demandes = [];
+    visibles.forEach(d => d.reqs.forEach(r => { if (r.action) demandes.push({ dim: d.label, texte: 'Demander ' + r.action }); }));
+    const nOk = visibles.filter(d => d.level === 'ok').length;
+    const syntheseTitre = visibles.length === 0 ? 'Aucune note visée.'
+      : (nOk === visibles.length ? (visibles.length > 1 ? 'Les ' + visibles.length + ' dimensions couvrent leur note visée.' : 'La dimension visée couvre sa note.')
+      : nOk + ' dimension' + (nOk > 1 ? 's' : '') + ' sur ' + visibles.length + ' couvre' + (nOk > 1 ? 'nt' : '') + ' sa note visée.');
+    const syntheseSub = demandes.length === 0 ? 'Rien à redemander au client sur ce périmètre.'
+      : demandes.length + ' élément' + (demandes.length > 1 ? 's' : '') + ' à consolider ou à obtenir du client. La liste complète est en bas de page.';
+    const analyseSteps = this.stepLabels().map((a, i) => {
+      const done = S.step > i, active = S.step === i;
+      return { ...a, done, active, pending: !done && !active, opacity: done || active ? 1 : 0.55, weight: active ? 700 : 600, color: done ? '#1E7A3C' : (active ? '#17173A' : '#8A8AA5') };
+    });
+    const tabs = [
+      { label: 'Parcourir les critères', key: 'criteres' },
+      { label: 'Décrire mon dossier', key: 'dossier' },
+      { label: 'Bibliothèque IMP', key: 'imp' }
+    ].map(t => ({
+      ...t, onPick: () => this.setState({ tab: t.key }),
+      color: tab === t.key ? '#000191' : '#6A6A85',
+      bar: tab === t.key ? '#FDC533' : 'transparent'
+    }));
+    const grillesBySecteur = {
+      'Numérique': ['Data centre', 'Tours télécoms', 'Opérateurs télécoms'],
+      'Intermédiaires financiers': ['Institution de microfinance', 'Ligne de crédit bancaire', 'Fonds d\'investissement']
+    };
+    const secteurs = Object.keys(grillesBySecteur).map(sec => ({
+      label: sec,
+      onPick: () => this.setState({ secteur: sec, grille: grillesBySecteur[sec][0], openTip: null }),
+      bg: S.secteur === sec ? '#000191' : '#FFFFFF', color: S.secteur === sec ? '#FFFFFF' : '#41415E',
+      hoverBg: S.secteur === sec ? '#000191' : '#F2F2FC'
+    }));
+    const grilles = grillesBySecteur[S.secteur].map(g => ({
+      label: g, onPick: () => this.setState({ grille: g }),
+      bg: S.grille === g ? '#000191' : '#FFFFFF', color: S.grille === g ? '#FFFFFF' : '#41415E',
+      border: S.grille === g ? '#000191' : '#C9CADD'
+    }));
+    const pilierStyles = { 'Planète': { bg: '#E9F5EC', c: '#1E7A3C' }, 'Inclusion': { bg: '#FFF2C9', c: '#7A5600' } };
+    const noteOrder = ['-2', '-1', '0', '+1', '+2', '+3'];
+    const piliers = ['Planète', 'Inclusion'].map(pl => ({
+      label: pl, color: pilierStyles[pl].c,
+      items: this.critData.filter(d => d.pilier === pl).map(d => {
+        const keys = noteOrder.filter(n => d.levels[n]);
+        return {
+          label: d.label, meta: keys[0] + ' à ' + keys[keys.length - 1],
+          onPick: () => this.setState({ selDim: d.id, selLevel: d.levels['+2'] ? '+2' : null, openTip: null }),
+          bg: S.selDim === d.id ? '#000191' : 'transparent',
+          color: S.selDim === d.id ? '#FFFFFF' : '#2A2A4A',
+          metaColor: S.selDim === d.id ? '#B9B9E8' : '#8A8AA5',
+          hoverBg: S.selDim === d.id ? '#000191' : '#F2F2FC'
+        };
+      })
+    }));
+    const dimC = this.critData.find(d => d.id === S.selDim) || this.critData[0];
+    const dimKeys = noteOrder.filter(n => dimC.levels[n]);
+    const scale = dimKeys.map(n => {
+      const sd = this.scaleDefs[n], on = S.selLevel === n;
+      return {
+        note: n, label: sd.label,
+        onPick: () => this.setState(s => ({ selLevel: s.selLevel === n ? null : n, openTip: null })),
+        bg: on ? sd.selBg : sd.tint,
+        border: on ? (sd.neutral ? '#17173A' : sd.selBg) : (sd.neutral ? '#D5D6E6' : 'transparent'),
+        hoverBorder: sd.neutral ? '#17173A' : sd.selBg,
+        noteColor: on ? sd.selTxt : sd.txt, labelColor: on ? sd.selTxt : '#5A5A72'
+      };
+    });
+    const shownKeys = S.selLevel ? [S.selLevel] : dimKeys;
+    const levelsView = shownKeys.map(n => {
+      const sd = this.scaleDefs[n];
+      const crits = dimC.levels[n];
+      const applicables = crits.filter(c => !c.only || c.only.includes(S.grille));
+      let num = 0;
+      return {
+        note: n, label: sd.label, badgeBg: sd.neutral ? '#F4F4F8' : sd.tint, badgeColor: sd.txt,
+        prereq: (n === '+2' || n === '+3') && dimC.levels['+1'],
+        multi: applicables.length > 1, nbChemins: applicables.length,
+        chemins: crits.map((c, i) => {
+          const isNa = !!(c.only && !c.only.includes(S.grille));
+          const prevShown = num;
+          if (!isNa) num++;
+          const key = dimC.id + '|' + n + '|' + i;
+          const open = !!S.openChemins[key];
+          const ctx = key;
+          return {
+            isNa, isOn: !isNa, showOu: !isNa && prevShown > 0,
+            naTexte: String(c.ex).replace(/\[\[|\]\]/g, ''),
+            num, showNum: applicables.length > 1 && !isNa,
+            segs: this.parse(c.ex, ctx),
+            hasDetail: !!(c.exigences || c.questions),
+            hasExigences: !!c.exigences, hasQuestions: !!c.questions,
+            open, detailLabel: open ? 'Masquer le détail ▴' : 'Exigences & questions clés ▾',
+            onToggle: () => this.setState(s => ({ openChemins: { ...s.openChemins, [key]: !s.openChemins[key] } })),
+            exigences: (c.exigences || []).map((e, j) => ({ segs: this.parse(e, ctx + '|e' + j) })),
+            questions: (c.questions || []).map((q, j) => ({ segs: this.parse(q.q, ctx + '|q' + j), docs: 'Docs attendus : ' + q.docs }))
+          };
+        })
+      };
+    });
+    return {
+      steps, tabs, isCriteres: tab === 'criteres', isDossier: tab === 'dossier',
+      grilles, grilleLabel: S.grille, piliers,
+      dimLabel: dimC.label, dimSub: dimC.sub,
+      dimPilier: dimC.pilier, dimPilierBg: pilierStyles[dimC.pilier].bg, dimPilierColor: pilierStyles[dimC.pilier].c,
+      dimNote: dimC.noteDim, hasDimNote: !!dimC.noteDim,
+      enjeuSegs: this.parse(dimC.enjeu, dimC.id + '|enjeu'),
+      scale, levelsView, hasSel: !!S.selLevel, secteurs,
+      showOrBanner: levelsView.some(l => l.multi),
+      resOpen: S.resOpen,
+      onResOpen: () => this.setState({ resOpen: true }),
+      onResClose: () => this.setState({ resOpen: false }),
+      resPaysChips: ['Kenya', 'Nigeria', 'Maroc', 'Côte d\'Ivoire', 'Sénégal', 'Arménie', 'Jordanie'].map(p => ({
+        label: p, onPick: () => this.setState({ resPays: p }),
+        bg: S.resPays === p ? '#000191' : '#FFFFFF', color: S.resPays === p ? '#FFFFFF' : '#41415E',
+        border: S.resPays === p ? '#000191' : '#C9CADD'
+      })),
+      resPays: S.resPays,
+      resExternes: this.externes.filter(x => x.dims.includes(dimC.label)).map(x => ({ ...x, note: 'Donnée ' + S.resPays + ' disponible sur le site' })),
+      resInternes: S.bib.filter(d => d.statut === 'qualifie' && d.dims && d.dims.includes(dimC.label) && (d.pays === S.resPays || d.pays === 'Monde' || d.pays === 'Afrique'))
+        .map(d => ({ title: d.title, meta: d.pays + ' · qualifié le ' + d.date })),
+      hasResInternes: S.bib.some(d => d.statut === 'qualifie' && d.dims && d.dims.includes(dimC.label) && (d.pays === S.resPays || d.pays === 'Monde' || d.pays === 'Afrique')),
+      noResInternes: !S.bib.some(d => d.statut === 'qualifie' && d.dims && d.dims.includes(dimC.label) && (d.pays === S.resPays || d.pays === 'Monde' || d.pays === 'Afrique')),
+      hasResExternes: this.externes.some(x => x.dims.includes(dimC.label)),
+      noResExternes: !this.externes.some(x => x.dims.includes(dimC.label)),
+      ...this.impVals(tab),
+      scaleHint: S.selLevel ? 'niveau ' + S.selLevel + ' affiché — cliquez à nouveau pour voir toute l\'échelle' : 'cliquez sur un niveau pour n\'afficher que ses critères',
+      onVoirTous: () => this.setState({ selLevel: null }),
+      isForm: screen === 'description', isAnalyse: screen === 'analyse', isResults: screen === 'resultats',
+      types, pays, noteRows, docs, nbDocs: S.docs.length,
+      onAddDoc: () => this.setState(s => ({ docs: [...s.docs, { name: '0' + (s.docs.length + 1) + '_document_client.pdf', meta: 'nouveau document' }] })),
+      ctaHint: nbVises >= 1
+        ? 'L\'analyse vérifiera la couverture pour ' + nbVises + ' notes visées, sur la base de ' + S.docs.length + ' documents. Durée : quelques secondes.'
+        : 'Sélectionnez au moins une note visée pour lancer l\'analyse.',
+      onAnalyse: () => { if (nbVises >= 1) this.startAnalysis(); },
+      progressPct: Math.min(100, Math.round(100 * (S.step + 0.6) / this.stepLabels().length)),
+      analyseSteps, nbVises, syntheseTitre, syntheseSub, nbDemandes: demandes.length,
+      dims, dimChips, demandes,
+      copyLabel: S.copied ? '✓ Copié' : 'Copier la liste',
+      onCopy: () => {
+        const txt = demandes.map(d => '• [' + d.dim + '] ' + d.texte).join('\n');
+        if (navigator.clipboard) navigator.clipboard.writeText(txt);
+        this.setState({ copied: true });
+        setTimeout(() => this.setState({ copied: false }), 2000);
+      },
+      onRestart: () => { this.clearTimer(); this.setState({ screen: 'description', step: -1, copied: false }); }
+    };
+  }
+}
+</script>
+</body>
+</html>

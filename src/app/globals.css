@@ -1,3 +1,5 @@
+@import "./theme.css";
+
 /* Charte & classes portées de docs/prototype-spec.html (parité prototype).
    Les couleurs de l'échelle DD sont appliquées en inline par <ScoreTag> (scoreTag.tsx). */
 :root {

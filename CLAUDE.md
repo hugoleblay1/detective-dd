@@ -34,6 +34,6 @@ pnpm indexer              # indexeur bibliothèque (LIBRARY_ROOT)
 
 - TypeScript strict ; contrats d'API et de sorties LLM validés par zod.
 - UI en français ; terminologie du domaine : CHAFF (chargé d'affaires), IMP (équipe impact), dimensions = Atténuation, Adaptation, Biodiversité (Planète), Social, Genre.
-- Charte : bleu `#000191`, or `#FDC533` (= +2, la note qui qualifie), échelle rouge → vert.
+- Charte : bleu `#000191`, or `#FDC533` (accent de marque — ne code plus le +2) ; échelle de notation : négatifs rouges, 0 neutre, positifs en dégradé de vert. Tokens dans `src/app/theme.css` (voir `TOKENS.md`), contrôle visuel sur `/style-guide`.
 - Tranches courtes : plan validé avant d'écrire, `pnpm typecheck` vert, commit par tranche.
 - Secrets uniquement en `.env` (gitignoré) ; ne jamais écrire de clé dans un fichier versionné ni dans ce fichier.
