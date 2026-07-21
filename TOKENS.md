@@ -27,6 +27,9 @@ Contrôle visuel : **http://localhost:3000/style-guide** (la page ne consomme qu
 | `--color-line-soft` | `#EEEFF6` | Bordures/soulignés discrets |
 | `--color-primary-tint` | `#EBEBF9` | Fonds bleutés (survols, sélections) |
 | `--color-primary-faint` | `#F5F5FD` | Fonds bleutés très pâles |
+| `--color-control-border` | `#C9CADD` | Bordures des contrôles (segments, chips, champs) |
+| `--color-surface-tint` | `#FAFAFE` | Fonds de lignes légèrement bleutés, survols de cartes |
+| `--color-on-primary-strong` / `-on-primary` / `-on-primary-muted` | `#DCDCF6` / `#CFCFF2` / `#B9B9E8` | Textes posés sur fond bleu (header, bandeau de synthèse) |
 
 ## Statuts d'exigence (couvert / partiel / manquant)
 
@@ -79,7 +82,7 @@ Note : les polices Google (Source Sans 3 / Source Serif 4) ne sont chargées pou
 ## Espacements, arrondis, ombres
 
 - `--space-1..8` : 4, 8, 12, 16, 20, 24, 32 px.
-- `--radius-sm/md/lg/pill` : 6, 8, 12, 999 px.
+- `--radius-sm/md/card/lg/pill` : 6, 8, 10, 12, 999 px (`card` = cartes et accordéons de la maquette).
 - Ombres teintées navy : `--shadow-card` (cartes), `--shadow-sticky` (barre CTA sticky), `--shadow-pop` (tooltips/modales), `--shadow-drawer` (panneau latéral).
 
 ## Branchement à faire lors de la refonte (rien de fait dans cette tranche)

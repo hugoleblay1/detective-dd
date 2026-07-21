@@ -1,5 +1,5 @@
 /** Barre de contrôle partagée (type d'investissement + géographie), au-dessus des onglets. */
-const GEO_PRESETS = ["Kenya", "Nigeria", "Maroc", "Côte d'Ivoire", "Sénégal", "Arménie", "Jordanie"];
+export const GEO_PRESETS = ["Kenya", "Nigeria", "Maroc", "Côte d'Ivoire", "Sénégal", "Arménie", "Jordanie"];
 
 export function ControlBar({ subtypes, sub, geo, onSub, onGeo }: {
   subtypes: string[]; sub: string; geo: string; onSub: (s: string) => void; onGeo: (g: string) => void;

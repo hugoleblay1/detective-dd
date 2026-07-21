@@ -1,6 +1,8 @@
 import { useState } from "react";
 import type { ClientDoc } from "@/lib/gap/types";
 
+const tileLabel = (name: string) => /\.(\w+)$/.exec(name)?.[1]?.toUpperCase().slice(0, 4) ?? "TXT";
+
 export function DocsEditor({ docs, onAdd, onRemove }: {
   docs: ClientDoc[]; onAdd: (d: ClientDoc) => void; onRemove: (i: number) => void;
 }) {
@@ -51,31 +53,44 @@ export function DocsEditor({ docs, onAdd, onRemove }: {
 
   return (
     <>
-      <textarea value={paste} onChange={(e) => setPaste(e.target.value)}
-        placeholder="Collez ici un extrait de document client… puis « Ajouter »" />
+      {(docs.length > 0 || pending.length > 0) && (
+        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+          {docs.map((d, i) => (
+            <div key={`${d.name}-${i}`} className="docrow">
+              <span className="doctile">{tileLabel(d.name)}</span>
+              <span className="dmain">
+                <span className="nm">{d.name}</span>
+                <span className="mt">{d.text.length.toLocaleString("fr-FR")} caractères</span>
+              </span>
+              <span className="rm" onClick={() => onRemove(i)}>Retirer</span>
+            </div>
+          ))}
+          {pending.map((n) => (
+            <div key={n} className="docrow" style={{ opacity: 0.7 }}>
+              <span className="doctile">⏳</span>
+              <span className="dmain">
+                <span className="nm">{n}</span>
+                <span className="mt">extraction du texte…</span>
+              </span>
+            </div>
+          ))}
+        </div>
+      )}
       <div className="docadd">
-        <button className="btn ghost small" onClick={addPaste}>Ajouter l&apos;extrait</button>
-        <span className="filebtn">
-          <button className="btn ghost small">Joindre un fichier .pdf / .txt / .md</button>
+        <span className="addfile">
+          + Joindre un fichier (.pdf, .txt, .md)
           <input type="file" accept=".pdf,.txt,.md,.csv" multiple onChange={(e) => { onFiles(e.target.files); e.target.value = ""; }} />
         </span>
-        <span className="hint">PDF : retranscription enrichie (tableaux et graphiques lus) jusqu&apos;à <b>100 pages / 30 Mo</b> par document — au-delà, texte brut seul (tableaux et graphiques non exploités).</span>
+        <span className="hint">PDF : retranscription enrichie (tableaux et graphiques lus) jusqu&apos;à <b>100 pages / 30 Mo</b> par document — au-delà, texte brut seul.</span>
       </div>
-      {err && <div className="gap-error" style={{ margin: "10px 0 0" }}>{err}</div>}
-      {notes.map((n) => <div key={n} className="hint" style={{ margin: "8px 0 0" }}>⚠ {n}</div>)}
-      <div>
-        {pending.map((n) => (
-          <div key={n} className="docpill" style={{ opacity: 0.7 }}>
-            <span>⏳ <b>{n}</b> · extraction du texte…</span>
-          </div>
-        ))}
-        {docs.map((d, i) => (
-          <div key={i} className="docpill">
-            <span>▤ <b>{d.name}</b> · {d.text.length.toLocaleString("fr-FR")} caractères</span>
-            <span className="x" onClick={() => onRemove(i)}>✕</span>
-          </div>
-        ))}
+      <div className="fgroup">
+        <span className="flabel">Ou coller un extrait <span className="opt">(texte brut)</span></span>
+        <textarea value={paste} onChange={(e) => setPaste(e.target.value)}
+          placeholder="Collez ici un extrait de document client… puis « Ajouter »" />
+        <div><button className="btn ghost small" onClick={addPaste} disabled={!paste.trim()}>Ajouter l&apos;extrait</button></div>
       </div>
+      {err && <div className="gap-error" style={{ margin: 0 }}>{err}</div>}
+      {notes.map((n) => <div key={n} className="hint">⚠ {n}</div>)}
     </>
   );
 }

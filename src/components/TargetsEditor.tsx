@@ -16,13 +16,13 @@ export function TargetsEditor({ grid, sub, targets, onSetNote, onSetCrit }: {
     return t && critsForNote(grid, sub, dk, t.note as Note).length > 1;
   });
   return (
-    <div style={{ marginTop: 12 }}>
+    <div>
       {ALL_DIMS.map((dk) => {
         if (DIMS_EXCLUDED_FROM_ANALYSIS.includes(dk)) {
           return (
-            <div key={dk} className="target-row">
-              <span className="dn" style={{ color: "var(--muted)" }}>{dk}</span>
-              <span className="hint">évalué via le questionnaire et l&apos;outil Genre dédiés — hors de cette analyse pour le moment</span>
+            <div key={dk} className="nrow">
+              <span className="dn" style={{ color: "var(--color-muted)" }}>{dk}</span>
+              <span className="excl">évalué via le questionnaire et l&apos;outil Genre dédiés — hors de cette analyse pour le moment</span>
             </div>
           );
         }
@@ -30,15 +30,16 @@ export function TargetsEditor({ grid, sub, targets, onSetNote, onSetCrit }: {
         const pool = t ? critsForNote(grid, sub, dk, t.note as Note) : [];
         return (
           <div key={dk}>
-            <div className="target-row">
+            <div className="nrow">
               <span className="dn">{dk}</span>
-              <div className="seg mini">
+              <div className="nopts">
                 <button className={!t ? "on" : ""} onClick={() => onSetNote(dk, null)}>—</button>
                 {NOTES.map((n) => (
-                  <button key={n} className={t?.note === n ? "on" : ""} onClick={() => onSetNote(dk, n)}>{n}</button>
+                  <button key={n} className={(t?.note === n ? "on" : "") + (t?.note === n && n === "+2" ? " gold" : "")}
+                    onClick={() => onSetNote(dk, n)}>{n}</button>
                 ))}
               </div>
-              <span className="hint">note visée</span>
+              <span className={"nhint " + (t ? "set" : "unset")}>{t ? `note visée : ${t.note}` : "pas de note visée"}</span>
             </div>
             {t && pool.length >= 1 && (
               <div className="crit-pick">
@@ -57,7 +58,7 @@ export function TargetsEditor({ grid, sub, targets, onSetNote, onSetCrit }: {
         );
       })}
       {anyMulti && (
-        <div className="hint">
+        <div className="hint" style={{ marginTop: 8 }}>
           Un seul critère au niveau visé suffit (+ prérequis). Les questions sont filtrées : générales + propres au critère visé.
         </div>
       )}

@@ -21,6 +21,8 @@
   --color-faint: #8A8AA5;
   --color-line: #E2E3EE;
   --color-line-soft: #EEEFF6;
+  --color-control-border: #C9CADD; /* bordures des contrôles (segments, chips, champs) */
+  --color-surface-tint: #FAFAFE;   /* fond des lignes/panneaux légèrement bleutés, survols de cartes */
   --color-primary-tint: #EBEBF9;  /* fonds bleutés (survols, sélections) */
   --color-primary-faint: #F5F5FD;
   /* Textes posés sur fond bleu primaire (header, bandeau de synthèse) */
@@ -91,6 +93,7 @@
   /* ---- Arrondis ---- */
   --radius-sm: 6px;
   --radius-md: 8px;
+  --radius-card: 10px; /* cartes et accordéons de la maquette */
   --radius-lg: 12px;
   --radius-pill: 999px;
 

@@ -86,9 +86,12 @@ export function AppShell({ grid, defs }: { grid: SectorGrid; defs: MethodDefinit
         </div>
       </div>
       <div className="wrap">
-        <ControlBar subtypes={subtypes} sub={sub} geo={geo} onSub={setSub} onGeo={setGeo} />
+        {tab !== "agent" && <ControlBar subtypes={subtypes} sub={sub} geo={geo} onSub={setSub} onGeo={setGeo} />}
         {tab === "browse" && <BrowseView grid={grid} sub={sub} geo={geo} libDocs={docs ?? []} defs={defs} />}
-        {tab === "agent" && <AgentView grid={grid} sub={sub} geo={geo} />}
+        {tab === "agent" && (
+          <AgentView grid={grid} sub={sub} geo={geo} subtypes={subtypes}
+            onSub={setSub} onGeo={setGeo} onPhase={setAgentPhase} />
+        )}
         {tab === "lib" && <LibraryView docs={docs} onQualified={onQualified} />}
         <div className="foot">
           Grille = Excel maître (source de vérité), republié vers l&apos;appli.<br />
