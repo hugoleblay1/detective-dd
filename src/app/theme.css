@@ -73,6 +73,8 @@
   --pillar-planete-ink: #1E7A3C;
   --pillar-inclusion-bg: #FFF2C9;
   --pillar-inclusion-ink: #7A5600;
+  --pillar-genre-bg: #FBEAF2;   /* hors maquette : pilier Genre conservé de l'app */
+  --pillar-genre-ink: #A8366B;
 
   /* ---- Typographie ---- */
   /* --font-*-src sont posées par next/font dans layout.tsx (nom de famille hashé) */

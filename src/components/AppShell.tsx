@@ -2,7 +2,6 @@
 import { useEffect, useState } from "react";
 import type { MethodDefinition, SectorGrid } from "@/lib/grid";
 import type { LibraryDoc } from "@/lib/library";
-import { ControlBar } from "./ControlBar";
 import { BrowseView } from "./BrowseView";
 import { AgentView } from "./AgentView";
 import { LibraryView } from "./LibraryView";
@@ -86,8 +85,9 @@ export function AppShell({ grid, defs }: { grid: SectorGrid; defs: MethodDefinit
         </div>
       </div>
       <div className="wrap">
-        {tab !== "agent" && <ControlBar subtypes={subtypes} sub={sub} geo={geo} onSub={setSub} onGeo={setGeo} />}
-        {tab === "browse" && <BrowseView grid={grid} sub={sub} geo={geo} libDocs={docs ?? []} defs={defs} />}
+        {tab === "browse" && (
+          <BrowseView grid={grid} sub={sub} geo={geo} libDocs={docs ?? []} defs={defs} onSub={setSub} onGeo={setGeo} />
+        )}
         {tab === "agent" && (
           <AgentView grid={grid} sub={sub} geo={geo} subtypes={subtypes}
             onSub={setSub} onGeo={setGeo} onPhase={setAgentPhase} />

@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { critsForNote, type DimKey, type Note, type SectorGrid } from "@/lib/grid";
 import type { ClientDoc, DimAnalysis } from "@/lib/gap/types";
 import type { AgentPhase } from "./AppShell";
-import { GEO_PRESETS } from "./ControlBar";
+import { GEO_PRESETS } from "./geo";
 import { TargetsEditor, type NoteT, type Targets } from "./TargetsEditor";
 import { DocsEditor } from "./DocsEditor";
 import { GapResults } from "./GapResults";
