@@ -3,19 +3,25 @@
 /* Charte & classes portées de docs/prototype-spec.html (parité prototype).
    Les couleurs de l'échelle DD sont appliquées en inline par <ScoreTag> (scoreTag.tsx). */
 :root {
-  --blue: #000191; --gold: #FDC533; --red: #E2231A;
-  --bg: #F6F6FA; --surface: #FFFFFF; --ink: #16162b; --muted: #6a6a80; --line: #ECECF3; --radius: 12px;
-  --ok: #1e6b34; --mid: #a8720a; --ko: #b3261e;
+  /* Alias historiques → tokens du thème (theme.css). Les classes ci-dessous
+     migrent progressivement vers les var(--color-*) directes, tranche par tranche. */
+  --blue: var(--color-primary); --gold: var(--color-accent); --red: var(--color-alert);
+  --bg: var(--color-bg); --surface: var(--color-surface); --ink: var(--color-ink);
+  --muted: var(--color-muted); --line: var(--color-line); --radius: var(--radius-lg);
+  --ok: var(--status-ok); --mid: var(--status-mid); --ko: var(--status-ko);
 }
 * { box-sizing: border-box; }
 body {
-  margin: 0; background: var(--bg); color: var(--ink);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  line-height: 1.55; font-size: 15px; -webkit-font-smoothing: antialiased;
+  margin: 0; background: var(--color-bg); color: var(--color-ink);
+  font-family: var(--font-sans);
+  line-height: 1.5; font-size: 15px; -webkit-font-smoothing: antialiased;
 }
-a { color: var(--blue); }
-.wrap { max-width: 920px; margin: 0 auto; padding: 0 20px 64px; }
-.brandline { height: 4px; background: var(--gold); }
+a { color: var(--color-primary); }
+a:hover { color: var(--color-link-hover); }
+.wrap { max-width: 1000px; margin: 0 auto; padding: 0 24px 64px; }
+@keyframes ddspin { to { transform: rotate(360deg); } }
+@keyframes ddfade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes ddpulse { 0%, 100% { opacity: 1; } 50% { opacity: .45; } }
 
 /* ---- barre de contrôle ---- */
 .controls { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
@@ -105,18 +111,31 @@ a { color: var(--blue); }
 .kq-meta .k { font-weight: 600; color: #555; }
 .kq-meta .cm { white-space: pre-line; }
 
-/* ---- header & onglets ---- */
-header.top { background: var(--blue); color: #fff; padding: 20px 0 22px; }
-header.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-bottom: 0; }
-.title { font-size: 21px; font-weight: 700; letter-spacing: -.2px; margin: 0; }
-.subtitle { font-size: 13px; opacity: .82; margin-top: 2px; }
-.hdr-right { display: flex; align-items: center; gap: 10px; }
-.badge-int { font-size: 11px; font-weight: 600; letter-spacing: .4px; text-transform: uppercase;
-  background: rgba(255, 255, 255, .14); border: 1px solid rgba(255, 255, 255, .25); padding: 5px 10px; border-radius: 999px; white-space: nowrap; }
-.tabs { display: flex; gap: 4px; margin: 24px 0 4px; border-bottom: 1px solid var(--line); flex-wrap: wrap; }
-.tabs > button { border: 0; background: transparent; padding: 11px 4px; margin-right: 22px; cursor: pointer; font-size: 15px; font-weight: 600; color: var(--muted); font-family: inherit; border-bottom: 2.5px solid transparent; margin-bottom: -1px; }
-.tabs > button.on { color: var(--blue); border-bottom-color: var(--gold); }
-.foot { font-size: 12px; color: var(--muted); margin-top: 34px; text-align: center; line-height: 1.7; }
+/* ---- header & onglets (maquette Claude design) ---- */
+header.top { background: var(--color-primary); color: #fff; }
+header.top .wrap { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-top: 18px; padding-bottom: 18px; }
+.hdr-brand { display: flex; flex-direction: column; gap: 4px; }
+.hdr-eyebrow { font-size: var(--text-xs); letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-on-primary-muted); font-weight: var(--weight-semibold); }
+.hdr-titleline { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.title { font-size: 26px; font-weight: var(--weight-bold); margin: 0; }
+.subtitle { font-size: var(--text-md); color: var(--color-on-primary); }
+.hdr-right { display: flex; align-items: center; gap: 12px; }
+.hdr-tagline { font-size: var(--text-xs); color: var(--color-on-primary); max-width: 220px; text-align: right; line-height: 1.35; }
+.badge-int { font-size: var(--text-xs); font-weight: var(--weight-bold); letter-spacing: 0.1em; text-transform: uppercase;
+  border: 1px solid var(--color-accent); color: var(--color-accent); padding: 4px 10px; border-radius: var(--radius-pill); white-space: nowrap; }
+.tabbar { background: var(--color-surface); border-bottom: 1px solid var(--color-line); }
+.tabbar .wrap { display: flex; gap: 28px; align-items: center; flex-wrap: wrap; padding-bottom: 0; }
+.tabbar button { border: 0; background: transparent; padding: 13px 2px; cursor: pointer; font-size: 14.5px; font-weight: var(--weight-bold); color: var(--color-muted); font-family: inherit; border-bottom: 3px solid transparent; margin-bottom: -1px; }
+.tabbar button:hover { color: var(--color-primary); }
+.tabbar button.on { color: var(--color-primary); border-bottom-color: var(--color-accent); }
+.stepper { display: flex; gap: 24px; margin-left: auto; }
+.stepper .st { display: flex; align-items: center; gap: 7px; padding: 12px 0; }
+.stepper .st .n { width: 19px; height: 19px; border-radius: var(--radius-pill); display: flex; align-items: center; justify-content: center; font-size: 11.5px; font-weight: var(--weight-bold); background: var(--color-surface); color: var(--color-faint); border: 1px solid #C9CADD; }
+.stepper .st .l { font-size: 12.5px; font-weight: var(--weight-semibold); color: var(--color-muted); }
+.stepper .st.cur .n { background: var(--color-primary); color: #fff; border-color: var(--color-primary); }
+.stepper .st.cur .l { color: var(--color-primary); }
+.stepper .st.done .n { background: var(--status-ok-tint); color: var(--status-ok); border-color: var(--status-ok-border); }
+.foot { font-size: var(--text-xs); color: var(--color-faint); margin-top: 34px; text-align: center; line-height: 1.7; }
 
 /* ---- onglet « Décrire mon dossier » ---- */
 .btn { background: var(--blue); color: #fff; border: 0; border-radius: 9px; padding: 11px 20px; font-size: 14.5px; font-weight: 600; cursor: pointer; font-family: inherit; }

@@ -8,6 +8,12 @@ import { AgentView } from "./AgentView";
 import { LibraryView } from "./LibraryView";
 
 type Tab = "browse" | "agent" | "lib";
+export type AgentPhase = "description" | "analyse" | "resultats";
+const PHASES: { key: AgentPhase; num: string; label: string }[] = [
+  { key: "description", num: "1", label: "Décrire le dossier" },
+  { key: "analyse", num: "2", label: "Analyse" },
+  { key: "resultats", num: "3", label: "Résultats" },
+];
 /** Démo : séparation de rôle visuelle, PAS un contrôle d'accès sécurisé (auth réelle = P2). */
 const IMP_PASSWORD = "imp2026";
 
@@ -21,6 +27,8 @@ export function AppShell({ grid, defs }: { grid: SectorGrid; defs: MethodDefinit
   const [pass, setPass] = useState("");
   const [passErr, setPassErr] = useState(false);
   const [docs, setDocs] = useState<LibraryDoc[] | null>(null);
+  // Étape du flux « Décrire mon dossier », affichée dans la barre d'onglets (stepper).
+  const [agentPhase, setAgentPhase] = useState<AgentPhase>("description");
 
   useEffect(() => {
     fetch("/api/library").then((r) => r.json()).then((d) => setDocs(d.documents ?? [])).catch(() => setDocs([]));
@@ -40,26 +48,45 @@ export function AppShell({ grid, defs }: { grid: SectorGrid; defs: MethodDefinit
 
   return (
     <>
-      <div className="brandline" />
       <header className="top">
         <div className="wrap">
-          <div>
-            <h1 className="title">Outil Détective DD — Secteur {grid.sector}</h1>
-            <div className="subtitle">Notation Développement Durable · aide à la notation autonome pour chargés d&apos;affaires</div>
+          <div className="hdr-brand">
+            <div className="hdr-eyebrow">Proparco · Secteur {grid.sector}</div>
+            <div className="hdr-titleline">
+              <h1 className="title">Détective DD</h1>
+              <span className="subtitle">Aide à la notation développement durable</span>
+            </div>
           </div>
           <div className="hdr-right">
-            <span className={"badge-int" + (imp ? " badge-imp" : "")}>{imp ? "Mode IMP · équipe Impact" : "Interne"}</span>
+            <span className="hdr-tagline">L&apos;outil vérifie la couverture et cite ses sources. La note reste une décision humaine.</span>
+            <span className={"badge-int" + (imp ? " badge-imp" : "")}>{imp ? "Mode IMP" : "Interne"}</span>
             <span className="imp-link" onClick={toggleImp}>{imp ? "Quitter le mode IMP" : "Mode IMP"}</span>
           </div>
         </div>
       </header>
-      <div className="wrap">
-        <ControlBar subtypes={subtypes} sub={sub} geo={geo} onSub={setSub} onGeo={setGeo} />
-        <div className="tabs">
+      <div className="tabbar">
+        <div className="wrap">
           <button className={tab === "browse" ? "on" : ""} onClick={() => setTab("browse")}>Parcourir les critères</button>
           <button className={tab === "agent" ? "on" : ""} onClick={() => setTab("agent")}>Décrire mon dossier</button>
           {imp && <button className={tab === "lib" ? "on" : ""} onClick={() => setTab("lib")}>Bibliothèque IMP</button>}
+          {tab === "agent" && (
+            <div className="stepper">
+              {PHASES.map((p, i) => {
+                const cur = PHASES.findIndex((x) => x.key === agentPhase);
+                const cls = i < cur ? "done" : i === cur ? "cur" : "";
+                return (
+                  <span key={p.key} className={`st ${cls}`}>
+                    <span className="n">{i < cur ? "✓" : p.num}</span>
+                    <span className="l">{p.label}</span>
+                  </span>
+                );
+              })}
+            </div>
+          )}
         </div>
+      </div>
+      <div className="wrap">
+        <ControlBar subtypes={subtypes} sub={sub} geo={geo} onSub={setSub} onGeo={setGeo} />
         {tab === "browse" && <BrowseView grid={grid} sub={sub} geo={geo} libDocs={docs ?? []} defs={defs} />}
         {tab === "agent" && <AgentView grid={grid} sub={sub} geo={geo} />}
         {tab === "lib" && <LibraryView docs={docs} onQualified={onQualified} />}

@@ -1,10 +1,4 @@
 import type { CSSProperties } from "react";
-import { Source_Sans_3, Source_Serif_4 } from "next/font/google";
-
-// Polices chargées uniquement ici : l'app garde sa police actuelle tant que
-// la refonte n'est pas validée.
-const sans = Source_Sans_3({ subsets: ["latin"], weight: ["400", "600", "700"] });
-const serif = Source_Serif_4({ subsets: ["latin"], style: ["italic"], weight: ["400"] });
 
 export const metadata = { title: "Style guide — Détective DD" };
 
@@ -109,8 +103,8 @@ function Swatch({ name, hex }: { name: string; hex: string }) {
 export default function StyleGuide() {
   return (
     <main
-      className={sans.className}
       style={{
+        fontFamily: "var(--font-sans)",
         background: "var(--color-bg)",
         color: "var(--color-ink)",
         minHeight: "100vh",
@@ -194,8 +188,8 @@ export default function StyleGuide() {
             </p>
           ))}
           <blockquote
-            className={serif.className}
             style={{
+              fontFamily: "var(--font-serif)",
               fontStyle: "italic",
               fontSize: "var(--text-base)",
               color: "var(--color-ink-soft)",

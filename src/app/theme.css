@@ -21,8 +21,12 @@
   --color-faint: #8A8AA5;
   --color-line: #E2E3EE;
   --color-line-soft: #EEEFF6;
-  --color-primary-tint: #EBEBF9;  /* fonds bleutés (pilier Planète, survols) */
+  --color-primary-tint: #EBEBF9;  /* fonds bleutés (survols, sélections) */
   --color-primary-faint: #F5F5FD;
+  /* Textes posés sur fond bleu primaire (header, bandeau de synthèse) */
+  --color-on-primary-strong: #DCDCF6;
+  --color-on-primary: #CFCFF2;
+  --color-on-primary-muted: #B9B9E8;
 
   /* ---- Statuts d'exigence : couvert / partiel / manquant ---- */
   --status-ok: #1E7A3C;
@@ -58,8 +62,9 @@
   --pillar-inclusion-ink: #7A5600;
 
   /* ---- Typographie ---- */
-  --font-sans: "Source Sans 3", Helvetica, Arial, sans-serif;
-  --font-serif: "Source Serif 4", Georgia, serif; /* avis éditoriaux et citations uniquement */
+  /* --font-*-src sont posées par next/font dans layout.tsx (nom de famille hashé) */
+  --font-sans: var(--font-sans-src, "Source Sans 3"), Helvetica, Arial, sans-serif;
+  --font-serif: var(--font-serif-src, "Source Serif 4"), Georgia, serif; /* avis éditoriaux et citations uniquement */
   --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace; /* chemins de fichiers */
   --text-xs: 11px;
   --text-sm: 13px;
