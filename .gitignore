@@ -6,3 +6,4 @@ index-library.json
 
 # Bibliothèque de dev (fixtures recréées par `pnpm db:seed` ; vrais dépôts non versionnés)
 /library-sample/
+tsconfig.tsbuildinfo
