@@ -1,0 +1,38 @@
+{
+  "sector": "Numérique",
+  "deals": [
+    {
+      "id": "F", "dir": "deal-F-greenwave-telecom-nigeria",
+      "subtype": "MNO", "geo": "Nigeria",
+      "deal_text": "Facilité de 40 MUSD à GreenWave Telecom, opérateur mobile nigérian, pour son plan réseau 2026-2029.",
+      "cases": [
+        { "dim": "Atténuation", "note": "+1", "expected": "repondu",
+          "hint": "GÉNÉRALISATION +1 : des cibles validées SBTi constituent un plan de transition certifié — jamais testé dans le corpus A-E." },
+        { "dim": "Atténuation", "note": "+2", "expected": "manquant",
+          "hint": "DISCRIMINATION plan/co-bénéfices : un plan certifié ne vaut PAS quantification de finance climat (Q2 : « Non. Aucun exercice… »)." },
+        { "dim": "Adaptation",  "note": "+2", "expected": "partiel",
+          "hint": "INCOMPLÉTUDE INÉDITE : criblage des risques ACTUELS réalisé, trajectoires prospectives absentes — variante jamais vue (C = aucune analyse formelle)." },
+        { "dim": "Social", "crit": "Accès",   "note": "+2", "expected": "repondu",
+          "hint": "VOCABULAIRE NOUVEAU : « quintiles inférieurs de richesse », forfait social homologué, obligation de licence — mêmes exigences, mots différents." },
+        { "dim": "Social", "crit": "Emplois", "note": "+2", "expected": "manquant" }
+      ]
+    },
+    {
+      "id": "G", "dir": "deal-G-baobab-dc-senegal",
+      "subtype": "Data Centre", "geo": "Sénégal",
+      "deal_text": "Facilité senior de 26 MUSD pour Baobab DC : data center de colocation à Diamniadio, Sénégal.",
+      "cases": [
+        { "dim": "Atténuation", "note": "+2", "expected": "repondu",
+          "hint": "FORMULATIONS NOUVELLES : « part verte de l'assiette : 33 % », PUE contractuel revu par le LTA, LEED en cours — seuil franchi autrement dit." },
+        { "dim": "Atténuation", "note": "+3", "expected": "manquant",
+          "hint": "CONDITION ABSENTE PAR SILENCE : aucun document n'évoque d'accompagnement — le corpus A-E ne testait que la négation explicite (deal D)." },
+        { "dim": "Adaptation",  "note": "+2", "expected": "manquant",
+          "hint": "CONFORMITÉ GÉNÉRIQUE : « respecte les normes de construction en vigueur » n'est pas une analyse de risques climatiques." },
+        { "dim": "Social", "crit": "Chaînes de valeur", "note": "+2", "expected": "repondu",
+          "assert_mentions": "50",
+          "hint": "SEUIL FRANCHI (52 % ≥ 50 %) avec revue indépendante — miroir du cas E (30 % < 50 %) : la comparaison aux deux nombres doit apparaître dans les deux sens." },
+        { "dim": "Social", "crit": "Emplois", "note": "+2", "expected": "manquant" }
+      ]
+    }
+  ]
+}
