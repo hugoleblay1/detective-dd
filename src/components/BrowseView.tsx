@@ -8,11 +8,6 @@ import { libForDim, type LibraryDoc } from "@/lib/library";
 import { GEO_PRESETS } from "./geo";
 import { highlightDefs } from "./highlight";
 
-// Libellés de l'échelle (maquette v2) ; les notes réellement affichées viennent de la grille.
-const SCALE_LABELS: Record<string, string> = {
-  "-2": "Désaligné", "-1": "Enjeu mal géré", "0": "Pas d'enjeu",
-  "+1": "Pris en compte", "+2": "Qualifie l'objectif stratégique", "+3": "Excellence",
-};
 /** Suffixe de classe CSS d'une note : -2 → m2, 0 → 0, +2 → p2. */
 const nk = (n: string) => (n === "0" ? "0" : (n[0] === "-" ? "m" : "p") + n.slice(1));
 
@@ -142,7 +137,6 @@ export function BrowseView({ grid, sub, geo, libDocs, defs, onSub, onGeo }: {
                   <div key={n} className={`sc-seg n-${nk(n)}` + (selLevel === n ? " on" : "")}
                     onClick={() => setSelLevel(selLevel === n ? null : (n as Note))}>
                     <div className="n">{n}</div>
-                    <div className="l">{SCALE_LABELS[n] ?? ""}</div>
                   </div>
                 ))}
               </div>
@@ -167,7 +161,6 @@ export function BrowseView({ grid, sub, geo, libDocs, defs, onSub, onGeo }: {
               <div key={n} className="lvlblock">
                 <div className="lv-head">
                   <span className={`lvbadge n-${nk(n)}`}>{n}</span>
-                  <span className="lv-label">{SCALE_LABELS[n] ?? ""}</span>
                   {chemins.length > 1 && <span className="lv-multi">{chemins.length} chemins possibles — un seul suffit</span>}
                 </div>
                 {(n === "+2" || n === "+3") && dim.prerequisite && (
